@@ -89,11 +89,11 @@ function DockIcon({
 
     // Re-tuned Scale (Subtle, Responsive)
     // Base width: 36px, Max width: 64px (was 45 -> 90)
-    let widthSync = useTransform(distance, [-120, 0, 120], [36, 64, 36]);
+    let widthSync = useTransform(distance, [-120, 0, 120] as const, [36, 64, 36] as const);
     let width = useSpring(widthSync, { mass: 0.1, stiffness: 180, damping: 14 });
 
     // Icon opacity/scale inside the button
-    let iconScaleSync = useTransform(distance, [-120, 0, 120], [0.75, 1.2, 0.75]);
+    let iconScaleSync = useTransform(distance, [-120, 0, 120] as const, [0.75, 1.2, 0.75] as const);
     let iconScale = useSpring(iconScaleSync, { mass: 0.1, stiffness: 180, damping: 14 });
 
     return (
@@ -109,7 +109,7 @@ function DockIcon({
                 className="aspect-square rounded-xl bg-white/5 border border-white/5 flex items-center justify-center group-hover:bg-[#E8C677]/10 group-hover:border-[#E8C677]/40 shadow-lg relative transition-colors duration-200"
             >
                 <motion.div style={{ scale: iconScale }}>
-                    <item.icon className="text-white/80 group-hover:text-[#E8C677] transition-colors" strokeWidth={1.5} />
+                    {React.createElement(item.icon, { className: "text-white/80 group-hover:text-[#E8C677] transition-colors", strokeWidth: 1.5 })}
                 </motion.div>
             </motion.div>
         </a>

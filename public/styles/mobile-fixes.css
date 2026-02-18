@@ -16,15 +16,18 @@ body {
         padding-right: 1rem;
     }
 
-    /* Prevent any element from causing horizontal scroll */
-    * {
+    /* Prevent media/content from causing horizontal scroll - avoid * selector */
+    img,
+    video,
+    iframe,
+    object,
+    pre,
+    table {
         max-width: 100%;
     }
 
     img,
-    video,
-    iframe {
-        max-width: 100%;
+    video {
         height: auto;
     }
 }

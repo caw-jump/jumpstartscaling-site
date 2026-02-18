@@ -39,15 +39,15 @@ const resources = [
     <!-- Desktop Menu -->
     <ul class="hidden lg:flex items-center gap-8 font-medium text-sm text-white/90">
       
-      <!-- Services Dropdown -->
+      <!-- Services Dropdown (hover + focus-within for touch/keyboard) -->
       <li class="relative group">
-        <button class="hover:text-[#E8C677] transition flex items-center gap-1 py-4 cursor-pointer">
-          Services <span class="text-[10px] opacity-70 group-hover:rotate-180 transition-transform">▼</span>
+        <button type="button" aria-haspopup="true" aria-expanded="false" aria-controls="services-menu" class="hover:text-[#E8C677] focus:text-[#E8C677] focus:outline-none transition flex items-center gap-1 py-4 cursor-pointer">
+          Services <span class="text-[10px] opacity-70 group-hover:rotate-180 group-focus-within:rotate-180 transition-transform">▼</span>
         </button>
         <!-- Hover Bridge -->
         <div class="absolute top-full left-0 w-full h-4 bg-transparent"></div>
         
-        <div class="absolute top-[calc(100%+0.5rem)] left-0 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0 w-72 pointer-events-none group-hover:pointer-events-auto">
+        <div id="services-menu" class="absolute top-[calc(100%+0.5rem)] left-0 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible group-focus-within:opacity-100 group-focus-within:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0 group-focus-within:translate-y-0 w-72 pointer-events-none group-hover:pointer-events-auto group-focus-within:pointer-events-auto">
           <ul class="bg-[#0A0A0A] border border-white/10 rounded-xl p-2 shadow-2xl overflow-hidden ring-1 ring-white/5">
             {services.map(item => (
               <li>
@@ -63,13 +63,13 @@ const resources = [
 
       <!-- Resources Dropdown -->
       <li class="relative group">
-        <button class="hover:text-[#E8C677] transition flex items-center gap-1 py-4 cursor-pointer">
-          Resources <span class="text-[10px] opacity-70 group-hover:rotate-180 transition-transform">▼</span>
+        <button type="button" aria-haspopup="true" aria-expanded="false" aria-controls="resources-menu" class="hover:text-[#E8C677] focus:text-[#E8C677] focus:outline-none transition flex items-center gap-1 py-4 cursor-pointer">
+          Resources <span class="text-[10px] opacity-70 group-hover:rotate-180 group-focus-within:rotate-180 transition-transform">▼</span>
         </button>
         <!-- Hover Bridge -->
         <div class="absolute top-full left-0 w-full h-4 bg-transparent"></div>
 
-        <div class="absolute top-[calc(100%+0.5rem)] left-0 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0 w-64 pointer-events-none group-hover:pointer-events-auto">
+        <div id="resources-menu" class="absolute top-[calc(100%+0.5rem)] left-0 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible group-focus-within:opacity-100 group-focus-within:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0 group-focus-within:translate-y-0 w-64 pointer-events-none group-hover:pointer-events-auto group-focus-within:pointer-events-auto">
           <ul class="bg-[#0A0A0A] border border-white/10 rounded-xl p-2 shadow-2xl overflow-hidden ring-1 ring-white/5">
             <li class="px-4 py-2 text-[10px] uppercase tracking-widest text-[#E8C677]/70 font-mono">Growth Tools</li>
             {resources.map(item => (

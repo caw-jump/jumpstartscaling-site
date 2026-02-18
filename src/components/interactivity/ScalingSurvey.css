@@ -1,7 +1,10 @@
 /* src/components/ui/ScalingSurvey.css */
 
-/* --- CORE VARIABLES --- */
+/* --- CORE VARIABLES (fallbacks if global.css vars not loaded) --- */
 :root {
+    --text-primary: #fff;
+    --text-secondary: rgba(255, 255, 255, 0.94);
+    --text-muted: rgba(255, 255, 255, 0.6);
     --gold-primary: #D4B062;
     --gold-hover: #FFE5A0;
     --gold-dim: rgba(212, 176, 98, 0.1);
