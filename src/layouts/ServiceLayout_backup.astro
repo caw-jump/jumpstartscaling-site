@@ -1,0 +1,48 @@
+---
+import Navigation from '../components/ui/Navigation.astro';
+import Clarity from '../components/analytics/Clarity.astro';
+import '../styles/global.css'; // We'll create this to hold shared styles if needed, or just rely on service-page.css
+
+interface Props {
+  title: string;
+  description: string;
+  currentPath?: string;
+}
+
+const { title, description, currentPath } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content={description}>
+  <title>{title}</title>
+  
+  <link rel="canonical" href={`https://jumpstartscaling.com${currentPath || ''}`} />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <!-- Import the service page CSS directly so Astro bundles it -->
+  <!-- We'll assume service-page.css is in public/styles but we can import it if we move it or referencing it from public -->
+  <link rel="stylesheet" href="/styles/service-page.css">
+  
+  <slot name="head" />
+</head>
+<body>
+  <Navigation currentPath={currentPath} />
+  <Clarity />
+  
+  <slot />
+
+  <footer>
+    <div class="container">
+      <p>&copy; {new Date().getFullYear()} Jumpstart Scaling. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>

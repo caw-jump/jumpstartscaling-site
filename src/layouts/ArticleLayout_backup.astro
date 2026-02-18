@@ -1,0 +1,100 @@
+---
+import ServiceLayout from './ServiceLayout.astro';
+import AtmosphereParticles from '../components/3d/AtmosphereParticles';
+import StickyTOC from '../components/ui/StickyTOC.astro';
+import ServiceSynergy from '../components/content/ServiceSynergy.astro';
+
+interface Props {
+  content: {
+    title: string;
+    description: string;
+    city?: string;
+    serviceTier?: string;
+    readingTime?: string;
+    keywords?: string;
+    featuredImageCode?: string;
+  };
+}
+
+const { content } = Astro.props;
+const { title, description, city = "Global Hubs", serviceTier } = content;
+---
+
+<ServiceLayout title={title} description={description}>
+  <section class="hero relative overflow-hidden min-h-[70vh] flex items-center">
+    <div class="absolute inset-0 z-0">
+      <AtmosphereParticles client:only="react" />
+    </div>
+    <div class="container relative z-10 text-center lg:text-left">
+      <span class="text-gold font-mono uppercase tracking-widest text-sm mb-4 block">Market Insight: {city}</span>
+      <h1 class="text-5xl md:text-7xl font-black leading-tight mb-6">
+        {title}
+      </h1>
+      <p class="subhead max-w-2xl text-xl text-slate-400 leading-relaxed">
+        {description}
+      </p>
+    </div>
+  </section>
+
+  <div class="container grid grid-cols-1 lg:grid-cols-12 gap-12 py-20">
+    <aside class="lg:col-span-3 hidden lg:block sticky top-24 h-fit">
+      <StickyTOC />
+    </aside>
+
+    <main class="lg:col-span-9 prose prose-invert prose-gold max-w-none">
+      <slot /> 
+      
+      <div class="mt-20 pt-20 border-t border-white/10">
+        <h2 class="text-3xl font-bold mb-8">Maximize Your <span class="gold italic">ROI</span></h2>
+        <ServiceSynergy currentService={serviceTier} />
+      </div>
+    </main>
+  </div>
+</ServiceLayout>
+
+<style is:global>
+  /* Enforcing the 3-sentence rule and bolding via CSS for the AI-generated text */
+  main p {
+    margin-bottom: 2rem;
+    font-size: 1.125rem;
+    line-height: 1.8;
+    color: #cbd5e1; /* slate-300 */
+  }
+  
+  main h2 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-top: 4rem;
+    margin-bottom: 1.5rem;
+    color: #fff;
+  }
+
+  main h3 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+    color: #f8fafc; /* slate-50 */
+  }
+  
+  main strong {
+    color: #fff;
+    font-weight: 700;
+  }
+
+  .accent {
+    background: linear-gradient(to right, #facc15, #d97706);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  
+  .text-gold {
+    color: #fbbf24;
+  }
+  
+  /* Prose Overrides for Dark Mode */
+  .prose-invert ul > li::marker {
+    color: #fbbf24;
+  }
+</style>

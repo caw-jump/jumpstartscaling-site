@@ -1,0 +1,85 @@
+---
+// src/components/ui/Navigation.astro - Updated for reliable dropdown + polish
+interface Props { currentPath?: string }
+const { currentPath = '/' } = Astro.props;
+
+const services = [
+  { name: 'Paid Acquisition', slug: '/services/paid-acquisition' },
+  { name: 'Funnel Architecture', slug: '/services/funnel-architecture' },
+  { name: 'CRM Transformation', slug: '/services/crm-transformation' },
+  { name: 'Data Attribution', slug: '/services/data-attribution' },
+  { name: 'Authority Engine', slug: '/services/authority-engine' },
+  { name: 'Growth Retainer', slug: '/services/growth-retainer' }
+];
+---
+
+<nav class="fixed top-0 left-0 right-0 z-40 transition-all duration-300" id="main-nav">
+  <div class="container max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
+    <!-- Logo -->
+    <a href="/" class="flex items-center gap-4 text-2xl md:text-3xl font-black" aria-label="Jumpstart Scaling Home">
+      <svg width="48" height="48" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="32" height="32" rx="8" fill="url(#lg)" />
+        <path d="M10 22V14l6-4 6 4v8l-6 4-6-4z" stroke="#050505" stroke-width="2" fill="none" />
+        <circle cx="16" cy="16" r="3" fill="#050505" />
+        <defs>
+          <linearGradient id="lg" x1="0" y1="0" x2="32" y2="32">
+            <stop stop-color="#C9A961" />
+            <stop offset="1" stop-color="#FFE5A0" />
+          </linearGradient>
+        </defs>
+      </svg>
+      <span class="hidden md:block">Jumpstart Scaling</span>
+    </a>
+
+    <!-- Desktop Nav -->
+    <ul class="hidden lg:flex items-center gap-10 font-medium text-lg">
+      <li class="relative group">
+        <button class="flex items-center gap-2 hover:text-accent transition">
+          Services <span class="transition group-hover:rotate-180 text-xl">▾</span>
+        </button>
+        <ul class="absolute top-full left-1/2 -translate-x-1/2 mt-6 w-72 bg-[#0A0A0A] border border-white/10 rounded-3xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible pointer-events-none group-hover:pointer-events-auto transition-all duration-400 p-8 z-50 before:absolute before:-top-6 before:left-0 before:w-full before:h-6 before:bg-transparent">
+          {services.map(s => (
+            <li class="mb-4 last:mb-0">
+              <a href={s.slug} class={`block py-3 px-6 rounded-xl hover:bg-accent/10 hover:text-accent transition ${currentPath === s.slug ? 'text-accent bg-accent/10' : ''}`}>
+                {s.name}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </li>
+      <li><a href="/intel" class={`hover:text-accent transition ${currentPath.startsWith('/intel') ? 'text-accent' : ''}`}>Intel</a></li>
+      <li><a href="/about" class={`hover:text-accent transition ${currentPath === '/about' ? 'text-accent' : ''}`}>About</a></li>
+      <li><a href="/audit" class="px-10 py-4 bg-accent text-black font-bold text-lg rounded-2xl hover:scale-105 hover:shadow-2xl transition">Free Audit</a></li>
+    </ul>
+
+    <!-- Mobile Toggle -->
+    <input type="checkbox" id="mob-toggle" class="hidden peer" />
+    <label for="mob-toggle" class="lg:hidden cursor-pointer z-[60] flex flex-col gap-2">
+      <span class="w-10 h-1.5 bg-white transition peer-checked:rotate-45 peer-checked:translate-y-3.5"></span>
+      <span class="w-10 h-1.5 bg-white transition peer-checked:opacity-0"></span>
+      <span class="w-10 h-1.5 bg-white transition peer-checked:-rotate-45 peer-checked:-translate-y-3.5"></span>
+    </label>
+
+    <!-- Mobile Drawer -->
+    <div class="fixed inset-0 bg-[#050505]/98 backdrop-blur-2xl -translate-x-full peer-checked:translate-x-0 transition-transform duration-500 flex items-center justify-center lg:hidden z-50">
+      <ul class="space-y-10 text-center text-4xl font-bold">
+        <li><a href="/" class="hover:text-accent transition">Home</a></li>
+        {services.map(s => (
+          <li><a href={s.slug} class="block hover:text-accent transition">{s.name}</a></li>
+        ))}
+        <li><a href="/intel" class="block hover:text-accent transition">Intel</a></li>
+        <li><a href="/about" class="block hover:text-accent transition">About</a></li>
+        <li><a href="/audit" class="block px-16 py-8 bg-accent text-black rounded-3xl hover:scale-105 transition text-3xl">Free Audit</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<style>
+  nav.nav-scrolled {
+    backdrop-filter: blur(20px);
+    background: rgba(5, 5, 5, 0.9);
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 0.5rem;
+  }
+</style>
