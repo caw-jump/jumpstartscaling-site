@@ -8,7 +8,8 @@ echo "🚀 Jumpstart Scaling - Safe Deployment Script"
 echo "=============================================="
 
 # Configuration
-SERVER="opc@193.122.168.215"
+# Legacy Oracle deploy - for Coolify use the UI or deploy-to-coolify.sh
+SERVER="${DEPLOY_SERVER:-opc@150.136.117.198}"
 SSH_KEY="~/.ssh/id_rsa"
 PROD_DIR="/home/opc/sites/jumpstartscaling"
 BACKUP_DIR="/home/opc/sites"

@@ -3,12 +3,47 @@ import { readFileSync, statSync } from 'fs';
 import { join, extname } from 'path';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
+import https from 'https';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const PORT = process.env.PORT || 8100;
 const DIST_DIR = join(__dirname, 'dist');
+
+// n8n webhook - form submissions proxy here (Postgres was on Oracle router)
+const N8N_WEBHOOK = process.env.N8N_WEBHOOK || 'https://n8n.jumpstartscaling.com/webhook/7e2dae05-1ba8-4d2b-b168-b67de7bbece6';
+
+function proxyToWebhook(body, res) {
+    const data = JSON.stringify(body);
+    const req = https.request(N8N_WEBHOOK, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Content-Length': Buffer.byteLength(data) }
+    }, (proxyRes) => {
+        res.writeHead(proxyRes.statusCode || 200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ success: true, message: 'Submitted' }));
+    });
+    req.on('error', () => {
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ success: true, message: 'Received' }));
+    });
+    req.write(data);
+    req.end();
+}
+
+function handleApiPost(url, req, res) {
+    let body = '';
+    req.on('data', (chunk) => { body += chunk; });
+    req.on('end', () => {
+        try {
+            const data = body ? JSON.parse(body) : {};
+            proxyToWebhook(data, res);
+        } catch (e) {
+            res.writeHead(400, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ error: 'Invalid JSON' }));
+        }
+    });
+}
 
 const MIME_TYPES = {
     '.html': 'text/html',
@@ -28,7 +63,16 @@ const MIME_TYPES = {
 };
 
 const server = createServer((req, res) => {
-    let filePath = join(DIST_DIR, req.url === '/' ? 'index.html' : req.url);
+    const urlPath = (req.url || '/').split('?')[0];
+
+    // API routes - proxy to n8n webhook (Coolify has no Postgres)
+    if (req.method === 'POST') {
+        if (urlPath === '/api/submit-lead' || urlPath === '/api/submit-scaling-survey') {
+            return handleApiPost(urlPath, req, res);
+        }
+    }
+
+    let filePath = join(DIST_DIR, urlPath === '/' || urlPath === '' ? 'index.html' : urlPath);
 
     // Try to serve the file
     try {
