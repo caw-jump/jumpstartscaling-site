@@ -7,7 +7,7 @@ export default defineConfig({
   site: 'https://jumpstartscaling.com',
   compressHTML: true,
   output: 'static',
-  build: { inlineStylesheets: 'auto' },
+  build: { inlineStylesheets: 'always' },
   integrations: [react(), mdx(), sitemap({ changefreq: 'weekly', priority: 0.7, lastmod: new Date() })],
   vite: {
     plugins: [tailwindcss()],

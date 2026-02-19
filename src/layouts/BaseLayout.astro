@@ -3,7 +3,6 @@
 import Navigation from '../components/ui/Navigation.astro';
 import Footer from '../components/ui/Footer.astro';
 import AtmosphereParticles from '../components/visuals/AtmosphereParticles.tsx';
-import { ViewTransitions } from 'astro:transitions';
 import '../styles/global.css';
 
 interface Props {
@@ -143,7 +142,6 @@ const gaId = import.meta.env.PUBLIC_GA_ID || '';
         ]
     })} />
 
-    <ViewTransitions />
     <slot name="head" />
   </head>
 
