@@ -24,10 +24,10 @@ export default function AcquisitionValueEstimator() {
     new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', notation: 'compact', maximumFractionDigits: 1 }).format(n);
 
   return (
-    <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="w-full">
+    <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="w-full text-white">
       <div className="grid md:grid-cols-3 gap-6 mb-8">
         <div>
-          <label className="block text-sm font-medium mb-2">Target Revenue ($M)</label>
+          <label className="block text-sm font-medium text-white/95 mb-2">Target Revenue ($M)</label>
           <input
             type="number"
             value={revenue}
@@ -36,7 +36,7 @@ export default function AcquisitionValueEstimator() {
           />
         </div>
         <div>
-          <label className="block text-sm font-medium mb-2">Valuation Multiple (x)</label>
+          <label className="block text-sm font-medium text-white/95 mb-2">Valuation Multiple (x)</label>
           <input
             type="number"
             value={multiple}
@@ -45,7 +45,7 @@ export default function AcquisitionValueEstimator() {
           />
         </div>
         <div>
-          <label className="block text-sm font-medium mb-2">Synergy Premium %</label>
+          <label className="block text-sm font-medium text-white/95 mb-2">Synergy Premium %</label>
           <input
             type="number"
             value={synergies}

@@ -21,10 +21,10 @@ export default function LoyaltyRewardsOptimizer() {
   }, [flights, miles, cardSpend, hasCard, cardDiscount]);
 
   return (
-    <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="w-full">
+    <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="w-full text-white">
       <div className="grid md:grid-cols-2 gap-6 mb-6">
         <div>
-          <label className="block text-sm font-medium mb-2">Annual Flights</label>
+          <label className="block text-sm font-medium text-white/95 mb-2">Annual Flights</label>
           <input
             type="number"
             value={flights}
@@ -33,7 +33,7 @@ export default function LoyaltyRewardsOptimizer() {
           />
         </div>
         <div>
-          <label className="block text-sm font-medium mb-2">Base Miles</label>
+          <label className="block text-sm font-medium text-white/95 mb-2">Base Miles</label>
           <input
             type="number"
             value={miles}
@@ -42,7 +42,7 @@ export default function LoyaltyRewardsOptimizer() {
           />
         </div>
         <div>
-          <label className="block text-sm font-medium mb-2">Card Spend ($)</label>
+          <label className="block text-sm font-medium text-white/95 mb-2">Card Spend ($)</label>
           <input
             type="number"
             value={cardSpend}
@@ -51,13 +51,13 @@ export default function LoyaltyRewardsOptimizer() {
           />
         </div>
         <div className="flex flex-col gap-4">
-          <label className="flex items-center gap-3 cursor-pointer">
+          <label className="flex items-center gap-3 cursor-pointer text-white/95">
             <input type="checkbox" checked={hasCard} onChange={(e) => setHasCard(e.target.checked)} className="rounded" />
             <span>Co-branded cardholder</span>
           </label>
           {hasCard && (
             <div>
-              <label className="block text-sm mb-2">Points Discount %</label>
+              <label className="block text-sm text-white/95 mb-2">Points Discount %</label>
               <input
                 type="number"
                 value={cardDiscount}

@@ -25,10 +25,10 @@ export default function AIMusicRoyaltyCalculator() {
   const formatCurrency = (n: number) => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 2 }).format(n);
 
   return (
-    <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="w-full">
+    <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="w-full text-white">
       <div className="grid md:grid-cols-3 gap-6 mb-8">
         <div>
-          <label className="block text-sm font-medium mb-2">Track Length (sec)</label>
+          <label className="block text-sm font-medium text-white/95 mb-2">Track Length (sec)</label>
           <input
             type="number"
             value={trackLength}
@@ -37,7 +37,7 @@ export default function AIMusicRoyaltyCalculator() {
           />
         </div>
         <div>
-          <label className="block text-sm font-medium mb-2">Est. Streams</label>
+          <label className="block text-sm font-medium text-white/95 mb-2">Est. Streams</label>
           <input
             type="number"
             value={streams}
@@ -46,7 +46,7 @@ export default function AIMusicRoyaltyCalculator() {
           />
         </div>
         <div>
-          <label className="block text-sm font-medium mb-2">AI Gen Cost/Track ($)</label>
+          <label className="block text-sm font-medium text-white/95 mb-2">AI Gen Cost/Track ($)</label>
           <input
             type="number"
             value={genCostPerTrack}

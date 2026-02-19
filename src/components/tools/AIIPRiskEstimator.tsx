@@ -26,16 +26,16 @@ export default function AIIPRiskEstimator() {
   }, [contentType, toolUse, datasetScope]);
 
   return (
-    <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="w-full">
+    <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="w-full text-white">
       <div className="space-y-6 mb-8">
         <div>
-          <label className="block text-sm font-medium mb-3">Content Type</label>
+          <label className="block text-sm font-medium text-white/95 mb-3">Content Type</label>
           <div className="flex flex-wrap gap-3">
             {(['original', 'derived', 'licensed'] as const).map((v) => (
               <button
                 key={v}
                 onClick={() => setContentType(v)}
-                className={`px-4 py-2 rounded-lg transition ${contentType === v ? 'bg-accent text-black font-bold' : 'bg-white/10 hover:bg-white/20'}`}
+                className={`px-4 py-2 rounded-lg transition ${contentType === v ? 'bg-accent text-black font-bold' : 'bg-white/10 hover:bg-white/20 text-white'}`}
               >
                 {v.charAt(0).toUpperCase() + v.slice(1)}
               </button>
@@ -43,13 +43,13 @@ export default function AIIPRiskEstimator() {
           </div>
         </div>
         <div>
-          <label className="block text-sm font-medium mb-3">AI Tool Use</label>
+          <label className="block text-sm font-medium text-white/95 mb-3">AI Tool Use</label>
           <div className="flex flex-wrap gap-3">
             {(['none', 'assist', 'full'] as const).map((v) => (
               <button
                 key={v}
                 onClick={() => setToolUse(v)}
-                className={`px-4 py-2 rounded-lg transition ${toolUse === v ? 'bg-accent text-black font-bold' : 'bg-white/10 hover:bg-white/20'}`}
+                className={`px-4 py-2 rounded-lg transition ${toolUse === v ? 'bg-accent text-black font-bold' : 'bg-white/10 hover:bg-white/20 text-white'}`}
               >
                 {v.charAt(0).toUpperCase() + v.slice(1)}
               </button>
@@ -57,13 +57,13 @@ export default function AIIPRiskEstimator() {
           </div>
         </div>
         <div>
-          <label className="block text-sm font-medium mb-3">Training Dataset</label>
+          <label className="block text-sm font-medium text-white/95 mb-3">Training Dataset</label>
           <div className="flex flex-wrap gap-3">
             {(['curated', 'web', 'unknown'] as const).map((v) => (
               <button
                 key={v}
                 onClick={() => setDatasetScope(v)}
-                className={`px-4 py-2 rounded-lg transition ${datasetScope === v ? 'bg-accent text-black font-bold' : 'bg-white/10 hover:bg-white/20'}`}
+                className={`px-4 py-2 rounded-lg transition ${datasetScope === v ? 'bg-accent text-black font-bold' : 'bg-white/10 hover:bg-white/20 text-white'}`}
               >
                 {v.charAt(0).toUpperCase() + v.slice(1)}
               </button>
@@ -82,7 +82,7 @@ export default function AIIPRiskEstimator() {
           </div>
           <div className="glass-card p-6">
             <div className="text-sm text-white/60 mb-2">Recommendation</div>
-            <p className="text-lg">{results.recommendation}</p>
+            <p className="text-lg text-white/95">{results.recommendation}</p>
           </div>
         </motion.div>
       )}

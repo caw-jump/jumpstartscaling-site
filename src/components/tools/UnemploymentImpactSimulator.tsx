@@ -24,10 +24,10 @@ export default function UnemploymentImpactSimulator() {
   const formatCurrency = (n: number) => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(n);
 
   return (
-    <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="w-full">
+    <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="w-full text-white">
       <div className="grid md:grid-cols-3 gap-6 mb-8">
         <div>
-          <label className="block text-sm font-medium mb-2">Monthly Expenses ($)</label>
+          <label className="block text-sm font-medium text-white/95 mb-2">Monthly Expenses ($)</label>
           <input
             type="number"
             value={monthlyExpenses}
@@ -36,7 +36,7 @@ export default function UnemploymentImpactSimulator() {
           />
         </div>
         <div>
-          <label className="block text-sm font-medium mb-2">Savings ($)</label>
+          <label className="block text-sm font-medium text-white/95 mb-2">Savings ($)</label>
           <input
             type="number"
             value={savings}
@@ -45,7 +45,7 @@ export default function UnemploymentImpactSimulator() {
           />
         </div>
         <div>
-          <label className="block text-sm font-medium mb-2">Jobless Duration (mo)</label>
+          <label className="block text-sm font-medium text-white/95 mb-2">Jobless Duration (mo)</label>
           <input
             type="number"
             value={duration}

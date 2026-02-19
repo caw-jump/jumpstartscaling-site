@@ -18,7 +18,7 @@ export default function FAQAccordion({ faqs }: Props) {
         <div key={i} className="glass-card overflow-hidden">
           <button
             onClick={() => setOpen(open === i ? null : i)}
-            className="w-full text-left px-6 py-4 font-bold flex justify-between items-center hover:bg-white/5 transition"
+            className="w-full text-left px-6 py-4 font-bold flex justify-between items-center hover:bg-white/5 transition faq-question"
             aria-expanded={open === i}
             aria-controls={`faq-${i}`}
             id={`faq-btn-${i}`}
@@ -32,7 +32,7 @@ export default function FAQAccordion({ faqs }: Props) {
             aria-labelledby={`faq-btn-${i}`}
             className={`overflow-hidden transition-all duration-300 ${open === i ? 'max-h-96' : 'max-h-0'}`}
           >
-            <div className="px-6 pb-4 pt-0 text-white/80 faq-answer">{faq.a}</div>
+            <div className="px-6 pb-4 pt-0 faq-answer">{faq.a}</div>
           </div>
         </div>
       ))}

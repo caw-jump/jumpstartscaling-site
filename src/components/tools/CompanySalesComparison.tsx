@@ -28,13 +28,13 @@ export default function CompanySalesComparison() {
   const formatB = (n: number) => `${(n / 1e9).toFixed(1)}B`;
 
   return (
-    <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="w-full">
+    <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="w-full text-white">
       <div className="grid md:grid-cols-2 gap-8 mb-8">
         <div className="glass-card p-6">
-          <h3 className="text-lg font-bold mb-4">Company A</h3>
+          <h3 className="text-lg font-bold text-white mb-4">Company A</h3>
           <div className="space-y-4">
             <div>
-              <label className="block text-sm mb-2">Revenue ($B)</label>
+              <label className="block text-sm text-white/95 mb-2">Revenue ($B)</label>
               <input
                 type="number"
                 value={companyA}
@@ -44,7 +44,7 @@ export default function CompanySalesComparison() {
               />
             </div>
             <div>
-              <label className="block text-sm mb-2">Growth %</label>
+              <label className="block text-sm text-white/95 mb-2">Growth %</label>
               <input
                 type="number"
                 value={growthA}
@@ -55,10 +55,10 @@ export default function CompanySalesComparison() {
           </div>
         </div>
         <div className="glass-card p-6">
-          <h3 className="text-lg font-bold mb-4">Company B</h3>
+          <h3 className="text-lg font-bold text-white mb-4">Company B</h3>
           <div className="space-y-4">
             <div>
-              <label className="block text-sm mb-2">Revenue ($B)</label>
+              <label className="block text-sm text-white/95 mb-2">Revenue ($B)</label>
               <input
                 type="number"
                 value={companyB}
@@ -68,7 +68,7 @@ export default function CompanySalesComparison() {
               />
             </div>
             <div>
-              <label className="block text-sm mb-2">Growth %</label>
+              <label className="block text-sm text-white/95 mb-2">Growth %</label>
               <input
                 type="number"
                 value={growthB}
@@ -85,16 +85,16 @@ export default function CompanySalesComparison() {
           <table className="w-full text-left">
             <thead>
               <tr className="border-b border-white/20">
-                <th className="py-3">Year</th>
-                <th className="py-3">Company A</th>
-                <th className="py-3">Company B</th>
+                <th className="py-3 text-white/95">Year</th>
+                <th className="py-3 text-white/95">Company A</th>
+                <th className="py-3 text-white/95">Company B</th>
               </tr>
             </thead>
             <tbody>
               {projections.map((row) => (
                 <tr key={row.year} className="border-b border-white/10">
-                  <td className="py-2">{row.year === 0 ? 'Now' : `Year ${row.year}`}</td>
-                  <td className="py-2 font-medium">{formatB(row.a)}</td>
+                  <td className="py-2 text-white/90">{row.year === 0 ? 'Now' : `Year ${row.year}`}</td>
+                  <td className="py-2 font-medium text-white/95">{formatB(row.a)}</td>
                   <td className="py-2 text-accent">{formatB(row.b)}</td>
                 </tr>
               ))}

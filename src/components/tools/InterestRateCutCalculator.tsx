@@ -27,10 +27,10 @@ export default function InterestRateCutCalculator() {
   const formatCurrency = (n: number) => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(n);
 
   return (
-    <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="w-full">
+    <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="w-full text-white">
       <div className="grid md:grid-cols-4 gap-6 mb-8">
         <div>
-          <label className="block text-sm font-medium mb-2">Principal ($)</label>
+          <label className="block text-sm font-medium text-white/95 mb-2">Principal ($)</label>
           <input
             type="number"
             value={principal}
@@ -39,7 +39,7 @@ export default function InterestRateCutCalculator() {
           />
         </div>
         <div>
-          <label className="block text-sm font-medium mb-2">Current Rate %</label>
+          <label className="block text-sm font-medium text-white/95 mb-2">Current Rate %</label>
           <input
             type="number"
             value={currentRate}
@@ -49,7 +49,7 @@ export default function InterestRateCutCalculator() {
           />
         </div>
         <div>
-          <label className="block text-sm font-medium mb-2">New Rate %</label>
+          <label className="block text-sm font-medium text-white/95 mb-2">New Rate %</label>
           <input
             type="number"
             value={newRate}
@@ -59,7 +59,7 @@ export default function InterestRateCutCalculator() {
           />
         </div>
         <div>
-          <label className="block text-sm font-medium mb-2">Term (years)</label>
+          <label className="block text-sm font-medium text-white/95 mb-2">Term (years)</label>
           <input
             type="number"
             value={termYears}

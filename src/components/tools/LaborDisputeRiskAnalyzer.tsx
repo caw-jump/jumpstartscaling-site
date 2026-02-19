@@ -27,10 +27,10 @@ export default function LaborDisputeRiskAnalyzer() {
     new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', notation: 'compact', maximumFractionDigits: 1 }).format(n);
 
   return (
-    <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="w-full">
+    <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="w-full text-white">
       <div className="grid md:grid-cols-4 gap-6 mb-8">
         <div>
-          <label className="block text-sm font-medium mb-2">Player Salary ($)</label>
+          <label className="block text-sm font-medium text-white/95 mb-2">Player Salary ($)</label>
           <input
             type="number"
             value={salary}
@@ -39,7 +39,7 @@ export default function LaborDisputeRiskAnalyzer() {
           />
         </div>
         <div>
-          <label className="block text-sm font-medium mb-2">Salary Cap ($)</label>
+          <label className="block text-sm font-medium text-white/95 mb-2">Salary Cap ($)</label>
           <input
             type="number"
             value={cap}
@@ -48,7 +48,7 @@ export default function LaborDisputeRiskAnalyzer() {
           />
         </div>
         <div>
-          <label className="block text-sm font-medium mb-2">Roster Size</label>
+          <label className="block text-sm font-medium text-white/95 mb-2">Roster Size</label>
           <input
             type="number"
             value={playerCount}
@@ -57,7 +57,7 @@ export default function LaborDisputeRiskAnalyzer() {
           />
         </div>
         <div>
-          <label className="block text-sm font-medium mb-2">Strike Duration (days)</label>
+          <label className="block text-sm font-medium text-white/95 mb-2">Strike Duration (days)</label>
           <input
             type="number"
             value={strikeDays}

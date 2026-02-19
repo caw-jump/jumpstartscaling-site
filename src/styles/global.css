@@ -504,6 +504,68 @@ button.primary:hover {
     background-clip: text
 }
 
+/* Calculator / tools contrast – light text on dark cards */
+.tools-fact-label {
+    color: rgba(255, 255, 255, 0.85)
+}
+
+.tools-fact-value {
+    color: var(--accent)
+}
+
+.section.light .tools-fact-label {
+    color: rgba(0, 0, 0, 0.7) !important
+}
+
+.section.light .tools-fact-value {
+    color: #B38728 !important
+}
+
+/* Ensure calculator form content has light text on dark glass-cards */
+#calculator .glass-card,
+#calculator + * .glass-card {
+    color: rgba(255, 255, 255, 0.95)
+}
+
+/* BenchmarkTable – light text on dark, dark text on light */
+.benchmark-th {
+    color: rgba(255, 255, 255, 0.95)
+}
+
+.benchmark-td {
+    color: rgba(255, 255, 255, 0.9)
+}
+
+.benchmark-td-desc {
+    color: rgba(255, 255, 255, 0.85)
+}
+
+.section.light .benchmark-th {
+    color: #000 !important
+}
+
+.section.light .benchmark-td,
+.section.light .benchmark-td-desc {
+    color: rgba(0, 0, 0, 0.85) !important
+}
+
+.section.light .benchmark-table .text-accent {
+    color: #B38728 !important
+}
+
+/* FAQ accordion – light text in dark section, dark in light section */
+.section.dark .faq-answer {
+    color: rgba(255, 255, 255, 0.85)
+}
+
+.section.light .faq-answer {
+    color: rgba(0, 0, 0, 0.85) !important
+}
+
+.faq-question {
+    color: inherit
+}
+
 .text-muted {
     color: var(--text-muted-dark)
 }

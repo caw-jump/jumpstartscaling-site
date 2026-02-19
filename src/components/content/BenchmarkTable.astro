@@ -11,21 +11,21 @@ interface Props {
 
 const { rows } = Astro.props;
 ---
-<div class="glass-card p-6 overflow-x-auto">
+<div class="glass-card p-6 overflow-x-auto benchmark-table">
   <table class="w-full text-left">
     <thead>
       <tr class="border-b border-white/20">
-        <th class="py-3 font-bold">Tier</th>
-        <th class="py-3 font-bold">Range</th>
-        <th class="py-3 font-bold">Description</th>
+        <th class="py-3 font-bold benchmark-th">Tier</th>
+        <th class="py-3 font-bold benchmark-th">Range</th>
+        <th class="py-3 font-bold benchmark-th">Description</th>
       </tr>
     </thead>
     <tbody>
       {rows.map((row) => (
         <tr class="border-b border-white/10">
-          <td class="py-3 font-medium">{row.tier}</td>
-          <td class="py-3 text-accent">{row.range}</td>
-          <td class="py-3 text-white/80">{row.description}</td>
+          <td class="py-3 font-medium benchmark-td">{row.tier}</td>
+          <td class="py-3 text-accent benchmark-td">{row.range}</td>
+          <td class="py-3 benchmark-td-desc">{row.description}</td>
         </tr>
       ))}
     </tbody>

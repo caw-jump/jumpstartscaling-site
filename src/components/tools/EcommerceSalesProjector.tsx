@@ -26,10 +26,10 @@ export default function EcommerceSalesProjector() {
     new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', notation: 'compact', maximumFractionDigits: 1 }).format(n);
 
   return (
-    <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="w-full">
+    <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="w-full text-white">
       <div className="grid md:grid-cols-4 gap-6 mb-8">
         <div>
-          <label className="block text-sm font-medium mb-2">Current Sales ($)</label>
+          <label className="block text-sm font-medium text-white/95 mb-2">Current Sales ($)</label>
           <input
             type="number"
             value={sales}
@@ -38,7 +38,7 @@ export default function EcommerceSalesProjector() {
           />
         </div>
         <div>
-          <label className="block text-sm font-medium mb-2">Online %</label>
+          <label className="block text-sm font-medium text-white/95 mb-2">Online %</label>
           <input
             type="number"
             value={onlinePct}
@@ -47,7 +47,7 @@ export default function EcommerceSalesProjector() {
           />
         </div>
         <div>
-          <label className="block text-sm font-medium mb-2">Growth Rate %</label>
+          <label className="block text-sm font-medium text-white/95 mb-2">Growth Rate %</label>
           <input
             type="number"
             value={growthRate}
@@ -56,7 +56,7 @@ export default function EcommerceSalesProjector() {
           />
         </div>
         <div>
-          <label className="block text-sm font-medium mb-2">Quarters</label>
+          <label className="block text-sm font-medium text-white/95 mb-2">Quarters</label>
           <select
             value={quarters}
             onChange={(e) => setQuarters(Number(e.target.value))}
@@ -76,16 +76,16 @@ export default function EcommerceSalesProjector() {
           <table className="w-full text-left text-sm">
             <thead>
               <tr className="border-b border-white/20">
-                <th className="py-3">Quarter</th>
-                <th className="py-3">Total Revenue</th>
-                <th className="py-3">Online</th>
+                <th className="py-3 text-white/95">Quarter</th>
+                <th className="py-3 text-white/95">Total Revenue</th>
+                <th className="py-3 text-white/95">Online</th>
               </tr>
             </thead>
             <tbody>
               {projections.map((row) => (
                 <tr key={row.q} className="border-b border-white/10">
-                  <td className="py-3">Q{row.q}</td>
-                  <td className="py-3 font-medium">{formatCurrency(row.total)}</td>
+                  <td className="py-3 text-white/90">Q{row.q}</td>
+                  <td className="py-3 font-medium text-white/95">{formatCurrency(row.total)}</td>
                   <td className="py-3 text-accent">{formatCurrency(row.online)}</td>
                 </tr>
               ))}
