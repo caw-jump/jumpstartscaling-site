@@ -1,0 +1,126 @@
+---
+title: "AI Music Royalty & Generation Cost Calculator"
+description: "Estimate royalties and creation costs. Model Google Lyria 3's 30-sec tracks and stream economics."
+category: "ai"
+emoji: "🎵"
+newsHook: "Google and Apple push AI music features — Lyria 3, 30-sec tracks. Model royalties vs generation cost."
+meta:
+  title: "AI Music Royalty Calculator — Streams & Gen Cost (2026)"
+  description: "Calculate AI music royalties vs generation cost. Model stream economics. Free, instant."
+  publishedAt: "2026-02-19"
+  updatedAt: "2026-02-19"
+faqs:
+  - q: "How much do artists earn per stream?"
+    a: "Industry average ~$0.003–0.005 per stream. Spotify, Apple, others have different rates."
+  - q: "What does AI music generation cost?"
+    a: "Varies by tool and length. Lyria 3 and similar: fractions of a cent to a few cents per track. User inputs drive our model."
+  - q: "Can AI music royalties cover generation cost?"
+    a: "At ~$0.003/stream, you need hundreds of thousands of streams to offset even low gen costs. Use the calculator to find breakeven."
+howToSteps:
+  - name: "Enter track length"
+    text: "Duration in seconds (e.g. 30 for Lyria 3 clips)."
+  - name: "Set streams"
+    text: "Expected or actual stream count."
+  - name: "Enter generation cost"
+    text: "Cost to create the track (per track or per minute)."
+  - name: "View net"
+    text: "Royalty minus gen cost; breakeven streams."
+applicationCategory: "FinanceApplication"
+featureList: ["Royalty estimate", "Generation cost", "Breakeven streams", "Unit economics"]
+relatedSlugs:
+  - ai-ip-risk-estimator
+  - startup-valuation-calculator
+---
+
+<section id="how-it-works" class="section light py-16 scroll-mt-24">
+  <div class="container mx-auto px-6 max-w-4xl">
+    <h2>How We Calculate Royalties</h2>
+    <p>Approximate <strong>$0.003 per stream</strong> (industry average — Spotify, Apple, others vary). <strong>Generation cost</strong> is user input. <strong>Net</strong> = Royalty − Gen cost. Formulas are illustrative — real rates depend on platform, territory, and deal structure. No APIs; all calculations in your browser.</p>
+
+    <div class="glass-card p-6 my-8 max-w-2xl">
+      <h3 class="text-lg font-bold mb-4 text-black">Formulas</h3>
+      <ul class="space-y-2 font-mono text-sm">
+        <li><strong>Royalty</strong> = Streams × $0.003 (or your rate)</li>
+        <li><strong>Net</strong> = Royalty − Generation cost</li>
+        <li><strong>Breakeven streams</strong> = Gen cost ÷ $0.003</li>
+      </ul>
+    </div>
+
+    <p><strong>How much do artists earn per stream?</strong> Industry average is roughly $0.003–0.005. That means 1M streams ≈ $3K–5K. For AI-generated tracks, the question is: do royalties cover the cost to create? At $0.003/stream and $10 gen cost, you need 3,333 streams to break even. The calculator shows it in seconds.</p>
+
+    <h3>What does AI music generation cost?</h3>
+    <p>Tools like Google Lyria 3, Suno, Udio charge per track or per minute. Costs range from fractions of a cent to a few dollars. You input your estimate — the calculator shows breakeven and net at different stream levels. Model 30-sec clips, full tracks, albums.</p>
+  </div>
+</section>
+
+<section id="news-context" class="section dark py-16 scroll-mt-24">
+  <div class="container mx-auto px-6 max-w-4xl">
+    <h2>The News Driving This Conversation</h2>
+    <p><strong>Google and Apple</strong> are pushing AI music features — Lyria 3, 30-second clips, custom lyrics and instrumentals. Creation is cheap. But can royalties cover the cost at scale? Model it. Enter stream count and gen cost — see net economics. The gap (or surplus) drives the business case.</p>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 my-8">
+      <div class="glass-card p-6">
+        <div class="text-sm text-white/60 mb-2">Approx royalty/stream</div>
+        <div class="text-xl font-bold text-[#E8C677]">$0.003</div>
+      </div>
+      <div class="glass-card p-6">
+        <div class="text-sm text-white/60 mb-2">Breakeven (e.g. $1 gen cost)</div>
+        <div class="text-xl font-bold text-[#E8C677]">~333 streams</div>
+      </div>
+      <div class="glass-card p-6">
+        <div class="text-sm text-white/60 mb-2">Lyria 3 clip length</div>
+        <div class="text-xl font-bold text-[#E8C677]">30 sec</div>
+      </div>
+    </div>
+
+    <p>Can AI music royalties cover generation cost? At low gen costs, yes — a few hundred streams can break even. At higher costs (e.g. full-track production), you need hundreds of thousands. The calculator gives you the exact breakeven. No guesswork.</p>
+
+    <h3>Visual royalty breakdown</h3>
+    <p>See royalty vs gen cost in a simple chart. At 100K streams: $300 royalty. Subtract $50 gen cost = $250 net. Scale to 1M: $3K − $50 = $2,950 net. The unit economics become obvious. Use it for pitch decks, business plans, or personal projects.</p>
+  </div>
+</section>
+
+<section id="interpret" class="section light py-16 scroll-mt-24">
+  <div class="container mx-auto px-6 max-w-4xl">
+    <h2>How to Interpret Your Results</h2>
+    <p>Breakeven by generation cost (at $0.003/stream):</p>
+
+    <div class="glass-card p-6 my-8 overflow-x-auto">
+      <table class="w-full text-left">
+        <thead>
+          <tr class="border-b border-black/20">
+            <th class="py-3 font-bold">Gen cost</th>
+            <th class="py-3 font-bold">Breakeven streams</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="border-b border-black/10"><td class="py-3 font-medium">$0.10</td><td class="py-3 text-[#B38728]">approx. 33</td></tr>
+          <tr class="border-b border-black/10"><td class="py-3 font-medium">$1</td><td class="py-3 text-[#B38728]">approx. 333</td></tr>
+          <tr class="border-b border-black/10"><td class="py-3 font-medium">$10</td><td class="py-3 text-[#B38728]">approx. 3,333</td></tr>
+          <tr><td class="py-3 font-medium">$100</td><td class="py-3 text-[#B38728]">approx. 33,333</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p><strong>Takeaway:</strong> Low gen cost = easy breakeven. High gen cost = need viral scale. Use the calculator to set realistic targets. If breakeven is 100K streams and you're doing 1K, you're upside down. Adjust cost or strategy.</p>
+  </div>
+</section>
+
+<section id="who-uses" class="section dark py-16 scroll-mt-24">
+  <div class="container mx-auto px-6 max-w-4xl">
+    <h2>Who Should Use This Calculator</h2>
+    <p><strong>Artists and producers</strong> — understand AI music economics. Does the math work?</p>
+    <p><strong>Labels and distributors</strong> — model unit economics. Set expectations for AI-generated catalogs.</p>
+    <p><strong>AI music platform builders</strong> — price your product. What gen cost allows royalties to cover it?</p>
+    <p><strong>Content creators</strong> — budget for AI tracks. Know breakeven before you scale.</p>
+
+    <h3>Understand the unit economics of AI-generated content</h3>
+    <p>One number: breakeven streams. Use it to decide: is this model sustainable? The calculator gives you that number in seconds.</p>
+
+    <h3>Platform rate differences</h3>
+    <p>Spotify pays ~$0.003–0.004 per stream. Apple Music often higher. YouTube lower. Our default uses a blended average. Adjust the rate in the calculator to match your primary platform. Breakeven shifts — higher rate means fewer streams needed to cover gen cost.</p>
+
+    <h3>Catalog scale and long tail</h3>
+    <p>One track needs X streams to break even. A catalog of 100 tracks needs 100X total — but streams spread across tracks. Model single-track economics first; then think about catalog. If each track needs 10K streams and you have 100, you need 1M total streams to cover creation cost. The calculator handles one track; scale in your head.</p>
+  </div>
+</section>

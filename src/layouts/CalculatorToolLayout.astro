@@ -1,0 +1,113 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import ToolStickyNav from '../components/tools/ToolStickyNav.astro';
+import ToolPageSchema from '../components/seo/ToolPageSchema.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  slug: string;
+  newsHook?: string;
+  emoji?: string;
+  faqs?: { q: string; a: string }[];
+  howToSteps?: { name: string; text: string }[];
+  applicationCategory?: string;
+  featureList?: string[];
+  relatedUrls?: string[];
+  meta?: {
+    title?: string;
+    description?: string;
+    ogImage?: string;
+    canonical?: string;
+    publishedAt?: string;
+    updatedAt?: string;
+  };
+}
+
+const {
+  title,
+  description,
+  slug,
+  newsHook = '',
+  emoji = '📊',
+  faqs = [],
+  howToSteps = [],
+  applicationCategory,
+  featureList,
+  relatedUrls = [],
+  meta = {},
+} = Astro.props;
+
+const siteUrl = 'https://jumpstartscaling.com';
+const pageUrl = `${siteUrl}/tools/${slug}`;
+const fullTitle = meta.title || `${title} | Jumpstart Scaling`;
+const fullDescription = meta.description || description;
+const canonicalUrl = meta.canonical || pageUrl;
+const ogImage = meta.ogImage ? (meta.ogImage.startsWith('http') ? meta.ogImage : new URL(meta.ogImage, siteUrl).href) : `${siteUrl}/og-default.png`;
+
+const crumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Tools', url: '/tools' },
+  { name: title, url: `/tools/${slug}` },
+];
+
+const navSections = [
+  { id: 'calculator', label: 'Calculator' },
+  { id: 'how-it-works', label: 'How It Works' },
+  { id: 'news-context', label: 'News Context' },
+  { id: 'interpret', label: 'Interpret Results' },
+  { id: 'who-for', label: 'Who It\'s For' },
+  { id: 'faqs', label: 'FAQs' },
+  { id: 'related', label: 'Related Tools' },
+];
+---
+<BaseLayout
+  title={fullTitle}
+  description={fullDescription}
+  canonical={canonicalUrl}
+  ogImage={meta.ogImage || '/og-default.png'}
+  crumbs={crumbs}
+  faqs={faqs}
+  fluid={true}
+>
+  <ToolPageSchema
+    title={title}
+    description={fullDescription}
+    url={pageUrl}
+    slug={slug}
+    publishedAt={meta.publishedAt}
+    updatedAt={meta.updatedAt}
+    faqs={faqs}
+    howToSteps={howToSteps}
+    applicationCategory={applicationCategory}
+    featureList={featureList}
+    relatedUrls={relatedUrls}
+  />
+  <slot name="head" slot="head" />
+
+  <div class="relative z-10">
+    <div class="container mx-auto px-6 max-w-7xl">
+      <!-- Hero -->
+      <section class="py-12 lg:py-16">
+        <div class="grid lg:grid-cols-4 gap-12">
+          <div class="lg:col-span-3">
+            <div class="text-5xl mb-4">{emoji}</div>
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-black gradient-text mb-6">{title}</h1>
+            <p class="text-xl md:text-2xl text-white/90 mb-4 hero-intro">{description}</p>
+            {newsHook && (
+              <p class="text-lg text-white/70">{newsHook}</p>
+            )}
+          </div>
+          <div class="hidden lg:block">
+            <ToolStickyNav sections={navSections} />
+          </div>
+        </div>
+        <div class="lg:hidden mt-8">
+          <ToolStickyNav sections={navSections} />
+        </div>
+      </section>
+
+      <slot />
+    </div>
+  </div>
+</BaseLayout>

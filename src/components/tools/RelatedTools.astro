@@ -1,0 +1,36 @@
+---
+import { getCollection } from 'astro:content';
+
+interface Props {
+  currentSlug: string;
+}
+
+const { currentSlug } = Astro.props;
+
+const toSlug = (id: string) => id.replace(/\.mdx$/, '');
+const allTools = await getCollection('tools');
+const tools = allTools
+  .filter((t) => toSlug(t.id) !== currentSlug)
+  .slice(0, 4);
+
+const categoryLabels: Record<string, string> = {
+  finance: 'Finance',
+  ecommerce: 'E-Commerce',
+  loyalty: 'Loyalty',
+  labor: 'Labor',
+  ai: 'AI & Tech',
+};
+---
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+  {tools.map((tool) => (
+    <a
+      href={`/tools/${toSlug(tool.id)}`}
+      class="glass-card p-6 group hover:border-accent hover:-translate-y-2 transition-all duration-300 block"
+    >
+      <div class="text-4xl mb-4">{tool.data.emoji || '📊'}</div>
+      <h3 class="text-xl font-bold mb-2 group-hover:text-accent transition">{tool.data.title}</h3>
+      <p class="text-white/70 text-sm mb-4 line-clamp-2">{tool.data.description}</p>
+      <span class="text-accent font-bold text-sm">Use calculator →</span>
+    </a>
+  ))}
+</div>

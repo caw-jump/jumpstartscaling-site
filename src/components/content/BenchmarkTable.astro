@@ -1,0 +1,33 @@
+---
+interface Row {
+  tier: string;
+  range: string;
+  description: string;
+}
+
+interface Props {
+  rows: Row[];
+}
+
+const { rows } = Astro.props;
+---
+<div class="glass-card p-6 overflow-x-auto">
+  <table class="w-full text-left">
+    <thead>
+      <tr class="border-b border-white/20">
+        <th class="py-3 font-bold">Tier</th>
+        <th class="py-3 font-bold">Range</th>
+        <th class="py-3 font-bold">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      {rows.map((row) => (
+        <tr class="border-b border-white/10">
+          <td class="py-3 font-medium">{row.tier}</td>
+          <td class="py-3 text-accent">{row.range}</td>
+          <td class="py-3 text-white/80">{row.description}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>

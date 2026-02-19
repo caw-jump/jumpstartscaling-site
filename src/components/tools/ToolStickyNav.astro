@@ -1,0 +1,36 @@
+---
+interface Props {
+  sections: { id: string; label: string }[];
+}
+
+const { sections } = Astro.props;
+---
+<nav aria-label="Page sections" class="tool-sticky-nav">
+  <ul class="flex flex-wrap gap-2 lg:flex-col lg:gap-1">
+    {sections.map((s) => (
+      <li>
+        <a href={`#${s.id}`} class="block px-3 py-2 text-sm text-white/70 hover:text-accent rounded-lg hover:bg-white/5 transition">
+          {s.label}
+        </a>
+      </li>
+    ))}
+  </ul>
+</nav>
+
+<style>
+  .tool-sticky-nav {
+    position: sticky;
+    top: 6rem;
+  }
+  @media (max-width: 1023px) {
+    .tool-sticky-nav {
+      position: static;
+      margin-bottom: 2rem;
+      padding: 1rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .tool-sticky-nav ul {
+      justify-content: flex-start;
+    }
+  }
+</style>

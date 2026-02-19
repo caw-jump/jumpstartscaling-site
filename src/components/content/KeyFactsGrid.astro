@@ -1,0 +1,17 @@
+---
+interface Props {
+  facts: { label: string; value: string }[];
+  columns?: 2 | 3;
+}
+
+const { facts, columns = 3 } = Astro.props;
+const gridClass = columns === 2 ? 'md:grid-cols-2' : 'md:grid-cols-3';
+---
+<div class={`grid grid-cols-1 ${gridClass} gap-4`}>
+  {facts.map((fact) => (
+    <div class="glass-card p-6">
+      <div class="text-sm text-white/60 mb-2">{fact.label}</div>
+      <div class="text-xl font-bold text-accent">{fact.value}</div>
+    </div>
+  ))}
+</div>

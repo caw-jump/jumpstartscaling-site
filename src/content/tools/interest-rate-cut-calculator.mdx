@@ -1,0 +1,127 @@
+---
+title: "Interest Rate Cut Impact Calculator"
+description: "Model savings and mortgage costs under rate cut scenarios. Fed minutes temper cuts — see your breakeven."
+category: "finance"
+emoji: "📈"
+newsHook: "Fed minutes: no more cuts if inflation persists. Model your portfolio and mortgage under different rate scenarios."
+meta:
+  title: "Interest Rate Cut Calculator — Mortgage & Portfolio (2026)"
+  description: "Calculate mortgage savings and impact of rate cuts. Model Fed scenarios. Free, instant."
+  publishedAt: "2026-02-19"
+  updatedAt: "2026-02-19"
+faqs:
+  - q: "How do rate cuts affect my mortgage?"
+    a: "Lower rates mean lower monthly payments and less interest over the life of the loan. Refinancing when rates drop can save thousands."
+  - q: "Should I refinance if the Fed cuts rates?"
+    a: "Compare your current payment to the new rate. If savings exceed refinance costs within a reasonable period, it may be worth it."
+  - q: "What's the Fed saying about rate cuts in 2026?"
+    a: "Fed minutes suggest cuts are on hold if inflation persists. Use the calculator to model different scenarios."
+howToSteps:
+  - name: "Enter loan amount"
+    text: "Mortgage or loan principal."
+  - name: "Set current vs new rate"
+    text: "Current rate and hypothetical cut (e.g. 7% vs 6%)."
+  - name: "Set term"
+    text: "Loan term in years (e.g. 30)."
+  - name: "View savings"
+    text: "Monthly payment difference, lifetime interest saved."
+applicationCategory: "FinanceApplication"
+featureList: ["Mortgage calculator", "Rate cut impact", "Savings comparison", "Refi breakeven"]
+relatedSlugs:
+  - startup-valuation-calculator
+  - acquisition-value-estimator
+  - unemployment-impact-simulator
+---
+
+<section id="how-it-works" class="section light py-16 scroll-mt-24">
+  <div class="container mx-auto px-6 max-w-4xl">
+    <h2>How We Calculate Impact</h2>
+    <p>We use standard <strong>amortization formulas</strong> for mortgage payments. Monthly payment = Principal × (rate/12) × (1 + rate/12)^n ÷ ((1 + rate/12)^n − 1). Compare current rate vs new rate to show monthly and lifetime savings. Static formulas only — no APIs.</p>
+
+    <div class="glass-card p-6 my-8 max-w-2xl">
+      <h3 class="text-lg font-bold mb-4 text-black">What Changes When Rates Drop</h3>
+      <ul class="space-y-2">
+        <li><strong>Monthly payment</strong> — Lower rate = lower payment</li>
+        <li><strong>Total interest</strong> — Less paid over life of loan</li>
+        <li><strong>Refi breakeven</strong> — When savings exceed refinance costs</li>
+      </ul>
+    </div>
+
+    <p><strong>How do rate cuts affect my mortgage?</strong> A 1% drop on a $400K, 30-year loan can save $250+/month and $90K+ over the life of the loan. The calculator shows the exact numbers. Plug in your loan amount, current rate, and a hypothetical cut — see the dollar impact.</p>
+
+    <h3>Scenario modeling for divided Fed views</h3>
+    <p>The Fed is split: cuts if inflation cools, hold if it sticks. You can't control the Fed. You can model "what if we get one cut? Two?" and plan accordingly. Refi now or wait? The calculator helps you decide.</p>
+  </div>
+</section>
+
+<section id="news-context" class="section dark py-16 scroll-mt-24">
+  <div class="container mx-auto px-6 max-w-4xl">
+    <h2>The News Driving This Conversation</h2>
+    <p><strong>Fed minutes</strong> — no more cuts if inflation persists. Markets oscillate. Homeowners wonder: refinance now or wait? Use this calculator to model different rate scenarios. See your savings under 1, 2, or 3 cuts. Know the breakeven before you act.</p>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 my-8">
+      <div class="glass-card p-6">
+        <div class="text-sm text-white/60 mb-2">Fed posture</div>
+        <div class="text-xl font-bold text-[#E8C677]">Cuts on hold</div>
+      </div>
+      <div class="glass-card p-6">
+        <div class="text-sm text-white/60 mb-2">Example: 1% cut on $400K</div>
+        <div class="text-xl font-bold text-[#E8C677]">~$250/mo savings</div>
+      </div>
+      <div class="glass-card p-6">
+        <div class="text-sm text-white/60 mb-2">Lifetime interest impact</div>
+        <div class="text-xl font-bold text-[#E8C677]">$90K+ saved</div>
+      </div>
+    </div>
+
+    <p>What's the Fed saying about rate cuts in 2026? Data-dependent. If inflation cools, cuts come. If not, rates stay higher for longer. The calculator doesn't predict — it shows you the impact of any scenario you choose.</p>
+
+    <h3>Breakeven charts</h3>
+    <p>Refinancing costs money (closing costs, fees). When do savings exceed those costs? The calculator can show monthly savings — divide closing costs by monthly savings to get breakeven in months. Under 24 months? Usually worth it.</p>
+  </div>
+</section>
+
+<section id="interpret" class="section light py-16 scroll-mt-24">
+  <div class="container mx-auto px-6 max-w-4xl">
+    <h2>How to Interpret Your Results</h2>
+    <p>Savings tiers for a typical $400K, 30-year loan:</p>
+
+    <div class="glass-card p-6 my-8 overflow-x-auto">
+      <table class="w-full text-left">
+        <thead>
+          <tr class="border-b border-black/20">
+            <th class="py-3 font-bold">Rate cut</th>
+            <th class="py-3 font-bold">Monthly savings (est.)</th>
+            <th class="py-3 font-bold">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="border-b border-black/10"><td class="py-3 font-medium">0.5%</td><td class="py-3 text-[#B38728]">approx. $120</td><td class="py-3 text-black/80">Consider if refi costs low</td></tr>
+          <tr class="border-b border-black/10"><td class="py-3 font-medium">1%</td><td class="py-3 text-[#B38728]">approx. $250</td><td class="py-3 text-black/80">Often worth refi</td></tr>
+          <tr><td class="py-3 font-medium">1.5%+</td><td class="py-3 text-[#B38728]">approx. $380+</td><td class="py-3 text-black/80">Strong refi candidate</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p><strong>Should I refinance if the Fed cuts rates?</strong> Run your numbers. If monthly savings exceed refi costs within 18–24 months, it's usually a win. The calculator gives you the savings — you bring the refi cost and decide.</p>
+  </div>
+</section>
+
+<section id="who-uses" class="section dark py-16 scroll-mt-24">
+  <div class="container mx-auto px-6 max-w-4xl">
+    <h2>Who Should Use This Calculator</h2>
+    <p><strong>Homeowners</strong> — see mortgage savings under different rate scenarios. Plan refi timing.</p>
+    <p><strong>Refinancers</strong> — compare current payment to new rate. Know your breakeven.</p>
+    <p><strong>Rate-sensitive borrowers</strong> — anyone with variable debt. Model the impact of cuts (or hikes).</p>
+    <p><strong>Financial advisors</strong> — show clients the dollar impact. Make rate moves tangible.</p>
+
+    <h3>Know your savings before rates move</h3>
+    <p>Don't guess. Plug in your loan, your rate, and a hypothetical cut. In 30 seconds you'll know exactly what you'd save. Then you can decide: act now or wait for the next Fed meeting.</p>
+
+    <h3>Fixed vs adjustable rates</h3>
+    <p>This calculator assumes fixed rates. If you have an ARM, rate cuts (or hikes) affect your payment directly. Model the impact of a 1% move — that's often the cap per adjustment period. Same formula, different use case.</p>
+
+    <h3>Closing costs and breakeven</h3>
+    <p>Refi closing costs typically run 2–5% of loan amount. On $400K, that's $8K–$20K. At $250/month savings, breakeven is 32–80 months. If you plan to stay 5+ years, refi often wins. The calculator gives you savings; you bring the closing cost — divide to get breakeven months.</p>
+  </div>
+</section>

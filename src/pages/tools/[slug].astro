@@ -1,0 +1,124 @@
+---
+import { getCollection } from 'astro:content';
+import CalculatorToolLayout from '../../layouts/CalculatorToolLayout.astro';
+import CalculatorLoader from '../../components/tools/CalculatorLoader';
+import KeyFactsGrid from '../../components/content/KeyFactsGrid.astro';
+import BenchmarkTable from '../../components/content/BenchmarkTable.astro';
+import FAQAccordion from '../../components/content/FAQAccordion';
+import RelatedTools from '../../components/tools/RelatedTools.astro';
+
+export async function getStaticPaths() {
+  const tools = await getCollection('tools');
+  return tools.map((tool) => {
+    const slug = tool.id.replace(/\.mdx$/, '');
+    return { params: { slug }, props: { tool } };
+  });
+}
+
+const { tool } = Astro.props;
+const { Content } = await tool.render();
+const slug = tool.id.replace(/\.mdx$/, '');
+const data = tool.data;
+const siteUrl = 'https://jumpstartscaling.com';
+
+const toSlug = (id: string) => id.replace(/\.mdx$/, '');
+const relatedSlugs = data.relatedSlugs || [];
+const allTools = await getCollection('tools');
+const relatedTools = relatedSlugs
+  .map((s: string) => allTools.find((t) => toSlug(t.id) === s))
+  .filter(Boolean);
+const relatedUrls = relatedTools.map((t) => `${siteUrl}/tools/${toSlug(t!.id)}`);
+---
+
+<CalculatorToolLayout
+  title={data.title}
+  description={data.description}
+  slug={slug}
+  newsHook={data.newsHook}
+  emoji={data.emoji}
+  faqs={data.faqs}
+  howToSteps={data.howToSteps}
+  applicationCategory={data.applicationCategory}
+  featureList={data.featureList}
+  relatedUrls={relatedUrls}
+  meta={data.meta}
+>
+  <!-- Calculator Section -->
+  <section id="calculator" class="section dark py-16 scroll-mt-24">
+    <div class="grid lg:grid-cols-2 gap-16 items-start">
+      <div class="space-y-6">
+        <h2 class="text-3xl md:text-4xl font-black gradient-text">Run Your Own Simulation</h2>
+        <p class="text-xl text-white/90">
+          Adjust the inputs below. Results update instantly. No signup, no data saved — everything runs in your browser.
+        </p>
+      </div>
+      <div class="glass-card p-8">
+        <CalculatorLoader client:visible slug={slug} />
+      </div>
+    </div>
+  </section>
+
+  <!-- MDX Content (How It Works, News Context, etc.) -->
+  <div class="prose-tools">
+    <Content />
+  </div>
+
+  <!-- FAQs -->
+  {data.faqs && data.faqs.length > 0 && (
+    <section id="faqs" class="section light py-16 scroll-mt-24">
+      <h2 class="text-3xl md:text-4xl font-black text-center mb-12">Frequently Asked Questions</h2>
+      <div class="max-w-3xl mx-auto">
+        <FAQAccordion faqs={data.faqs} client:visible />
+      </div>
+    </section>
+  )}
+
+  <!-- Related Tools -->
+  <section id="related" class="section dark py-16 scroll-mt-24">
+    <h2 class="text-3xl md:text-4xl font-black gradient-text text-center mb-12">Related Calculators</h2>
+    <RelatedTools currentSlug={slug} />
+  </section>
+
+  <!-- CTA -->
+  <section class="section dark py-16 text-center">
+    <div class="glass-card p-12 max-w-2xl mx-auto">
+      <h2 class="text-2xl md:text-3xl font-bold mb-4">Want a Deeper Analysis?</h2>
+      <p class="text-white/80 mb-8">These calculators reveal opportunities. Our audit turns them into predictable revenue.</p>
+      <a href="/audit" class="inline-block px-12 py-4 bg-accent text-black font-bold rounded-xl hover:scale-105 transition">
+        Get Your Free Growth Audit
+      </a>
+    </div>
+  </section>
+</CalculatorToolLayout>
+
+<style>
+  .prose-tools :global(h2) {
+    scroll-margin-top: 6rem;
+    font-size: 1.875rem;
+    font-weight: 900;
+    margin-bottom: 1.5rem;
+    margin-top: 3rem;
+  }
+  .prose-tools :global(h3) {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
+  .prose-tools :global(p) {
+    font-size: 1.125rem;
+    color: rgb(255 255 255 / 0.9);
+    margin-bottom: 1rem;
+  }
+  .prose-tools :global(ul) {
+    list-style-type: disc;
+    padding-left: 2rem;
+    margin-bottom: 1.5rem;
+  }
+  .prose-tools :global(ul li + li) {
+    margin-top: 0.5rem;
+  }
+  .prose-tools :global(.section) {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+</style>

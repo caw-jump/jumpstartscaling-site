@@ -23,7 +23,19 @@ const crumbs = [
 ];
 ---
 
-<BaseLayout title={post.data.title} description={post.data.description} palette="emerald">
+<BaseLayout title={post.data.title} description={post.data.description} palette="emerald" crumbs={crumbs}>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": post.data.title,
+      "description": post.data.description,
+      "datePublished": post.data.publishedAt,
+      "author": { "@type": "Organization", "name": post.data.author },
+      "publisher": { "@type": "Organization", "name": "Jumpstart Scaling", "logo": { "@type": "ImageObject", "url": "https://jumpstartscaling.com/favicon.svg" } },
+      "mainEntityOfPage": { "@type": "WebPage", "@id": new URL(Astro.url.pathname, "https://jumpstartscaling.com").href }
+    })} />
+  </Fragment>
   <!-- Content handles its own Layout (Hero -> Sections) -->
   <div class="intel-page-wrapper">
     <Content />
