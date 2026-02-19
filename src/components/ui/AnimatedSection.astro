@@ -6,11 +6,8 @@ const { delay = 0 } = Astro.props
   <slot />
 </section>
 <script>
-  let observer;
-  document.addEventListener('astro:page-load', () => {
-    if (observer) observer.disconnect();
-    
-    observer = new IntersectionObserver((entries) => {
+  function initAnimatedSections() {
+    const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.remove('opacity-0', 'translate-y-10');
@@ -19,7 +16,12 @@ const { delay = 0 } = Astro.props
         }
       });
     }, { threshold: 0.1 });
-    
     document.querySelectorAll('.animated-section').forEach(el => observer.observe(el));
-  });
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initAnimatedSections);
+  } else {
+    initAnimatedSections();
+  }
+  document.addEventListener('astro:page-load', initAnimatedSections);
 </script>

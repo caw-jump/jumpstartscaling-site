@@ -231,14 +231,11 @@ const gaId = import.meta.env.PUBLIC_GA_ID || '';
             });
         }, { threshold: 0.1 });
 
-        // Initial observe
-        document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
-        
-        // Setup on page load/transition
-        document.addEventListener('astro:page-load', () => {
-             updateScroll();
-             document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
-        });
+        function observeAnimateElements() {
+            document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
+        }
+        observeAnimateElements();
+        document.addEventListener('astro:page-load', () => { updateScroll(); observeAnimateElements(); });
     </script>
   </body>
 </html>
