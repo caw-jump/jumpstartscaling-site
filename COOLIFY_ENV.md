@@ -4,11 +4,14 @@ Set these in **Coolify → Application → Environment Variables**.
 
 ## Required (runtime)
 
-| Variable      | Description                              | Example |
-|---------------|------------------------------------------|---------|
-| `N8N_WEBHOOK` | Full n8n webhook URL for form submissions| `https://n8n.yourserver.com/webhook/YOUR_ID` |
+| Variable      | Description                              |
+|---------------|------------------------------------------|
+| `N8N_WEBHOOK` | Full n8n webhook URL for form submissions |
 
-**Never commit the real URL.** Forms POST to `/api/submit-lead` and `/api/submit-scaling-survey`; the server proxies to this webhook.
+**Production (Coolify):** `https://n8n.jumpstartscaling.com/webhook/d282e622-9c83-4936-9d93-05c37eaa7b68`  
+**Test (local/staging):** `https://n8n.jumpstartscaling.com/webhook-test/d282e622-9c83-4936-9d93-05c37eaa7b68`
+
+Forms POST to `/api/submit-lead` and `/api/submit-scaling-survey`; the server proxies to this webhook.
 
 ## Optional (build-time)
 
