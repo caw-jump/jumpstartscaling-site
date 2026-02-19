@@ -43,5 +43,9 @@
     "tailwindcss": "^4.1.18",
     "three": "^0.182.0",
     "typescript": "^5.9.3"
+  },
+  "overrides": {
+    "lodash": "4.17.23",
+    "ajv": "8.18.0"
   }
 }
