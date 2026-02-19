@@ -231,8 +231,8 @@ const description = "Stop hiring freelancers. Start building an empire. The 'Uni
       </div>
 
       <div class="bg-[#111] p-8 rounded-xl border border-[#333]">
-        <form id="n8n-application-form" class="space-y-6" method="post">
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <form id="n8n-lead-form" class="space-y-6">
+          <div class="grid grid-cols-2 gap-6">
              <div>
                 <label class="block font-mono text-xs text-[#00FF94] tracking-wider mb-2" for="name">NAME</label>
                 <input class="w-full bg-black border border-[#333] text-white p-3 rounded focus:outline-none focus:border-[#00FF94]" type="text" id="name" name="name" placeholder="Full Name">
@@ -243,7 +243,7 @@ const description = "Stop hiring freelancers. Start building an empire. The 'Uni
              </div>
           </div>
 
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="grid grid-cols-2 gap-6">
              <div>
                 <label class="block font-mono text-xs text-[#00FF94] tracking-wider mb-2" for="revenue">ANNUAL REVENUE</label>
                 <select class="w-full bg-black border border-[#333] text-white p-3 rounded focus:outline-none focus:border-[#00FF94]" id="revenue" name="revenue">
@@ -276,22 +276,24 @@ const description = "Stop hiring freelancers. Start building an empire. The 'Uni
   </section>
 
   <script>
-    document.getElementById('n8n-application-form')?.addEventListener('submit', async (e) => {
+    document.getElementById('n8n-lead-form')?.addEventListener('submit', async (e) => {
       e.preventDefault();
       const form = e.target as HTMLFormElement;
-      const data = Object.fromEntries(new FormData(form).entries());
-      const btn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
-      if (btn) { btn.disabled = true; btn.textContent = 'SENDING...'; }
+      const btn = form.querySelector('button[type="submit"]');
+      if (btn) (btn as HTMLButtonElement).disabled = true;
+      const fd = new FormData(form);
+      const data = Object.fromEntries(fd.entries());
       try {
-        await fetch('/api/submit-lead', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ ...data, formType: 'n8n_application' })
-        });
-        form.innerHTML = '<p class="text-[#00FF94] font-bold text-xl text-center py-12">✓ Application received. We\'ll reach out shortly.</p>';
+        const r = await fetch('/api/submit-lead', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
+        if (r.ok) {
+          (form.querySelector('button[type="submit"]') as HTMLButtonElement).textContent = 'THANKS! WE\'LL BE IN TOUCH.';
+        } else {
+          if (btn) (btn as HTMLButtonElement).disabled = false;
+          alert('Something went wrong. Please try again.');
+        }
       } catch (err) {
-        if (btn) { btn.disabled = false; btn.textContent = 'SUBMIT APPLICATION & BOOK CALL'; }
-        alert('Something went wrong. Please email hello@jumpstartscaling.com');
+        if (btn) (btn as HTMLButtonElement).disabled = false;
+        alert('Network error. Please try again.');
       }
     });
   </script>

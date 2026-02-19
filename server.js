@@ -11,7 +11,7 @@ const __dirname = dirname(__filename);
 const PORT = process.env.PORT || 8100;
 const DIST_DIR = join(__dirname, 'dist');
 
-// n8n webhook - form submissions proxy here (Postgres was on Oracle router)
+// n8n webhook - form submissions proxy here (Coolify: no Postgres, proxy to n8n)
 const N8N_WEBHOOK = process.env.N8N_WEBHOOK || 'https://n8n.jumpstartscaling.com/webhook/7e2dae05-1ba8-4d2b-b168-b67de7bbece6';
 
 function proxyToWebhook(body, res) {
@@ -31,7 +31,7 @@ function proxyToWebhook(body, res) {
     req.end();
 }
 
-function handleApiPost(url, req, res) {
+function handleApiPost(urlPath, req, res) {
     let body = '';
     req.on('data', (chunk) => { body += chunk; });
     req.on('end', () => {
@@ -65,7 +65,7 @@ const MIME_TYPES = {
 const server = createServer((req, res) => {
     const urlPath = (req.url || '/').split('?')[0];
 
-    // API routes - proxy to n8n webhook (Coolify has no Postgres)
+    // API routes - proxy to n8n (Coolify deployment)
     if (req.method === 'POST') {
         if (urlPath === '/api/submit-lead' || urlPath === '/api/submit-scaling-survey') {
             return handleApiPost(urlPath, req, res);
@@ -74,7 +74,6 @@ const server = createServer((req, res) => {
 
     let filePath = join(DIST_DIR, urlPath === '/' || urlPath === '' ? 'index.html' : urlPath);
 
-    // Try to serve the file
     try {
         const stat = statSync(filePath);
 
@@ -87,7 +86,6 @@ const server = createServer((req, res) => {
 
         const content = readFileSync(filePath);
 
-        // Set aggressive caching for static assets, shorter for HTML
         const isStatic = ['.js', '.css', '.png', '.jpg', '.gif', '.svg', '.ico', '.webp', '.woff', '.woff2', '.ttf', '.eot'].includes(ext);
         const cacheControl = isStatic ? 'public, max-age=31536000, immutable' : 'public, max-age=3600';
 
@@ -97,7 +95,6 @@ const server = createServer((req, res) => {
         });
         res.end(content);
     } catch (error) {
-        // If file not found, try serving index.html (for client-side routing)
         try {
             const content = readFileSync(join(DIST_DIR, 'index.html'));
             res.writeHead(200, { 'Content-Type': 'text/html' });

@@ -309,7 +309,7 @@ const ScalingSurvey = ({ webhookUrl }: { webhookUrl?: string }) => {
                     aria-describedby={errors.name ? "name-error" : undefined}
                   />
                   {errors.name && (
-                    <div id="name-error" className="error-msg" role="alert" ref={el => { errorRefs.current.name = el; }}>
+                    <div id="name-error" className="error-msg" role="alert" ref={el => errorRefs.current.name = el}>
                       {errors.name}
                     </div>
                   )}
@@ -328,7 +328,7 @@ const ScalingSurvey = ({ webhookUrl }: { webhookUrl?: string }) => {
                     aria-describedby={errors.email ? "email-error" : undefined}
                   />
                   {errors.email && (
-                    <div id="email-error" className="error-msg" role="alert" ref={el => { errorRefs.current.email = el; }}>
+                    <div id="email-error" className="error-msg" role="alert" ref={el => errorRefs.current.email = el}>
                       {errors.email}
                     </div>
                   )}
@@ -348,7 +348,7 @@ const ScalingSurvey = ({ webhookUrl }: { webhookUrl?: string }) => {
                   />
                   <small className="privacy-note">🔒 Data sent securely. No spam.</small>
                   {errors.phone && (
-                    <div id="phone-error" className="error-msg" role="alert" ref={el => { errorRefs.current.phone = el; }}>
+                    <div id="phone-error" className="error-msg" role="alert" ref={el => errorRefs.current.phone = el}>
                       {errors.phone}
                     </div>
                   )}

@@ -56,33 +56,22 @@ export default function ScalingSurvey() {
         }
 
         try {
-            // Primary: /api (Coolify server.js proxies to n8n)
             const response = await fetch('/api/submit-scaling-survey', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: {
+                    'Content-Type': 'application/json',
+                },
                 body: JSON.stringify(data),
             });
 
-            // Fallback: direct n8n webhook if API fails
-            if (!response.ok) {
-                await fetch('https://n8n.jumpstartscaling.com/webhook/7e2dae05-1ba8-4d2b-b168-b67de7bbece6', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ ...data, formType: 'scaling_survey' }),
-                }).catch(() => null);
+            if (response.ok) {
+                setIsSuccess(true);
+            } else {
+                alert('Something went wrong. Please try again.');
             }
-
-            setIsSuccess(true);
         } catch (error) {
-            // Fallback to n8n on network error
-            try {
-                await fetch('https://n8n.jumpstartscaling.com/webhook/7e2dae05-1ba8-4d2b-b168-b67de7bbece6', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ ...data, formType: 'scaling_survey' }),
-                });
-            } catch (_) { /* ignore */ }
-            setIsSuccess(true);
+            console.error(error);
+            alert('Network error. Please try again.');
         } finally {
             setIsSubmitting(false);
         }
