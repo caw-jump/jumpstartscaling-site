@@ -60,21 +60,12 @@ const ContactForm = () => {
                 formType: 'contact_form'
             };
 
-            // 1. Postgres Internal API
+            // Submit via API (server proxies to n8n using N8N_WEBHOOK env)
             await fetch('/api/submit-lead', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(submissionData)
-            }).catch(err => console.warn('Postgres save fail:', err));
-
-            // 2. Webhook (Optional Fallback)
-            const webhook = 'https://n8n.jumpstartscaling.com/webhook/7e2dae05-1ba8-4d2b-b168-b67de7bbece6';
-
-            await fetch(webhook, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(submissionData)
-            }).catch(err => console.warn('Webhook save fail:', err));
+            });
 
             setStatus('success');
             setFormData(prev => ({ ...prev, name: '', email: '', message: '' })); // Reset display fields

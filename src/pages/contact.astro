@@ -8,6 +8,8 @@ import CTA from '../components/ui/CTA.astro';
 import ContactForm from '../components/interactivity/ContactForm.tsx';
 
 const crumbs = [{ name: 'Home', url: '/' }, { name: 'Contact', url: '/contact' }];
+// Set in Coolify: PUBLIC_CALENDLY_URL
+const calendlyUrl = import.meta.env.PUBLIC_CALENDLY_URL || 'https://calendly.com/jumpstartscaling/30min';
 ---
 
 <BaseLayout title="Contact Jumpstart Scaling" description="Get in touch with our growth engineering team. Book a strategy call or reach out directly." palette="gold" crumbs={crumbs}>
@@ -25,7 +27,7 @@ const crumbs = [{ name: 'Home', url: '/' }, { name: 'Contact', url: '/contact' }
           </p>
           <!-- Calendly embed or form -->
           <div class="glass-card p-12">
-             <div class="calendly-inline-widget" data-url="https://calendly.com/YOUR_LINK" style="min-width:320px;height:630px;"></div>
+             <div class="calendly-inline-widget" data-url={calendlyUrl} style="min-width:320px;height:630px;"></div>
              <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
           </div>
         </div>

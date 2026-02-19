@@ -191,23 +191,12 @@ const ScalingSurvey = ({ webhookUrl }: { webhookUrl?: string }) => {
       existingLeads.push(submissionData);
       localStorage.setItem('jumpstart_leads', JSON.stringify(existingLeads));
 
-      // 2. Postgres Internal API (Unified)
+      // Submit via API (server proxies to n8n using N8N_WEBHOOK env)
       await fetch('/api/submit-lead', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(submissionData)
-      }).catch(err => console.warn('Postgres save fail:', err));
-
-      // 3. Webhook (Optional Fallback)
-      const webhook = 'https://n8n.jumpstartscaling.com/webhook/7e2dae05-1ba8-4d2b-b168-b67de7bbece6';
-
-      if (webhook) {
-        await fetch(webhook, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(submissionData)
-        }).catch(err => console.warn('Webhook silent fail:', err));
-      }
+      }).catch(err => console.warn('API save fail:', err));
 
       setTimeout(() => {
         setIsSubmitting(false);

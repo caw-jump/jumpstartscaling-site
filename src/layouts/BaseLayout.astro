@@ -45,6 +45,10 @@ const graph = [org, webSite];
 if (breadcrumb) graph.push(breadcrumb);
 if (faqSchema) graph.push(faqSchema);
 graph.push(mainEntity);
+
+// Analytics – set in Coolify env (PUBLIC_* = client-visible, no secrets)
+const clarityId = import.meta.env.PUBLIC_CLARITY_ID || '';
+const gaId = import.meta.env.PUBLIC_GA_ID || '';
 ---
 
 <!DOCTYPE html>
@@ -79,28 +83,27 @@ graph.push(mainEntity);
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=JetBrains+Mono:wght@100..800&display=swap" rel="stylesheet">
 
 
-    <!-- Microsoft Clarity -->
-    <script type="text/javascript">
+    {clarityId && (
+    <script type="text/javascript" define:vars={{ clarityId }}>
         (function(c,l,a,r,i,t,y){
             c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
             t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
             y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-        })(window, document, "clarity", "script", "u2is508icv");
+        })(window, document, "clarity", "script", clarityId);
     </script>
+    )}
 
-    <!-- Google Analytics 4 (GA4) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VKT7QBTYNX"></script>
-    <script>
+    {gaId && (
+    <>
+    <script async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}></script>
+    <script define:vars={{ gaId }}>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-
-      // Primary config for jumpstartscaling.com
-      gtag('config', 'G-VKT7QBTYNX', {
-        send_page_view: true,
-        transport_type: 'beacon'
-      });
+      gtag('config', gaId, { send_page_view: true, transport_type: 'beacon' });
     </script>
+    </>
+    )}
 
     <!-- Schema (Global Organization + WebSite + Breadcrumb) -->
     <script type="application/ld+json" set:html={JSON.stringify({

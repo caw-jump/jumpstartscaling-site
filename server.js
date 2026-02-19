@@ -11,8 +11,8 @@ const __dirname = dirname(__filename);
 const PORT = process.env.PORT || 8100;
 const DIST_DIR = join(__dirname, 'dist');
 
-// n8n webhook - form submissions proxy here (Coolify: no Postgres, proxy to n8n)
-const N8N_WEBHOOK = process.env.N8N_WEBHOOK || 'https://n8n.jumpstartscaling.com/webhook/7e2dae05-1ba8-4d2b-b168-b67de7bbece6';
+// n8n webhook - MUST be set in Coolify env (never commit)
+const N8N_WEBHOOK = process.env.N8N_WEBHOOK;
 
 function proxyToWebhook(body, res) {
     const data = JSON.stringify(body);
@@ -68,6 +68,11 @@ const server = createServer((req, res) => {
     // API routes - proxy to n8n (Coolify deployment)
     if (req.method === 'POST') {
         if (urlPath === '/api/submit-lead' || urlPath === '/api/submit-scaling-survey') {
+            if (!N8N_WEBHOOK) {
+                console.warn('N8N_WEBHOOK not set - form submissions will be accepted but not forwarded');
+                res.writeHead(200, { 'Content-Type': 'application/json' });
+                return res.end(JSON.stringify({ success: true, message: 'Received' }));
+            }
             return handleApiPost(urlPath, req, res);
         }
     }
