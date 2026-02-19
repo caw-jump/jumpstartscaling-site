@@ -23,7 +23,7 @@ import ScrollRevealGrid from '../../components/ui/ScrollRevealGrid.tsx';
 import BentoGrid from '../../components/ui/BentoGrid.astro';
 import ScalingSurvey from '../../components/interactivity/ScalingSurvey.tsx';
 import CTA from '../../components/ui/CTA.astro';
-import ImagePlaceholder from '../../components/ui/ImagePlaceholder.tsx';
+import LazyVideo from '../../components/ui/LazyVideo.astro';
 import CohortAnalysisCalculator from '../../components/calculators/CohortAnalysisCalculator.tsx';
 import MRRForecastCalculator from '../../components/calculators/MRRForecastCalculator.tsx';
 
@@ -49,11 +49,9 @@ import MRRForecastCalculator from '../../components/calculators/MRRForecastCalcu
             <p>Apple. Salesforce. HubSpot. These aren't just "good" companies. **They engineered authority.**</p>
         </div>
         <div>
-            <ImagePlaceholder 
-                client:visible
-                minHeight="400px"
-                suggestion="Authority vs Noise"
-                description="Visual comparing a brand that stands out as a signal vs competitors lost in noise."
+            <LazyVideo
+                src="/assets/Authority.mp4"
+                ariaLabel="Visual comparing a brand that stands out as a signal vs competitors lost in noise."
             />
         </div>
       </div>

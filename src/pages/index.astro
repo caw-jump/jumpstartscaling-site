@@ -10,6 +10,7 @@ import GlassCard from '../components/ui/GlassCard.astro';
 import AnimatedSection from '../components/ui/AnimatedSection.astro';
 import ScrollRevealGrid from '../components/ui/ScrollRevealGrid.tsx';
 import ImagePlaceholder from '../components/ui/ImagePlaceholder.tsx';
+import LazyVideo from '../components/ui/LazyVideo.astro';
 
 const services = (await getCollection('services')).sort((a, b) => (a.data.order || 99) - (b.data.order || 99));
 ---
@@ -60,18 +61,13 @@ const services = (await getCollection('services')).sort((a, b) => (a.data.order 
               </div>
 
               <!-- Chaos vs Engineering Visual -->
-              <div class="rounded-2xl overflow-hidden shadow-2xl border border-black/10 relative aspect-video bg-black">
-                 <video 
-                    class="absolute inset-0 w-full h-full object-cover"
-                    autoplay 
-                    loop 
-                    muted 
-                    playsinline
-                 >
-                    <source src="/assets/chaosvsorder.mp4" type="video/mp4" />
-                 </video>
-                 <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none"></div>
-              </div>
+              <LazyVideo 
+                src="/assets/chaosvsorder.mp4"
+                ariaLabel="Chaos vs engineering comparison video"
+                class="shadow-2xl border border-black/10 bg-black"
+              >
+                <div slot="overlay" class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none" />
+              </LazyVideo>
           </div>
        </AnimatedSection>
     </div>
@@ -164,7 +160,7 @@ const services = (await getCollection('services')).sort((a, b) => (a.data.order 
         Answer 5 quick questions. We'll map your biggest scaling bottleneck and show you how to fix it.
       </p>
       <div class="max-w-5xl mx-auto">
-        <ScalingSurvey client:load />
+        <ScalingSurvey client:visible />
       </div>
     </div>
   </section>

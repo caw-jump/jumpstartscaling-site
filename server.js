@@ -56,6 +56,8 @@ const MIME_TYPES = {
     '.svg': 'image/svg+xml',
     '.ico': 'image/x-icon',
     '.webp': 'image/webp',
+    '.mp4': 'video/mp4',
+    '.webm': 'video/webm',
     '.woff': 'font/woff',
     '.woff2': 'font/woff2',
     '.ttf': 'font/ttf',
@@ -91,7 +93,7 @@ const server = createServer((req, res) => {
 
         const content = readFileSync(filePath);
 
-        const isStatic = ['.js', '.css', '.png', '.jpg', '.gif', '.svg', '.ico', '.webp', '.woff', '.woff2', '.ttf', '.eot'].includes(ext);
+        const isStatic = ['.js', '.css', '.png', '.jpg', '.gif', '.svg', '.ico', '.webp', '.mp4', '.webm', '.woff', '.woff2', '.ttf', '.eot'].includes(ext);
         const cacheControl = isStatic ? 'public, max-age=31536000, immutable' : 'public, max-age=3600';
 
         res.writeHead(200, {

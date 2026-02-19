@@ -23,6 +23,7 @@ import ScrollRevealGrid from '../../components/ui/ScrollRevealGrid.tsx';
 import ScalingSurvey from '../../components/interactivity/ScalingSurvey.tsx';
 import CTA from '../../components/ui/CTA.astro';
 import ImagePlaceholder from '../../components/ui/ImagePlaceholder.tsx';
+import LazyVideo from '../../components/ui/LazyVideo.astro';
 import ChurnCalculator from '../../components/calculators/ChurnCalculator.tsx';
 import LTVCalculator from '../../components/calculators/LTVCalculator.tsx';
 import MRRForecastCalculator from '../../components/calculators/MRRForecastCalculator.tsx';
@@ -76,11 +77,10 @@ import CLVRetentionCalculator from '../../components/calculators/CLVRetentionCal
             </div>
         </div>
 
-        <ImagePlaceholder 
-            client:visible
-            minHeight="400px"
-            suggestion="Lifecycle Logic"
-            description="Visual showing leads entering funnel, leaking out without follow-up vs getting nurtured automatically."
+        <LazyVideo
+            src="/assets/lifecycle.mp4"
+            ariaLabel="Visual showing leads entering funnel, leaking out without follow-up vs getting nurtured automatically."
+            class="shadow-2xl border border-black/10 bg-black"
         />
       </div>
 

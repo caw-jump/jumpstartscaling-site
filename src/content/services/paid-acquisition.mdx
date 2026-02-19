@@ -24,6 +24,7 @@ import ScalingSurvey from '../../components/interactivity/ScalingSurvey.tsx';
 import CTA from '../../components/ui/CTA.astro';
 import ROASCalculator from '../../components/calculators/ROASCalculator.jsx';
 import ImagePlaceholder from '../../components/ui/ImagePlaceholder.tsx';
+import LazyVideo from '../../components/ui/LazyVideo.astro';
 
 <ParallaxHero>
   <Hero 
@@ -47,16 +48,14 @@ import ImagePlaceholder from '../../components/ui/ImagePlaceholder.tsx';
             </div>
         </div>
 
-        <div class="rounded-2xl overflow-hidden shadow-2xl border border-black/10 relative bg-black">
-           <video
-             src="/assets/infrastructure-gap-opt.mp4"
-             class="w-full h-auto block"
-             autoplay
-             muted
-             loop
-             playsinline
-           ></video>
-           <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none"></div>
+        <div>
+          <LazyVideo
+            src="/assets/infrastructure-gap-opt.mp4"
+            ariaLabel="Infrastructure gap visual"
+            class="shadow-2xl border border-black/10 bg-black"
+          >
+            <div slot="overlay" class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none" />
+          </LazyVideo>
         </div>
       </div>
     </AnimatedSection>
