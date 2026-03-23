@@ -57,9 +57,9 @@ export default function PartyRentalInventoryROICalculator() {
         <div>
           <label className="block text-sm font-medium text-white/95 mb-2">Weekend Utilization %</label>
           <select value={weekendUtilization} onChange={(e) => setWeekendUtilization(e.target.value)} className="w-full px-4 py-3 bg-[#1A1A1F] border border-white/20 rounded-xl focus:border-accent text-white">
-            <option value="20">20% (Struggling / Low Traffic)</option>
-            <option value="40">40% (Standard Regional Agency)</option>
-            <option value="70">70% (Peak Season Sell-out)</option>
+            <option value="20" className="bg-[#1A1A1F] text-white">20% (Struggling / Low Traffic)</option>
+            <option value="40" className="bg-[#1A1A1F] text-white">40% (Standard Regional Agency)</option>
+            <option value="70" className="bg-[#1A1A1F] text-white">70% (Peak Season Sell-out)</option>
           </select>
         </div>
       </div>

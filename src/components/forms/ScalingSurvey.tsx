@@ -143,12 +143,12 @@ export default function ScalingSurvey() {
                             <div className="space-y-2">
                                 <label className="text-sm font-medium text-white/70">Your Role *</label>
                                 <select {...register("role", { required: true })} className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:border-accent focus:outline-none focus:bg-white/10 transition text-white">
-                                    <option value="" className="bg-zinc-900">Select...</option>
-                                    <option value="Founder/CEO" className="bg-zinc-900">Founder/CEO</option>
-                                    <option value="Marketing Lead" className="bg-zinc-900">Marketing Lead</option>
-                                    <option value="Sales Lead" className="bg-zinc-900">Sales Lead</option>
-                                    <option value="Product" className="bg-zinc-900">Product</option>
-                                    <option value="Other" className="bg-zinc-900">Other</option>
+                                    <option value="" className="bg-zinc-900" className="bg-[#1A1A1F] text-white">Select...</option>
+                                    <option value="Founder/CEO" className="bg-zinc-900" className="bg-[#1A1A1F] text-white">Founder/CEO</option>
+                                    <option value="Marketing Lead" className="bg-zinc-900" className="bg-[#1A1A1F] text-white">Marketing Lead</option>
+                                    <option value="Sales Lead" className="bg-zinc-900" className="bg-[#1A1A1F] text-white">Sales Lead</option>
+                                    <option value="Product" className="bg-zinc-900" className="bg-[#1A1A1F] text-white">Product</option>
+                                    <option value="Other" className="bg-zinc-900" className="bg-[#1A1A1F] text-white">Other</option>
                                 </select>
                                 {errors.role && <span className="text-red-400 text-xs">Required</span>}
                             </div>
@@ -165,13 +165,13 @@ export default function ScalingSurvey() {
                                 <div className="space-y-2">
                                     <label className="text-sm font-medium text-white/70">Current Annual Revenue (ARR) *</label>
                                     <select {...register("currentRevenue", { required: true })} className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:border-accent focus:outline-none text-white">
-                                        <option value="" className="bg-zinc-900">Select...</option>
-                                        <option value="0-100k" className="bg-zinc-900">&lt; $100k</option>
-                                        <option value="100k-500k" className="bg-zinc-900">$100k - $500k</option>
-                                        <option value="500k-1m" className="bg-zinc-900">$500k - $1M</option>
-                                        <option value="1m-5m" className="bg-zinc-900">$1M - $5M</option>
-                                        <option value="5m-10m" className="bg-zinc-900">$5M - $10M</option>
-                                        <option value="10m+" className="bg-zinc-900">$10M+</option>
+                                        <option value="" className="bg-zinc-900" className="bg-[#1A1A1F] text-white">Select...</option>
+                                        <option value="0-100k" className="bg-zinc-900" className="bg-[#1A1A1F] text-white">&lt; $100k</option>
+                                        <option value="100k-500k" className="bg-zinc-900" className="bg-[#1A1A1F] text-white">$100k - $500k</option>
+                                        <option value="500k-1m" className="bg-zinc-900" className="bg-[#1A1A1F] text-white">$500k - $1M</option>
+                                        <option value="1m-5m" className="bg-zinc-900" className="bg-[#1A1A1F] text-white">$1M - $5M</option>
+                                        <option value="5m-10m" className="bg-zinc-900" className="bg-[#1A1A1F] text-white">$5M - $10M</option>
+                                        <option value="10m+" className="bg-zinc-900" className="bg-[#1A1A1F] text-white">$10M+</option>
                                     </select>
                                     {errors.currentRevenue && <span className="text-red-400 text-xs">Required</span>}
                                 </div>
@@ -190,11 +190,11 @@ export default function ScalingSurvey() {
                                 <div className="space-y-2">
                                     <label className="text-sm font-medium text-white/70">Team Size *</label>
                                     <select {...register("teamSize", { required: true })} className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:border-accent focus:outline-none text-white">
-                                        <option value="" className="bg-zinc-900">Select...</option>
-                                        <option value="1-5" className="bg-zinc-900">1-5</option>
-                                        <option value="6-20" className="bg-zinc-900">6-20</option>
-                                        <option value="21-50" className="bg-zinc-900">21-50</option>
-                                        <option value="50+" className="bg-zinc-900">50+</option>
+                                        <option value="" className="bg-zinc-900" className="bg-[#1A1A1F] text-white">Select...</option>
+                                        <option value="1-5" className="bg-zinc-900" className="bg-[#1A1A1F] text-white">1-5</option>
+                                        <option value="6-20" className="bg-zinc-900" className="bg-[#1A1A1F] text-white">6-20</option>
+                                        <option value="21-50" className="bg-zinc-900" className="bg-[#1A1A1F] text-white">21-50</option>
+                                        <option value="50+" className="bg-zinc-900" className="bg-[#1A1A1F] text-white">50+</option>
                                     </select>
                                 </div>
                             </div>
@@ -210,12 +210,12 @@ export default function ScalingSurvey() {
                             <div className="space-y-2">
                                 <label className="text-sm font-medium text-white/70">Monthly Marketing Budget ($) *</label>
                                 <select {...register("marketingSpend", { required: true })} className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:border-accent focus:outline-none text-white">
-                                    <option value="" className="bg-zinc-900">Select...</option>
-                                    <option value="0-5k" className="bg-zinc-900">&lt; $5k</option>
-                                    <option value="5k-20k" className="bg-zinc-900">$5k - $20k</option>
-                                    <option value="20k-50k" className="bg-zinc-900">$20k - $50k</option>
-                                    <option value="50k-100k" className="bg-zinc-900">$50k - $100k</option>
-                                    <option value="100k+" className="bg-zinc-900">$100k+</option>
+                                    <option value="" className="bg-zinc-900" className="bg-[#1A1A1F] text-white">Select...</option>
+                                    <option value="0-5k" className="bg-zinc-900" className="bg-[#1A1A1F] text-white">&lt; $5k</option>
+                                    <option value="5k-20k" className="bg-zinc-900" className="bg-[#1A1A1F] text-white">$5k - $20k</option>
+                                    <option value="20k-50k" className="bg-zinc-900" className="bg-[#1A1A1F] text-white">$20k - $50k</option>
+                                    <option value="50k-100k" className="bg-zinc-900" className="bg-[#1A1A1F] text-white">$50k - $100k</option>
+                                    <option value="100k+" className="bg-zinc-900" className="bg-[#1A1A1F] text-white">$100k+</option>
                                 </select>
                                 {errors.marketingSpend && <span className="text-red-400 text-xs">Required</span>}
                             </div>

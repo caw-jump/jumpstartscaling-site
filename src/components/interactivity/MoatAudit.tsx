@@ -129,7 +129,7 @@ export default function MoatAudit() {
                                     ))}
                                 </div>
 
-                                <button onClick={() => setStep(1)} className="mt-6 text-xs font-mono text-gray-600 hover:text-gray-400 flex items-center gap-2">
+                                <button onClick={() => setStep(1)} className="mt-6 text-xs font-mono text-gray-400 hover:text-white flex items-center gap-2">
                                     <span>&larr; RETURN TO VECTOR SELECTION</span>
                                 </button>
                             </motion.div>

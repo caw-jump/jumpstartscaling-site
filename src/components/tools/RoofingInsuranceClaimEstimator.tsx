@@ -73,8 +73,8 @@ export default function RoofingInsuranceClaimEstimator() {
         <div>
           <label className="block text-sm font-medium text-white/95 mb-2">Insurance Policy Type</label>
           <select value={policyType} onChange={(e) => setPolicyType(e.target.value)} className="w-full px-4 py-3 bg-[#1A1A1F] border border-white/20 rounded-xl focus:border-accent text-white">
-            <option value="RCV">Replacement Cost Value (RCV)</option>
-            <option value="ACV">Actual Cash Value (ACV)</option>
+            <option value="RCV" className="bg-[#1A1A1F] text-white">Replacement Cost Value (RCV)</option>
+            <option value="ACV" className="bg-[#1A1A1F] text-white">Actual Cash Value (ACV)</option>
           </select>
         </div>
       </div>

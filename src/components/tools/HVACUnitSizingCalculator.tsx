@@ -71,28 +71,28 @@ export default function HVACUnitSizingCalculator() {
         <div>
           <label className="block text-sm font-medium text-white/95 mb-2">Climate Region</label>
           <select value={climateZone} onChange={(e) => setClimateZone(e.target.value)} className="w-full px-4 py-3 bg-[#1A1A1F] border border-white/20 rounded-xl focus:border-accent text-white">
-            <option value="zone1">Zone 1: Very Hot (TX, FL, AZ)</option>
-            <option value="zone2">Zone 2: Hot/Humid (GA, AL, SC)</option>
-            <option value="zone3">Zone 3: Moderate (VA, NC, MO)</option>
-            <option value="zone4">Zone 4: Cool (NY, PA, OH)</option>
-            <option value="zone5">Zone 5: Cold (ME, MN, ND)</option>
+            <option value="zone1" className="bg-[#1A1A1F] text-white">Zone 1: Very Hot (TX, FL, AZ)</option>
+            <option value="zone2" className="bg-[#1A1A1F] text-white">Zone 2: Hot/Humid (GA, AL, SC)</option>
+            <option value="zone3" className="bg-[#1A1A1F] text-white">Zone 3: Moderate (VA, NC, MO)</option>
+            <option value="zone4" className="bg-[#1A1A1F] text-white">Zone 4: Cool (NY, PA, OH)</option>
+            <option value="zone5" className="bg-[#1A1A1F] text-white">Zone 5: Cold (ME, MN, ND)</option>
           </select>
         </div>
         <div>
           <label className="block text-sm font-medium text-white/95 mb-2">Primary Ceiling Height (ft)</label>
           <select value={ceilingHeight} onChange={(e) => setCeilingHeight(e.target.value)} className="w-full px-4 py-3 bg-[#1A1A1F] border border-white/20 rounded-xl focus:border-accent text-white">
-            <option value="8">8 ft (Standard)</option>
-            <option value="9">9 ft</option>
-            <option value="10">10 ft</option>
-            <option value="12">12+ ft (Vaulted)</option>
+            <option value="8" className="bg-[#1A1A1F] text-white">8 ft (Standard)</option>
+            <option value="9" className="bg-[#1A1A1F] text-white">9 ft</option>
+            <option value="10" className="bg-[#1A1A1F] text-white">10 ft</option>
+            <option value="12" className="bg-[#1A1A1F] text-white">12+ ft (Vaulted)</option>
           </select>
         </div>
         <div>
           <label className="block text-sm font-medium text-white/95 mb-2">Insulation & Window Quality</label>
           <select value={insulation} onChange={(e) => setInsulation(e.target.value)} className="w-full px-4 py-3 bg-[#1A1A1F] border border-white/20 rounded-xl focus:border-accent text-white">
-            <option value="poor">Poor (Older home, drafty windows)</option>
-            <option value="average">Average (Standard 1990s+ build)</option>
-            <option value="excellent">Excellent (New build, spray foam)</option>
+            <option value="poor" className="bg-[#1A1A1F] text-white">Poor (Older home, drafty windows)</option>
+            <option value="average" className="bg-[#1A1A1F] text-white">Average (Standard 1990s+ build)</option>
+            <option value="excellent" className="bg-[#1A1A1F] text-white">Excellent (New build, spray foam)</option>
           </select>
         </div>
       </div>

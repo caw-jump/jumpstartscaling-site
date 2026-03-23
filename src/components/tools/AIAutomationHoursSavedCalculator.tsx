@@ -65,9 +65,9 @@ export default function AIAutomationHoursSavedCalculator() {
         <div>
           <label className="block text-sm font-medium text-white/95 mb-2">AI Efficiency Goal (%)</label>
           <select value={automationEfficiency} onChange={(e) => setAutomationEfficiency(e.target.value)} className="w-full px-4 py-3 bg-[#1A1A1F] border border-white/20 rounded-xl focus:border-accent text-white">
-            <option value="50">50% (Partial Automation)</option>
-            <option value="80">80% (LLM Integration)</option>
-            <option value="100">100% (Full Replacement)</option>
+            <option value="50" className="bg-[#1A1A1F] text-white">50% (Partial Automation)</option>
+            <option value="80" className="bg-[#1A1A1F] text-white">80% (LLM Integration)</option>
+            <option value="100" className="bg-[#1A1A1F] text-white">100% (Full Replacement)</option>
           </select>
         </div>
       </div>

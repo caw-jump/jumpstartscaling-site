@@ -63,25 +63,25 @@ export default function SolarPanelSizingCalculator() {
         <div>
           <label className="block text-sm font-medium text-white/95 mb-2">Peak Sunlight (Hours/Day)</label>
           <select value={sunlightHours} onChange={(e) => setSunlightHours(e.target.value)} className="w-full px-4 py-3 bg-[#1A1A1F] border border-white/20 rounded-xl focus:border-accent text-white">
-            <option value="3.5">3.5 Hrs (Northeast / PNW)</option>
-            <option value="4.5">4.5 Hrs (Midwest / National Avg)</option>
-            <option value="5.5">5.5 Hrs (Southwest / CA / FL)</option>
+            <option value="3.5" className="bg-[#1A1A1F] text-white">3.5 Hrs (Northeast / PNW)</option>
+            <option value="4.5" className="bg-[#1A1A1F] text-white">4.5 Hrs (Midwest / National Avg)</option>
+            <option value="5.5" className="bg-[#1A1A1F] text-white">5.5 Hrs (Southwest / CA / FL)</option>
           </select>
         </div>
         <div>
           <label className="block text-sm font-medium text-white/95 mb-2">Individual Panel Wattage</label>
           <select value={panelWattage} onChange={(e) => setPanelWattage(e.target.value)} className="w-full px-4 py-3 bg-[#1A1A1F] border border-white/20 rounded-xl focus:border-accent text-white">
-            <option value="350">350W (Standard)</option>
-            <option value="400">400W (Premium)</option>
-            <option value="450">450W (Max Efficiency)</option>
+            <option value="350" className="bg-[#1A1A1F] text-white">350W (Standard)</option>
+            <option value="400" className="bg-[#1A1A1F] text-white">400W (Premium)</option>
+            <option value="450" className="bg-[#1A1A1F] text-white">450W (Max Efficiency)</option>
           </select>
         </div>
         <div>
           <label className="block text-sm font-medium text-white/95 mb-2">Target Bill Offset (%)</label>
           <select value={offsetTarget} onChange={(e) => setOffsetTarget(e.target.value)} className="w-full px-4 py-3 bg-[#1A1A1F] border border-white/20 rounded-xl focus:border-accent text-white">
-            <option value="80">80% Offset</option>
-            <option value="100">100% Offset (Zero Bill)</option>
-            <option value="120">120% Offset (Add future EVs/AC)</option>
+            <option value="80" className="bg-[#1A1A1F] text-white">80% Offset</option>
+            <option value="100" className="bg-[#1A1A1F] text-white">100% Offset (Zero Bill)</option>
+            <option value="120" className="bg-[#1A1A1F] text-white">120% Offset (Add future EVs/AC)</option>
           </select>
         </div>
       </div>

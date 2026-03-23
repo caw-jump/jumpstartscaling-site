@@ -67,21 +67,21 @@ export default function SEERVsSEER2Calculator() {
         <div>
           <label className="block text-sm font-medium text-white/95 mb-2">Unit Tonnage</label>
           <select value={tonnage} onChange={(e) => setTonnage(e.target.value)} className="w-full px-4 py-3 bg-[#1A1A1F] border border-white/20 rounded-xl focus:border-accent text-white">
-            <option value="2.0">2.0 Tons (24k BTU)</option>
-            <option value="2.5">2.5 Tons</option>
-            <option value="3.0">3.0 Tons (36k BTU)</option>
-            <option value="3.5">3.5 Tons</option>
-            <option value="4.0">4.0 Tons (48k BTU)</option>
-            <option value="5.0">5.0 Tons (60k BTU)</option>
+            <option value="2.0" className="bg-[#1A1A1F] text-white">2.0 Tons (24k BTU)</option>
+            <option value="2.5" className="bg-[#1A1A1F] text-white">2.5 Tons</option>
+            <option value="3.0" className="bg-[#1A1A1F] text-white">3.0 Tons (36k BTU)</option>
+            <option value="3.5" className="bg-[#1A1A1F] text-white">3.5 Tons</option>
+            <option value="4.0" className="bg-[#1A1A1F] text-white">4.0 Tons (48k BTU)</option>
+            <option value="5.0" className="bg-[#1A1A1F] text-white">5.0 Tons (60k BTU)</option>
           </select>
         </div>
         <div>
           <label className="block text-sm font-medium text-white/95 mb-2">Annual Cooling Hours</label>
           <select value={coolingHours} onChange={(e) => setCoolingHours(e.target.value)} className="w-full px-4 py-3 bg-[#1A1A1F] border border-white/20 rounded-xl focus:border-accent text-white">
-            <option value="1000">1000 hrs (Northeast / Cool)</option>
-            <option value="1500">1500 hrs (Midwest / Mild)</option>
-            <option value="2100">2100 hrs (South / Hot)</option>
-            <option value="2800">2800 hrs (FL, TX, AZ / Extreme)</option>
+            <option value="1000" className="bg-[#1A1A1F] text-white">1000 hrs (Northeast / Cool)</option>
+            <option value="1500" className="bg-[#1A1A1F] text-white">1500 hrs (Midwest / Mild)</option>
+            <option value="2100" className="bg-[#1A1A1F] text-white">2100 hrs (South / Hot)</option>
+            <option value="2800" className="bg-[#1A1A1F] text-white">2800 hrs (FL, TX, AZ / Extreme)</option>
           </select>
         </div>
       </div>

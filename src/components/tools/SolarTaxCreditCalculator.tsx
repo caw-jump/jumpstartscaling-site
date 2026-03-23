@@ -53,9 +53,9 @@ export default function SolarTaxCreditCalculator() {
         <div>
           <label className="block text-sm font-medium text-white/95 mb-2">State Tax Credit Tier</label>
           <select value={stateTier} onChange={(e) => setStateTier(e.target.value)} className="w-full px-4 py-3 bg-[#1A1A1F] border border-white/20 rounded-xl focus:border-accent text-white">
-            <option value="high">High Tier (NY, IL, SC, MA - up to $5k avg)</option>
-            <option value="average">Standard Tier (MD, UT - flat $1k cap)</option>
-            <option value="none">No Direct State Credit (TX, FL, CA)</option>
+            <option value="high" className="bg-[#1A1A1F] text-white">High Tier (NY, IL, SC, MA - up to $5k avg)</option>
+            <option value="average" className="bg-[#1A1A1F] text-white">Standard Tier (MD, UT - flat $1k cap)</option>
+            <option value="none" className="bg-[#1A1A1F] text-white">No Direct State Credit (TX, FL, CA)</option>
           </select>
           <p className="text-xs text-white/50 mt-1">Check the DSIRE database for your exact ZIP.</p>
         </div>

@@ -61,26 +61,26 @@ export default function RoofReplacementCostCalculator() {
         <div>
           <label className="block text-sm font-medium text-white/95 mb-2">Roofing Material</label>
           <select value={material} onChange={(e) => setMaterial(e.target.value)} className="w-full px-4 py-3 bg-[#1A1A1F] border border-white/20 rounded-xl focus:border-accent text-white">
-            <option value="asphalt">Asphalt Shingles (Standard)</option>
-            <option value="metal">Metal (Standing Seam)</option>
-            <option value="tile">Clay / Concrete Tile</option>
-            <option value="slate">Natural Slate</option>
+            <option value="asphalt" className="bg-[#1A1A1F] text-white">Asphalt Shingles (Standard)</option>
+            <option value="metal" className="bg-[#1A1A1F] text-white">Metal (Standing Seam)</option>
+            <option value="tile" className="bg-[#1A1A1F] text-white">Clay / Concrete Tile</option>
+            <option value="slate" className="bg-[#1A1A1F] text-white">Natural Slate</option>
           </select>
         </div>
         <div>
           <label className="block text-sm font-medium text-white/95 mb-2">Roof Pitch (Steepness)</label>
           <select value={pitch} onChange={(e) => setPitch(e.target.value)} className="w-full px-4 py-3 bg-[#1A1A1F] border border-white/20 rounded-xl focus:border-accent text-white">
-            <option value="low">Low Pitch (Walkable)</option>
-            <option value="medium">Medium Pitch (Standard)</option>
-            <option value="high">High Pitch (Steep / Needs Harness)</option>
+            <option value="low" className="bg-[#1A1A1F] text-white">Low Pitch (Walkable)</option>
+            <option value="medium" className="bg-[#1A1A1F] text-white">Medium Pitch (Standard)</option>
+            <option value="high" className="bg-[#1A1A1F] text-white">High Pitch (Steep / Needs Harness)</option>
           </select>
         </div>
         <div>
           <label className="block text-sm font-medium text-white/95 mb-2">Old Layers to Tear Off</label>
           <select value={removalLayers} onChange={(e) => setRemovalLayers(e.target.value)} className="w-full px-4 py-3 bg-[#1A1A1F] border border-white/20 rounded-xl focus:border-accent text-white">
-            <option value="1">1 Layer</option>
-            <option value="2">2 Layers</option>
-            <option value="3">3 Layers (Requires deep tear-off)</option>
+            <option value="1" className="bg-[#1A1A1F] text-white">1 Layer</option>
+            <option value="2" className="bg-[#1A1A1F] text-white">2 Layers</option>
+            <option value="3" className="bg-[#1A1A1F] text-white">3 Layers (Requires deep tear-off)</option>
           </select>
         </div>
       </div>
