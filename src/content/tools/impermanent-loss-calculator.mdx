@@ -1,0 +1,31 @@
+---
+title: "Impermanent Loss Calculator"
+description: "Model how token price divergences wipe out liquidity pool earnings before you stake."
+category: "trading"
+emoji: "📉"
+newsHook: "Is that 50% APY yield farm actually profitable for you?"
+meta:
+  title: "Crypto Impermanent Loss Calculator | Yield Farming Tools"
+  description: "Calculate hidden Impermanent Loss in Automated Market Maker (AMM) pools. See how price changes in your provided liquidity tokens affect your net capital."
+faqs:
+  - q: "What is Impermanent Loss?"
+    a: "It’s the difference in net value between holding tokens in an AMM liquidity pool versus simply holding them in your wallet. It happens when token prices diverge."
+  - q: "Why is it called 'Impermanent'?"
+    a: "If the token prices return to the exact same ratios as when you entered the pool, the loss goes away. However, if you withdraw while prices are diverged, the loss becomes permanent."
+---
+
+## The Impermanent Loss Formula
+
+For standard Automated Market Maker (AMM) pools (like Uniswap V2 or Raydium), impermanent loss ($IL$) mathematically stems from the price divergence ratio ($k$):
+
+`IL = ( 2 * SQRT(k) / (1 + k) ) - 1`
+
+*(Where `$k$` is the ratio of Token A's price change relative to Token B's price change).*
+
+### How it's used
+You input the prices of Token A and Token B exactly when you entered the liquidity pool, and their current (or projected future) prices. The calculator immediately shows you the net-negative effect of providing liquidity.
+
+### Why it matters
+Yield farming can be deceptive. A pool might offer an advertised 50% APY out of the gate. However, if one token skyrockets in value while the other crashes, the AMM algorithm forces you to mathematically sell your winning token to buy the losing one in order to maintain a 50/50 capital balance. 
+
+This calculator reveals if the fees you earn will actually cover the loss you take compared to simply holding the raw tokens in a cold wallet.

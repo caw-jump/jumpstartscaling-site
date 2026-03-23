@@ -1,0 +1,29 @@
+---
+title: "Isolated Margin Liquidation Calculator"
+description: "Calculate exactly where a crypto exchange will force close your leveraged margin position."
+category: "trading"
+emoji: "💥"
+newsHook: "Don't let market wicks wipe out your entire leveraged crypto account. Find the exact price."
+meta:
+  title: "Crypto Liquidation Price Calculator | Margin Trading Tools"
+  description: "Calculate the exact price line where your crypto exchange will liquidate your leveraged Long or Short isolated margin position."
+faqs:
+  - q: "What is a Liquidation Price?"
+    a: "When trading with leverage, your exchange lends you capital. If a trade goes against you, the exchange will automatically force-sell your position (liquidate) at a specific price to prevent you from losing their lent money."
+  - q: "What is a Maintenance Margin Rate (MMR)?"
+    a: "The absolute minimum amount of collateral you must maintain relative to the total position size to keep a leveraged trade open."
+---
+
+## Surviving Leveraged Trading
+
+This isolated margin calculator estimates the exact price point where an exchange forcefully liquidates a leveraged long or short position to cover its own collateral loans.
+
+`Liquidation = (Entry * Quantity - Initial Margin) / (Quantity * (1 - MMR))`
+
+*(Note: The exact derivation flips dynamically if you are utilizing a Short Position).*
+
+### How it's used
+You input your actual entry price, the amount of leverage used (e.g., 20x, 50x), your total coin quantity, and the exchange's required maintenance margin requirement percentage.
+
+### Why it matters
+In crypto, extremely high volatility wicks can wipe out heavily leveraged positions in milliseconds. This calculator lets you preemptively see your failure vector. You can then deliberately set precise stop-loss orders just above (for longs) the liquidation price—ensuring you manually control your exit logic rather than paying the exchange's steep automatic liquidation penalty fees.

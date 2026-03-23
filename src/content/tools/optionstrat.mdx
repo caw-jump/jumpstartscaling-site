@@ -1,0 +1,29 @@
+---
+title: "Option Expected Move Calculator"
+description: "Isolate Implied Volatility (IV) to estimate the expected dollar move of a stock leading up to expiration."
+category: "trading"
+emoji: "📊"
+newsHook: "Stop guessing how much a stock drops after earnings."
+meta:
+  title: "Option Expected Move Calculator | Implied Volatility Tool"
+  description: "Calculate the exact expected move of a stock based on Implied Volatility (IV). Avoid IV crush and maximize options trading profits."
+faqs:
+  - q: "What is Implied Volatility (IV)?"
+    a: "Implied Volatility represents the market's forecast of a likely movement in a security's price. Higher IV means higher expected swings."
+  - q: "What is IV Crush?"
+    a: "IV crush occurs when implied volatility drops dramatically after a known catalyst (like an earnings report). Even if the stock moves favorably, your option's value can plummet."
+---
+
+## The Expected Move Formula
+
+This calculator uses core pricing models to heavily isolate Implied Volatility (IV). To approximate the expected move of a stock based on its current IV, we use:
+
+`Expected Move ≈ Price * (IV / 100) * SQRT(Days_to_Expiration / 365)`
+
+### How it's used
+You input the current stock price and days until an option expires. Then, use the slider to adjust the Implied Volatility to see practically how high or low the market is pricing the move.
+
+### Why it matters
+It highlights the absolute danger of **"IV Crush."** If you buy an option right before earnings, the IV is extremely high. Following the earnings call, the market digests the news and IV immediately plunges. 
+
+Even if the stock moves in your intended direction, the sharp drop in IV can drastically reduce the option premium's value. This calculator helps you recognize those overpriced conditions and strategize around actually *shorting* volatility rather than blindly buying right into it.

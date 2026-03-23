@@ -1,0 +1,33 @@
+---
+title: "Options Profit Calculator"
+description: "Model dynamic option prices across time, strike, and volatility using the Black-Scholes formula."
+category: "trading"
+emoji: "📈"
+newsHook: "Calculate the exact value of your options before taking the trade."
+meta:
+  title: "Options Profit Calculator | Black-Scholes Pricing Model"
+  description: "Calculate theoretical option prices using Black-Scholes. Model stock price, strike, DTE, and IV to predict your trade profit."
+faqs:
+  - q: "What is the Black-Scholes Model?"
+    a: "The Black-Scholes model is a mathematical equation used to estimate the theoretical value of options. It factors in stock price, strike price, time to expiration, risk-free interest rates, and implied volatility."
+  - q: "Why do options lose value over time?"
+    a: "Time decay, or Theta, measures the rate of decline in the value of an option due to the passage of time. As maturity approaches, there is less time for the stock to move favorably, decreasing the premium."
+---
+
+## Understanding The Math
+
+This tool is built on underlying options pricing models like Black-Scholes. The core formula for calculating the theoretical price of a call option ($C$) is:
+
+`C = S * N(d1) - K * e^(-rT) * N(d2)`
+
+Where:
+- **$S$** is the current stock price.
+- **$K$** is the strike price you are targeting.
+- **$r$** is the risk-free interest rate.
+- **$T$** is time to maturity (in years).
+- **$N$** represents the normal distribution.
+- **$d_1$** and **$d_2$** are continuous probability factors based on volatility.
+
+### Why it matters
+
+Options do not move linearly. This visualizes exactly how time decay (Theta) will eat into your profits day-by-day, allowing you to pinpoint the exact date you need to exit the trade before time decay accelerates.
