@@ -1,0 +1,67 @@
+---
+title: "Real Estate: Wholesale & Land"
+description: "High-volume seller lead acquisition systems for real estate wholesalers, flippers, and land investors."
+palette: "emerald"
+author: "Jumpstart Scaling"
+order: 120
+keyMetrics:
+  - label: "Cost Per Motivated Seller"
+    value: "-40%"
+  - label: "SMS Delivery Rate"
+    value: "98%"
+  - label: "Contract Assignment ROI"
+    value: "650%"
+---
+
+import Hero from '../../components/ui/Hero.astro';
+import AnimatedSection from '../../components/ui/AnimatedSection.astro';
+import GlassCard from '../../components/ui/GlassCard.astro';
+import MortgageLeadToCloseCalculator from '../../components/tools/MortgageLeadToCloseCalculator.tsx';
+import LeadConversionTargetCalculator from '../../components/tools/LeadConversionTargetCalculator.tsx';
+
+<Hero 
+  title="Capture Motivated Seller Data"
+  subtitle="Bypass the MLS. We engineer multi-channel inbound funnels that generate exclusive, off-market distressed property leads before the competition knows they exist."
+  align="center"
+/>
+
+<AnimatedSection>
+  <div class="prose prose-invert max-w-4xl mx-auto mb-16 px-4 md:px-0">
+    <h2>The Race to the Contract</h2>
+    <p>
+      In wholesaling and land investing, whoever finds the distressed seller first wins the assignment fee. Cold calling lists bought from standard data brokers yields abysmal contact rates and endless regulatory headaches.
+    </p>
+    <p>
+      We transition investors from outbound spam to inbound authority. By utilizing highly targeted geographic PPC, SEO optimized for 'sell house fast' queries, and rigorous CRM webhooks, we ensure your acquisition managers only talk to sellers who actually want an offer today.
+    </p>
+  </div>
+</AnimatedSection>
+
+<AnimatedSection delay={0.2}>
+  <div class="max-w-6xl mx-auto mb-20 px-4 md:px-0">
+    <h3 class="text-3xl font-bold mb-8 text-center text-white/90">The Math of Wholesale Real Estate</h3>
+    <p class="text-center text-white/60 mb-12 max-w-2xl mx-auto">
+      Assigning a single $15,000 contract solves a lot of problems. Track your pipeline drop-off carefully to ensure you aren't bleeding leads.
+    </p>
+    
+    <div class="grid md:grid-cols-2 gap-8">
+      <GlassCard class="p-8">
+        <h4 class="text-xl font-bold text-green-400 mb-6 flex items-center gap-3">
+          <span class="text-2xl">📉</span> Lead to Contract Drop-off
+        </h4>
+        <div class="not-prose max-w-full">
+           <MortgageLeadToCloseCalculator client:visible />
+        </div>
+      </GlassCard>
+
+      <GlassCard class="p-8">
+        <h4 class="text-xl font-bold text-green-400 mb-6 flex items-center gap-3">
+          <span class="text-2xl">💸</span> Advertising Break-even
+        </h4>
+        <div class="not-prose max-w-full">
+           <LeadConversionTargetCalculator client:visible />
+        </div>
+      </GlassCard>
+    </div>
+  </div>
+</AnimatedSection>

@@ -1,0 +1,67 @@
+---
+title: "Specialized Auto & PPF"
+description: "Precision marketing for high-end auto detailing, Paint Protection Film (PPF), and wrap shops targeting luxury vehicle owners."
+palette: "emerald"
+author: "Jumpstart Scaling"
+order: 90
+keyMetrics:
+  - label: "Luxury Lead Volume"
+    value: "+185%"
+  - label: "ROAS (Return on Ad Spend)"
+    value: "410%"
+  - label: "Shop Capacity"
+    value: "95%"
+---
+
+import Hero from '../../components/ui/Hero.astro';
+import AnimatedSection from '../../components/ui/AnimatedSection.astro';
+import GlassCard from '../../components/ui/GlassCard.astro';
+import LeadConversionTargetCalculator from '../../components/tools/LeadConversionTargetCalculator.tsx';
+import AIAutomationHoursSavedCalculator from '../../components/tools/AIAutomationHoursSavedCalculator.tsx';
+
+<Hero 
+  title="Fill Your Bay With High-Ticket Jobs"
+  subtitle="Stop relying on walk-ins for $200 details. We build hyper-targeted digital funnels that connect your shop with Porsche and Tesla owners seeking $5,000 full-body PPF packages."
+  align="center"
+/>
+
+<AnimatedSection>
+  <div class="prose prose-invert max-w-4xl mx-auto mb-16 px-4 md:px-0">
+    <h2>The Math of the Modern Detail Shop</h2>
+    <p>
+      The detailing industry has bifurcated. On one end, you have volume-based car washes. On the other, extreme high-end technicians installing Paint Protection Film (PPF), Ceramic Coatings, and color change wraps. If your marketing doesn't scream 'luxury precision', you won't attract the latter.
+    </p>
+    <p>
+      We deploy geo-fenced advertising and intense SEO strategies to capture the specific demographic searching for vehicle protection the moment they drive off the dealership lot.
+    </p>
+  </div>
+</AnimatedSection>
+
+<AnimatedSection delay={0.2}>
+  <div class="max-w-6xl mx-auto mb-20 px-4 md:px-0">
+    <h3 class="text-3xl font-bold mb-8 text-center text-white/90">Scaling Shop Infrastructure</h3>
+    <p class="text-center text-white/60 mb-12 max-w-2xl mx-auto">
+      When you shift from $200 jobs to $4,000 jobs, the volume of leads required to hit your revenue goals drops significantly, but the required pipeline precision skyrockets.
+    </p>
+    
+    <div class="grid md:grid-cols-2 gap-8">
+      <GlassCard class="p-8">
+        <h4 class="text-xl font-bold text-green-400 mb-6 flex items-center gap-3">
+          <span class="text-2xl">🚗</span> Shop Target Conversion Rate
+        </h4>
+        <div class="not-prose max-w-full">
+           <LeadConversionTargetCalculator client:visible />
+        </div>
+      </GlassCard>
+
+      <GlassCard class="p-8">
+        <h4 class="text-xl font-bold text-green-400 mb-6 flex items-center gap-3">
+          <span class="text-2xl">📱</span> Automating Quote Requests
+        </h4>
+        <div class="not-prose max-w-full">
+           <AIAutomationHoursSavedCalculator client:visible />
+        </div>
+      </GlassCard>
+    </div>
+  </div>
+</AnimatedSection>

@@ -1,0 +1,67 @@
+---
+title: "Coaching & Personal Fitness"
+description: "High-margin digital architectures for online coaches, fitness consultants, and course creators seeking to scale their audience."
+palette: "sapphire"
+author: "Jumpstart Scaling"
+order: 100
+keyMetrics:
+  - label: "Webinar Conversion"
+    value: "18%"
+  - label: "Client LTV"
+    value: "+$3,200"
+  - label: "Ad Spend Efficiency"
+    value: "+210%"
+---
+
+import Hero from '../../components/ui/Hero.astro';
+import AnimatedSection from '../../components/ui/AnimatedSection.astro';
+import GlassCard from '../../components/ui/GlassCard.astro';
+import AIAutomationHoursSavedCalculator from '../../components/tools/AIAutomationHoursSavedCalculator.tsx';
+import GoHighLevelROIEstimator from '../../components/tools/GoHighLevelROIEstimator.tsx';
+
+<Hero 
+  title="Monetize Your Influence"
+  subtitle="Transition from trading hours for dollars to building a scalable online empire. We engineer the backend infrastructure to acquire, onboard, and retain high-ticket clients on autopilot."
+  align="center"
+/>
+
+<AnimatedSection>
+  <div class="prose prose-invert max-w-4xl mx-auto mb-16 px-4 md:px-0">
+    <h2>The Influencer Ceiling</h2>
+    <p>
+      Having 100,000 followers means nothing if you don't have a reliable engine to convert that attention into a predictable monthly recurring revenue (MRR) stream. Most coaches hit a revenue ceiling because they personally handle every DM, every onboarding call, and every payment follow-up.
+    </p>
+    <p>
+      We build automated HighLevel architectures that capture leads, nurture them with AI, and book qualified sales calls directly onto your calendar, letting you focus entirely on your craft.
+    </p>
+  </div>
+</AnimatedSection>
+
+<AnimatedSection delay={0.2}>
+  <div class="max-w-6xl mx-auto mb-20 px-4 md:px-0">
+    <h3 class="text-3xl font-bold mb-8 text-center text-white/90">Coaching Economics</h3>
+    <p class="text-center text-white/60 mb-12 max-w-2xl mx-auto">
+      Understand the underlying financial metrics of scaling a digital coaching business using modern SaaS infrastructure.
+    </p>
+    
+    <div class="grid md:grid-cols-2 gap-8">
+      <GlassCard class="p-8">
+        <h4 class="text-xl font-bold text-blue-400 mb-6 flex items-center gap-3">
+          <span class="text-2xl">🤖</span> AI Chatbot Automation ROI
+        </h4>
+        <div class="not-prose max-w-full">
+           <AIAutomationHoursSavedCalculator client:visible />
+        </div>
+      </GlassCard>
+
+      <GlassCard class="p-8">
+        <h4 class="text-xl font-bold text-blue-400 mb-6 flex items-center gap-3">
+          <span class="text-2xl">☁️</span> GHL Infrastructure Value
+        </h4>
+        <div class="not-prose max-w-full">
+           <GoHighLevelROIEstimator client:visible />
+        </div>
+      </GlassCard>
+    </div>
+  </div>
+</AnimatedSection>

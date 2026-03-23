@@ -25,7 +25,7 @@ const tools = defineCollection({
     title: z.string(),
     description: z.string(),
     slug: z.string().optional(), // defaults to file id
-    category: z.enum(['finance', 'ecommerce', 'loyalty', 'labor', 'ai', 'trading', 'marketing', 'saas', 'real-estate']),
+    category: z.enum(['finance', 'ecommerce', 'loyalty', 'labor', 'ai', 'trading', 'marketing', 'saas', 'real-estate', 'home-services', 'rentals']),
     emoji: z.string().default('📊'),
     newsHook: z.string().optional(),
     meta: metaSchema.optional(),

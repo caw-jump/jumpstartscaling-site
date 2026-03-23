@@ -1,0 +1,67 @@
+---
+title: "Insurance & Risk Management"
+description: "Data-driven client acquisition systems tailored for high-ticket final expense, commercial, and term insurance agencies."
+palette: "gold"
+author: "Jumpstart Scaling"
+order: 60
+keyMetrics:
+  - label: "Decreased Cost per Acquisition"
+    value: "42%"
+  - label: "Client Lifetime Value Boost"
+    value: "$14k"
+  - label: "Sales Cycle Reduction"
+    value: "15 Days"
+---
+
+import Hero from '../../components/ui/Hero.astro';
+import AnimatedSection from '../../components/ui/AnimatedSection.astro';
+import GlassCard from '../../components/ui/GlassCard.astro';
+import GoogleAdsServiceROI from '../../components/tools/GoogleAdsServiceROI.tsx';
+import LeadConversionTargetCalculator from '../../components/tools/LeadConversionTargetCalculator.tsx';
+
+<Hero 
+  title="Scale Your Insurance Agency"
+  subtitle="Dominate the local and national market for Life, Health, and Commercial policies by shifting from cold calling to high-intent digital funnels."
+  align="center"
+/>
+
+<AnimatedSection>
+  <div class="prose prose-invert max-w-4xl mx-auto mb-16 px-4 md:px-0">
+    <h2>The Math Behind Policy Growth</h2>
+    <p>
+      The traditional insurance model is broken. Buying shared leads that have been sold to 15 different agents is a race to the bottom that torches your margin and burns out your sales team.
+    </p>
+    <p>
+      We engineer exclusive, brand-owned funnels that capture high-intent users actively searching for Final Expense, Commercial Liability, and Group Health. By owning your infrastructure, you stabilize your Cost Per Lead (CPL) and dramatically increase your close rate.
+    </p>
+  </div>
+</AnimatedSection>
+
+<AnimatedSection delay={0.2}>
+  <div class="max-w-6xl mx-auto mb-20 px-4 md:px-0">
+    <h3 class="text-3xl font-bold mb-8 text-center text-white/90">Understand Your Acquisition Mathematics</h3>
+    <p class="text-center text-white/60 mb-12 max-w-2xl mx-auto">
+      Relying on "gut feelings" to spend $5,000 a month on Google Ads is a recipe for disaster. Model the math before you spend a dime.
+    </p>
+    
+    <div class="grid md:grid-cols-2 gap-8">
+      <GlassCard class="p-8">
+        <h4 class="text-xl font-bold text-[#E8C677] mb-6 flex items-center gap-3">
+          <span class="text-2xl">📊</span> Google Ads Profitability
+        </h4>
+        <div class="not-prose max-w-full">
+           <GoogleAdsServiceROI client:visible />
+        </div>
+      </GlassCard>
+
+      <GlassCard class="p-8">
+        <h4 class="text-xl font-bold text-[#E8C677] mb-6 flex items-center gap-3">
+          <span class="text-2xl">🎯</span> Target Conversion Requirements
+        </h4>
+        <div class="not-prose max-w-full">
+           <LeadConversionTargetCalculator client:visible />
+        </div>
+      </GlassCard>
+    </div>
+  </div>
+</AnimatedSection>

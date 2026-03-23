@@ -1,0 +1,67 @@
+---
+title: "Finance & Wealth Advisory"
+description: "Authority-driven marketing funnel architecture designed specifically to generate high-net-worth (HNWI) leads for wealth managers and RIAs."
+palette: "emerald"
+author: "Jumpstart Scaling"
+order: 80
+keyMetrics:
+  - label: "AUM Growth Velocity"
+    value: "2.4x"
+  - label: "Client Trust Score"
+    value: "94%"
+  - label: "Qualified Lead Volume"
+    value: "+115%"
+---
+
+import Hero from '../../components/ui/Hero.astro';
+import AnimatedSection from '../../components/ui/AnimatedSection.astro';
+import GlassCard from '../../components/ui/GlassCard.astro';
+import MortgageLeadToCloseCalculator from '../../components/tools/MortgageLeadToCloseCalculator.tsx';
+import RefinanceBreakEvenCalculator from '../../components/tools/RefinanceBreakEvenCalculator.tsx';
+
+<Hero 
+  title="Attract High-Net-Worth Capital"
+  subtitle="Ditch the cold networking events. Build a scalable digital ecosystem that projects institutional authority and attracts 7-figure and 8-figure clients on autopilot."
+  align="center"
+/>
+
+<AnimatedSection>
+  <div class="prose prose-invert max-w-4xl mx-auto mb-16 px-4 md:px-0">
+    <h2>The Digital RIA Blueprint</h2>
+    <p>
+      High-net-worth individuals do not hire financial advisors off a billboard. They conduct intensive, silent, multi-month research phases online. If your firm's digital footprint looks like a templated brochure from 2010, you are bleeding AUM to modern advisory firms.
+    </p>
+    <p>
+      We construct "Authority Funnels". By producing extremely high-caliber, data-driven content architectures and pairing them with sophisticated LinkedIn and Google Ads retargeting, we create the perception that your firm is the only logical choice for managing family office capital.
+    </p>
+  </div>
+</AnimatedSection>
+
+<AnimatedSection delay={0.2}>
+  <div class="max-w-6xl mx-auto mb-20 px-4 md:px-0">
+    <h3 class="text-3xl font-bold mb-8 text-center text-white/90">Financial Sales Funnel Mathematics</h3>
+    <p class="text-center text-white/60 mb-12 max-w-2xl mx-auto">
+      Closing a $5M AUM client takes extreme precision. Understand exactly how your pipeline performs before deploying an ad budget.
+    </p>
+    
+    <div class="grid md:grid-cols-2 gap-8">
+      <GlassCard class="p-8">
+        <h4 class="text-xl font-bold text-green-400 mb-6 flex items-center gap-3">
+          <span class="text-2xl">📉</span> Lead to Contract Drop-off
+        </h4>
+        <div class="not-prose max-w-full">
+           <MortgageLeadToCloseCalculator client:visible />
+        </div>
+      </GlassCard>
+
+      <GlassCard class="p-8">
+        <h4 class="text-xl font-bold text-green-400 mb-6 flex items-center gap-3">
+          <span class="text-2xl">💰</span> Interest Rate Volatility Models
+        </h4>
+        <div class="not-prose max-w-full">
+           <RefinanceBreakEvenCalculator client:visible />
+        </div>
+      </GlassCard>
+    </div>
+  </div>
+</AnimatedSection>

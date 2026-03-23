@@ -1,0 +1,67 @@
+---
+title: "Legal & Professional Services"
+description: "Authoritative lead generation for law firms, CPAs, and high-level consultancies focusing on high-value corporate and individual clients."
+palette: "gold"
+author: "Jumpstart Scaling"
+order: 110
+keyMetrics:
+  - label: "Retainer Signings"
+    value: "+45%"
+  - label: "Organic Search Domination"
+    value: "Top 3"
+  - label: "Cost Per Case"
+    value: "-30%"
+---
+
+import Hero from '../../components/ui/Hero.astro';
+import AnimatedSection from '../../components/ui/AnimatedSection.astro';
+import GlassCard from '../../components/ui/GlassCard.astro';
+import LeadConversionTargetCalculator from '../../components/tools/LeadConversionTargetCalculator.tsx';
+import ManualVsAutomationCostCalculator from '../../components/tools/ManualVsAutomationCostCalculator.tsx';
+
+<Hero 
+  title="Digital Authority for Legal Professionals"
+  subtitle="Stop relying purely on word-of-mouth. Dominate local search and capture individuals at the exact moment they desperately need representation or financial counsel."
+  align="center"
+/>
+
+<AnimatedSection>
+  <div class="prose prose-invert max-w-4xl mx-auto mb-16 px-4 md:px-0">
+    <h2>The Cost of Invisibility</h2>
+    <p>
+      In the legal and accounting sectors, trust is the only currency that matters. When a potential client faces a crisis—a divorce, a massive tax audit, a personal injury—they immediately turn to Google. If your firm does not appear instantly with unimpeachable authority, you lose the retainer.
+    </p>
+    <p>
+      We specialize in dominating hyper-competitive local search markets through aggressive SEO, tactical Google Ads (PPC), and highly converting landing pages that turn frantic searchers into booked consultations.
+    </p>
+  </div>
+</AnimatedSection>
+
+<AnimatedSection delay={0.2}>
+  <div class="max-w-6xl mx-auto mb-20 px-4 md:px-0">
+    <h3 class="text-3xl font-bold mb-8 text-center text-white/90">Calculating Firm Profitability</h3>
+    <p class="text-center text-white/60 mb-12 max-w-2xl mx-auto">
+      Legal clicks are some of the most expensive in the world. Calculate exactly how many cases you must sign to justify a marketing budget.
+    </p>
+    
+    <div class="grid md:grid-cols-2 gap-8">
+      <GlassCard class="p-8">
+        <h4 class="text-xl font-bold text-[#E8C677] mb-6 flex items-center gap-3">
+          <span class="text-2xl">⚖️</span> Case Acquisition Target
+        </h4>
+        <div class="not-prose max-w-full">
+           <LeadConversionTargetCalculator client:visible />
+        </div>
+      </GlassCard>
+
+      <GlassCard class="p-8">
+        <h4 class="text-xl font-bold text-[#E8C677] mb-6 flex items-center gap-3">
+          <span class="text-2xl">⏳</span> The Cost of Paralegal Data Entry
+        </h4>
+        <div class="not-prose max-w-full">
+           <ManualVsAutomationCostCalculator client:visible />
+        </div>
+      </GlassCard>
+    </div>
+  </div>
+</AnimatedSection>

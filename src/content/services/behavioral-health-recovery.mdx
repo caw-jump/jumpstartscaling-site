@@ -1,0 +1,67 @@
+---
+title: "Behavioral Health & Recovery"
+description: "Confidential, high-compliance patient acquisition systems for behavioral health, addiction recovery, and therapy centers."
+palette: "sapphire"
+author: "Jumpstart Scaling"
+order: 70
+keyMetrics:
+  - label: "Admissions Increase"
+    value: "38%"
+  - label: "VOB Processing Time"
+    value: "-60%"
+  - label: "Alumni Retention"
+    value: "85%"
+---
+
+import Hero from '../../components/ui/Hero.astro';
+import AnimatedSection from '../../components/ui/AnimatedSection.astro';
+import GlassCard from '../../components/ui/GlassCard.astro';
+import AIAutomationHoursSavedCalculator from '../../components/tools/AIAutomationHoursSavedCalculator.tsx';
+import ManualVsAutomationCostCalculator from '../../components/tools/ManualVsAutomationCostCalculator.tsx';
+
+<Hero 
+  title="Ethical Patient Acquisition"
+  subtitle="HIPAA-compliant, empathetic funnels that intercept high-intent families and patients at the moment they search for help, filling your beds and expanding your impact."
+  align="center"
+/>
+
+<AnimatedSection>
+  <div class="prose prose-invert max-w-4xl mx-auto mb-16 px-4 md:px-0">
+    <h2>Navigating Complex Admissions</h2>
+    <p>
+      Marketing a rehab or behavioral health center is arguably the most complex digital landscape in the world. Between LegitScript certifications, strict HIPAA barriers, and the deeply emotional nature of the user journey, generic marketing agencies simply cannot deliver.
+    </p>
+    <p>
+      We build highly-specialized, authoritative digital ecosystems. By focusing on technical SEO and compliant paid search architectures, we position your facility as the preeminent trusted authority in your region.
+    </p>
+  </div>
+</AnimatedSection>
+
+<AnimatedSection delay={0.2}>
+  <div class="max-w-6xl mx-auto mb-20 px-4 md:px-0">
+    <h3 class="text-3xl font-bold mb-8 text-center text-white/90">Automating Intake Friction</h3>
+    <p class="text-center text-white/60 mb-12 max-w-2xl mx-auto">
+      When a family reaches out, speed to contact is everything. If your admissions staff is bogged down manually entering data to verify benefits (VOB), you are losing patients to facilities that have automated the process.
+    </p>
+    
+    <div class="grid md:grid-cols-2 gap-8">
+      <GlassCard class="p-8">
+        <h4 class="text-xl font-bold text-blue-400 mb-6 flex items-center gap-3">
+          <span class="text-2xl">🤖</span> AI Intake Efficiency
+        </h4>
+        <div class="not-prose max-w-full">
+           <AIAutomationHoursSavedCalculator client:visible />
+        </div>
+      </GlassCard>
+
+      <GlassCard class="p-8">
+        <h4 class="text-xl font-bold text-blue-400 mb-6 flex items-center gap-3">
+          <span class="text-2xl">💸</span> The Cost of Manual Verification
+        </h4>
+        <div class="not-prose max-w-full">
+           <ManualVsAutomationCostCalculator client:visible />
+        </div>
+      </GlassCard>
+    </div>
+  </div>
+</AnimatedSection>
