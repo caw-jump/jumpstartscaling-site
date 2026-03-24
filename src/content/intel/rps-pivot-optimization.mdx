@@ -1,0 +1,102 @@
+---
+title: "The RPS (Revenue Per Session) Pivot"
+description: "ROAS Is a Vanity Metric. RPS Is Your Scaling Velocity. We optimize the total value of every visitor to give you the margin."
+palette: "emerald"
+publishedAt: "2026-03-24"
+author: "Jumpstart Scaling"
+category: "Financial Modeling"
+tags: ["rps", "cac", "roas", "ltv", "ecommerce"]
+---
+
+import Hero from '../../components/ui/Hero.astro';
+import AnimatedSection from '../../components/ui/AnimatedSection.astro';
+import GlassCard from '../../components/ui/GlassCard.astro';
+
+<Hero 
+  title="ROAS Is a Vanity Metric. RPS Is Your Scaling Velocity."
+  subtitle="In a world of $15+ CPCs, 'breaking even' on your first click isn't enough. We shift your focus to Revenue Per Session (RPS)—optimizing the total value of every visitor to give you the margin to outspend every competitor."
+  variant="compact"
+/>
+
+<AnimatedSection>
+  <div class="prose prose-invert max-w-4xl mx-auto mb-16 px-4 md:px-0 text-white/80 text-lg leading-relaxed">
+    <p>
+      If you run an operation strictly glued to Ads Manager ROAS metrics, you are blind to your actual burn rate. Return on Ad Spend completely ignores cost of goods, internal labor, and the friction of fulfillment. When you pivot tracking to Revenue Per Session, you unlock the specific mathematical threshold required to bid aggressively and steal market share.
+    </p>
+
+    <h2 class="text-3xl font-black mt-16 mb-8 text-[#E8C677]">The Executive's Queries</h2>
+    
+    <div class="space-y-12">
+      <div class="bg-white/5 border border-white/10 rounded-xl p-8 hover:border-[#E8C677]/30 transition-colors">
+        <h3 class="text-xl font-bold text-white mb-4">Why is my ROAS breaking at scale?</h3>
+        <p class="mb-0">
+          ROAS ignores fulfillment, shipping, and churn. RPS (Total Revenue / Total Sessions) shows the true health of your funnel’s ability to turn an anonymous visitor into a high-value, retained customer.
+        </p>
+      </div>
+
+      <div class="bg-white/5 border border-white/10 rounded-xl p-8 hover:border-[#E8C677]/30 transition-colors">
+        <h3 class="text-xl font-bold text-white mb-4">How do I increase RPS without increasing my ad spend?</h3>
+        <p class="mb-0">
+          By simultaneously lifting your Conversion Rate (CVR) and your Average Order Value (AOV) through highly targeted automated post-purchase sequences, order-bump integrations, and friction-free checkouts.
+        </p>
+      </div>
+
+      <div class="bg-white/5 border border-white/10 rounded-xl p-8 hover:border-[#E8C677]/30 transition-colors">
+        <h3 class="text-xl font-bold text-white mb-4">What is a "Healthy" RPS for my industry?</h3>
+        <p class="mb-0">
+          We mathematically benchmark your session value directly against leading 2026 SaaS and High-Ticket Service providers to identify exactly where you are "leaving money on the table."
+        </p>
+      </div>
+    </div>
+  </div>
+</AnimatedSection>
+
+<AnimatedSection delay={0.2}>
+  <div class="max-w-4xl mx-auto mb-20 px-4">
+    <h3 class="text-3xl font-bold mb-8 text-center text-white/90">2026 RPS Scaling Benchmarks</h3>
+    <GlassCard variant="default" class="p-0 overflow-hidden">
+      <div class="overflow-x-auto">
+        <table class="w-full text-left text-white/80">
+          <thead class="bg-black/40 text-[#E8C677] uppercase text-sm font-mono tracking-widest border-b border-white/10">
+            <tr>
+              <th class="px-6 py-4">Metric</th>
+              <th class="px-6 py-4">Industry Average</th>
+              <th class="px-6 py-4 bg-[#00FF94]/10 text-[#00FF94]">Top Quartile (Jumpstart)</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-white/10">
+            <tr class="hover:bg-white/5 transition-colors">
+              <td class="px-6 py-4 font-medium text-white">Conversion Rate</td>
+              <td class="px-6 py-4">1.89%</td>
+              <td class="px-6 py-4 text-[#00FF94] font-bold tracking-wide">4.5% +</td>
+            </tr>
+            <tr class="hover:bg-white/5 transition-colors">
+              <td class="px-6 py-4 font-medium text-white">Avg Order Value</td>
+              <td class="px-6 py-4">$120</td>
+              <td class="px-6 py-4 text-[#00FF94] font-bold tracking-wide">$210 +</td>
+            </tr>
+            <tr class="hover:bg-white/5 transition-colors">
+              <td class="px-6 py-4 font-medium text-white">Revenue Per Session</td>
+              <td class="px-6 py-4">$2.27</td>
+              <td class="px-6 py-4 text-[#00FF94] font-bold tracking-wide text-xl">$9.45 +</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </GlassCard>
+  </div>
+</AnimatedSection>
+
+<AnimatedSection delay={0.4}>
+  <div class="max-w-4xl mx-auto mb-24 text-center px-4">
+    <GlassCard variant="default">
+      <h3 class="text-3xl font-bold mb-6 text-white">Identify Your Conversion Leaks</h3>
+      <p class="text-white/70 mb-8 max-w-2xl mx-auto text-lg">
+        Double your session value immediately.
+      </p>
+      <a href="/audit" class="inline-block px-10 py-5 bg-[#00FF94] text-black font-black uppercase tracking-wider rounded-lg shadow-[0_0_20px_rgba(0,255,148,0.3)] hover:scale-105 transition-transform">
+        Run My RPS Audit
+      </a>
+    </GlassCard>
+  </div>
+</AnimatedSection>
