@@ -19,5 +19,8 @@
 {"category":"survey","terms":"[\"Unicorn Readiness Survey\",\"AI Architecture Audit\",\"Zapier Replacement Scorecard\",\"Private AI Blueprint\",\"Headless Readiness Check\"]","created_at":"2026-02-22 05:04:48+00:00"},
 {"category":"cta","terms":"[\"Book your slot\",\"Start survey now\",\"Claim free audit\",\"Reserve Unicorn Day\",\"Get instant roadmap\"]","created_at":"2026-02-22 05:04:48+00:00"},
 {"category":"tech_stack","terms":"[\"Next.js + Astro\",\"Supabase + Edge\",\"AI agents + LangChain\",\"Headless + Tailwind\",\"Custom SaaS stack\"]","created_at":"2026-02-22 05:04:48+00:00"},
-{"category":"local","terms":"[\"{{city}} tech scene\",\"{{county}} enterprises\",\"near {{landmark}}\",\"{{state}} startups\"]","created_at":"2026-02-22 05:04:48+00:00"}
+{"category":"local","terms":"[\"{{city}} tech scene\",\"{{county}} enterprises\",\"near {{landmark}}\",\"{{state}} startups\"]","created_at":"2026-02-22 05:04:48+00:00"},
+{"category":"private_ai","terms":"[\"private AI\",\"proprietary intelligence\",\"secure machine learning\",\"confidential AI layer\",\"sovereign AI engine\",\"custom-trained LLM\",\"internal AI agent\"]","created_at":"2026-03-24 12:50:00+00:00"},
+{"category":"innovation","terms":"[\"digital transformation\",\"intelligent scaling\",\"technical evolution\",\"automation excellence\",\"future-proof ops\",\"algorithmic growth\",\"systems innovation\"]","created_at":"2026-03-24 12:50:00+00:00"},
+{"category":"custom_saas","terms":"[\"bespoke software\",\"custom-built SaaS\",\"tailored tech stack\",\"proprietary platform\",\"dedicated cloud app\",\"white-label automation\",\"native solution\"]","created_at":"2026-03-24 12:50:00+00:00"}
 ]

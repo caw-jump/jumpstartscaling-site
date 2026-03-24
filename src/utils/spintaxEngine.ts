@@ -144,7 +144,7 @@ export function generatePseoPages() {
         const randomOffer = offerBlocks[Math.floor(seededRandom(urlSlug) * offerBlocks.length)];
         let offerData: any = typeof randomOffer.data === 'string' ? JSON.parse(randomOffer.data) : randomOffer.data;
 
-        // HIGH UNIQUENESS HEADLINE TEMPLATES
+        // HIGH UNIQUENESS HEADLINE TEMPLATES (14+ variations)
         const headlineTemplates = [
             `{Stop|Ditch|End} %zapier% and %grow% with %automation% in {{city}}`,
             `{{intent.h2_query}}`, 
@@ -153,10 +153,16 @@ export function generatePseoPages() {
             `%headless% %expert% {{niche_key}} %automation% {live|deployed} in {{neighborhood}}`,
             `Why {{city}} %expert% {{niche_key}}s are {moving|switching} to %custom_saas% near {{landmark}}`,
             `{{motto}}: The spirit of {{city}} %expert% %innovation%`,
-            `{Scaling|Growing} {{niche_key}} %revenue% across {{county}} with %private_ai%`
+            `{Scaling|Growing} {{niche_key}} %revenue% across {{county}} with %private_ai%`,
+            `The {{neighborhood}} %expert% playbook for {{niche_key}} %innovation%`,
+            `{Native|Zero-touch} %automation% for {{city}} %expert% {{niche_key}}s near {{parks}}`,
+            `{%private_ai%|%custom_saas%}: Built for {{city}} %expert% firms in {{county}}`,
+            `How {{city}} {{niche_key}}s are using %headless% tech to %grow% near {{landmark}}`,
+            `{{motto}}: Powering the {{city}} %expert% {{niche_key}} %pipeline%`,
+            `Building the %architecture% of the future for {{neighborhood}} {{niche_key}}s`
         ];
         
-        const selectedTemplate = headlineTemplates[Math.floor(seededRandom(urlSlug + 'head7') * headlineTemplates.length)];
+        const selectedTemplate = headlineTemplates[Math.floor(seededRandom(urlSlug + 'head_v2') * headlineTemplates.length)];
         const headline = spin(selectedTemplate);
 
         const blocks = [
