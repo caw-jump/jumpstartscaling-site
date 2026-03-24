@@ -2,6 +2,7 @@
 // src/layouts/BaseLayout.astro - Updated master layout (single source of truth for ALL pages)
 import Navigation from '../components/ui/Navigation.astro';
 import Footer from '../components/ui/Footer.astro';
+import StickySearchBar from '../components/StickySearchBar.astro';
 import AtmosphereParticles from '../components/visuals/AtmosphereParticles.tsx';
 import '../styles/global.css';
 
@@ -161,6 +162,8 @@ graph.push(mainEntity);
     </main>
 
     <Footer />
+
+    <StickySearchBar />
 
     <!-- Particles Container -->
     <div class="particles fixed inset-0 pointer-events-none z-0 overflow-hidden"></div>

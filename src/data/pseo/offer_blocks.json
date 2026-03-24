@@ -1,20 +1,182 @@
 [
-{"block_type":"unicorn_readiness_survey","avatar_key":null,"data":"{\"headline\":\"Free 90-Second Unicorn Readiness Survey\",\"button_text\":\"Start Survey Now\",\"form_fields\":[\"Name\",\"Email\",\"Company\",\"Biggest Bottleneck\"]}","created_at":"2026-02-22 05:04:49+00:00"},
-{"block_type":"ai_architecture_audit","avatar_key":null,"data":"{\"headline\":\"Claim Your Private AI Architecture Audit\",\"button_text\":\"Get Audit\",\"form_fields\":[\"URL\",\"Email\"]}","created_at":"2026-02-22 05:04:49+00:00"},
-{"block_type":"zapier_replacement_scorecard","avatar_key":null,"data":"{\"headline\":\"Zapier Replacement Scorecard (Instant)\",\"button_text\":\"Score My Workflows\",\"form_fields\":[\"Email\"]}","created_at":"2026-02-22 05:04:49+00:00"},
-{"block_type":"unicorn_day","avatar_key":null,"data":"{\"headline\":\"Book Your Private Unicorn Developer Day\",\"button_text\":\"Reserve My Day\",\"form_fields\":[\"Name\",\"Email\",\"Business Goal\"]}","created_at":"2026-02-22 05:04:49+00:00"},
-{"block_type":"technical_strategy_session","avatar_key":null,"data":"{\"headline\":\"Technical Strategy Session — No Pitch\",\"button_text\":\"Book Session\",\"form_fields\":[\"Name\",\"Email\"]}","created_at":"2026-02-22 05:04:49+00:00"},
-{"block_type":"headless_readiness_check","avatar_key":null,"data":"{\"headline\":\"Headless Readiness Check\",\"button_text\":\"Get Check\",\"form_fields\":[\"Email\",\"Current Stack\"]}","created_at":"2026-02-22 05:04:49+00:00"},
-{"block_type":"ai_blueprint","avatar_key":null,"data":"{\"headline\":\"Free AI Blueprint\",\"button_text\":\"Claim Blueprint\",\"form_fields\":[\"Email\"]}","created_at":"2026-02-22 05:04:49+00:00"},
-{"block_type":"cta","avatar_key":null,"data":"{\"headline\":\"Get a Free Quote Today\",\"button_text\":\"Get Free Quote\",\"form_action\":\"/api/submit-lead\"}","created_at":"2026-02-22 05:04:49+00:00"},
-{"block_type":"cta","avatar_key":null,"data":"{\"headline\":\"Need Help? Contact Us Now\",\"button_text\":\"Contact Us\",\"form_action\":\"/api/submit-lead\"}","created_at":"2026-02-22 05:04:49+00:00"},
-{"block_type":"strategy_call","avatar_key":null,"data":"{\"headline\":\"15-Min Strategy Call\",\"button_text\":\"Book Call\",\"form_fields\":[\"Name\",\"Email\",\"Phone\"]}","created_at":"2026-02-22 05:04:49+00:00"},
-{"block_type":"audit","avatar_key":null,"data":"{\"headline\":\"2-Hour Technical Audit\",\"button_text\":\"Request Audit\",\"form_fields\":[\"Email\",\"Website\"]}","created_at":"2026-02-22 05:04:49+00:00"},
-{"block_type":"demo","avatar_key":null,"data":"{\"headline\":\"Zapier Replacement Demo\",\"button_text\":\"See Demo\",\"form_fields\":[\"Email\"]}","created_at":"2026-02-22 05:04:49+00:00"},
-{"block_type":"roadmap","avatar_key":null,"data":"{\"headline\":\"Custom AI Roadmap\",\"button_text\":\"Get Roadmap\",\"form_fields\":[\"Email\"]}","created_at":"2026-02-22 05:04:49+00:00"},
-{"block_type":"survey_cta","avatar_key":null,"data":"{\"headline\":\"90-Second Unicorn Survey\",\"button_text\":\"Start Survey\",\"form_fields\":[\"Email\"]}","created_at":"2026-02-22 05:04:49+00:00"},
-{"block_type":"unicorn_day_teaser","avatar_key":null,"data":"{\"headline\":\"Unicorn Day — $4,997\",\"button_text\":\"Reserve\",\"form_fields\":[\"Name\",\"Email\"]}","created_at":"2026-02-22 05:04:49+00:00"},
-{"block_type":"free_audit","avatar_key":null,"data":"{\"headline\":\"Free Architecture Audit\",\"button_text\":\"Claim Audit\",\"form_fields\":[\"Email\"]}","created_at":"2026-02-22 05:04:49+00:00"},
-{"block_type":"ai_assessment","avatar_key":null,"data":"{\"headline\":\"AI Readiness Assessment\",\"button_text\":\"Get Assessment\",\"form_fields\":[\"Email\",\"Company\"]}","created_at":"2026-02-22 05:04:49+00:00"},
-{"block_type":"pipeline_build","avatar_key":null,"data":"{\"headline\":\"Revenue Pipeline Build\",\"button_text\":\"Learn More\",\"form_fields\":[\"Name\",\"Email\"]}","created_at":"2026-02-22 05:04:49+00:00"}
+  {
+    "block_type": "unicorn_readiness_survey",
+    "avatar_key": null,
+    "data": {
+      "headline": "Is your {{city}} tech stack ready to scale? Take the 90-second check.",
+      "button_text": "Check My Readiness Now",
+      "form_fields": ["Name", "Email", "Biggest Tech Headache"]
+    },
+    "created_at": "2026-02-22 05:04:49+00:00"
+  },
+  {
+    "block_type": "ai_architecture_audit",
+    "avatar_key": null,
+    "data": {
+      "headline": "Find the 3 revenue leaks in your {{city}} CRM. Get your Private AI Audit.",
+      "button_text": "Claim My Audit",
+      "form_fields": ["Website URL", "Email"]
+    },
+    "created_at": "2026-02-22 05:04:49+00:00"
+  },
+  {
+    "block_type": "zapier_replacement_scorecard",
+    "avatar_key": null,
+    "data": {
+      "headline": "How much are you overpaying for Zapier? Get your {{neighborhood}} score instantly.",
+      "button_text": "Calculate My Savings",
+      "form_fields": ["Email", "Monthly Zapier Bill ($)"]
+    },
+    "created_at": "2026-02-22 05:04:49+00:00"
+  },
+  {
+    "block_type": "unicorn_day",
+    "avatar_key": null,
+    "data": {
+      "headline": "8 hours of 1:1 dev time to fix your {{city}} workflows. Book your Unicorn Day.",
+      "button_text": "Reserve My Local Tech Day",
+      "form_fields": ["Name", "Email", "What needs fixing?"]
+    },
+    "created_at": "2026-02-22 05:04:49+00:00"
+  },
+  {
+    "block_type": "technical_strategy_session",
+    "avatar_key": null,
+    "data": {
+      "headline": "A 15-minute fix for your most annoying {{city}} workflow. No sales pitch.",
+      "button_text": "Book My Workflow Fix",
+      "form_fields": ["Name", "Email"]
+    },
+    "created_at": "2026-02-22 05:04:49+00:00"
+  },
+  {
+    "block_type": "headless_readiness_check",
+    "avatar_key": null,
+    "data": {
+      "headline": "Is your {{city}} website too slow to rank? Get your Headless Readiness Check.",
+      "button_text": "Run Speed Check",
+      "form_fields": ["Email", "Current Platform (WP/GHL/etc)"]
+    },
+    "created_at": "2026-02-22 05:04:49+00:00"
+  },
+  {
+    "block_type": "ai_blueprint",
+    "avatar_key": null,
+    "data": {
+      "headline": "The 2026 AI Roadmap for {{city}} businesses. Download your free Blueprint.",
+      "button_text": "Send Me The Blueprint",
+      "form_fields": ["Email"]
+    },
+    "created_at": "2026-02-22 05:04:49+00:00"
+  },
+  {
+    "block_type": "cta",
+    "avatar_key": null,
+    "data": {
+      "headline": "Stop overpaying for generic tech. Get a custom {{city}} quote today.",
+      "button_text": "Get My Custom Quote",
+      "form_action": "/api/submit-lead"
+    },
+    "created_at": "2026-02-22 05:04:49+00:00"
+  },
+  {
+    "block_type": "cta",
+    "avatar_key": null,
+    "data": {
+      "headline": "Need a local {{city}} tech expert to look at your stack?",
+      "button_text": "Talk to a Human",
+      "form_action": "/api/submit-lead"
+    },
+    "created_at": "2026-02-22 05:04:49+00:00"
+  },
+  {
+    "block_type": "strategy_call",
+    "avatar_key": null,
+    "data": {
+      "headline": "Map out your {{neighborhood}} scaling plan in 15 minutes.",
+      "button_text": "Book Strategy Call",
+      "form_fields": ["Name", "Email", "Phone"]
+    },
+    "created_at": "2026-02-22 05:04:49+00:00"
+  },
+  {
+    "block_type": "audit",
+    "avatar_key": null,
+    "data": {
+      "headline": "A 2-hour deep dive into your {{city}} backend. We find the leaks.",
+      "button_text": "Request Tech Audit",
+      "form_fields": ["Email", "Website"]
+    },
+    "created_at": "2026-02-22 05:04:49+00:00"
+  },
+  {
+    "block_type": "demo",
+    "avatar_key": null,
+    "data": {
+      "headline": "Watch us replace a 47-step Zap with one n8n workflow. (Live Demo)",
+      "button_text": "See the Demo",
+      "form_fields": ["Email"]
+    },
+    "created_at": "2026-02-22 05:04:49+00:00"
+  },
+  {
+    "block_type": "roadmap",
+    "avatar_key": null,
+    "data": {
+      "headline": "Your 12-month AI & Automation Roadmap for {{city}} dominance.",
+      "button_text": "Get My Roadmap",
+      "form_fields": ["Email"]
+    },
+    "created_at": "2026-02-22 05:04:49+00:00"
+  },
+  {
+    "block_type": "survey_cta",
+    "avatar_key": null,
+    "data": {
+      "headline": "Take the 90-second {{city}} Tech Survey. Get a custom roadmap.",
+      "button_text": "Start My Survey",
+      "form_fields": ["Email"]
+    },
+    "created_at": "2026-02-22 05:04:49+00:00"
+  },
+  {
+    "block_type": "unicorn_day_teaser",
+    "avatar_key": null,
+    "data": {
+      "headline": "Reserve your $4,997 Local Tech Day. 100% focused on your {{city}} business.",
+      "button_text": "Check Availability",
+      "form_fields": ["Name", "Email"]
+    },
+    "created_at": "2026-02-22 05:04:49+00:00"
+  },
+  {
+    "block_type": "free_audit",
+    "avatar_key": null,
+    "data": {
+      "headline": "Free Architecture Audit: Is your {{neighborhood}} business built to scale?",
+      "button_text": "Claim Free Audit",
+      "form_fields": ["Email"]
+    },
+    "created_at": "2026-02-22 05:04:49+00:00"
+  },
+  {
+    "block_type": "ai_assessment",
+    "avatar_key": null,
+    "data": {
+      "headline": "Could an AI Agent replace your manual {{city}} tasks? Take the Assessment.",
+      "button_text": "Run Assessment",
+      "form_fields": ["Email", "Company Size"]
+    },
+    "created_at": "2026-02-22 05:04:49+00:00"
+  },
+  {
+    "block_type": "pipeline_build",
+    "avatar_key": null,
+    "data": {
+      "headline": "Connect your {{city}} lead flow straight to your bank account. Learn how.",
+      "button_text": "See the Pipeline Build",
+      "form_fields": ["Name", "Email"]
+    },
+    "created_at": "2026-02-22 05:04:49+00:00"
+  }
 ]

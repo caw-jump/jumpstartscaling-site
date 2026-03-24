@@ -1,12 +1,16 @@
 ---
 import Layout from '../../layouts/BaseLayout.astro';
-import { stateGroupedContent, top10States } from '../../utils/pseo';
+import { stateGroupedContent, top10States, STATE_NAME_MAP } from '../../utils/pseo';
 
-const allStates = Object.keys(stateGroupedContent).sort();
+const allActiveStates = Object.keys(stateGroupedContent).sort();
+
+// Provide a placeholder for truly "missing" states to ensure 50-state coverage
+const ALL_50_STATES = Object.keys(STATE_NAME_MAP).sort();
+const inactiveStates = ALL_50_STATES.filter(s => !allActiveStates.includes(s));
 ---
 
 <Layout title="Local Intel Registry - Jumpstart Scaling" description="Explore data-driven growth insights, predictive modeling architectures, and private AI engineered solutions localized for your market.">
-  <main class="pt-32 pb-24 bg-[#0B0B0F] min-h-screen">
+  <main class="pt-32 pb-40 bg-[#0B0B0F] min-h-screen">
     <div class="w-full max-w-7xl mx-auto px-6">
       
       <!-- Page Header -->
@@ -24,31 +28,43 @@ const allStates = Object.keys(stateGroupedContent).sort();
       </div>
 
       <!-- Top 10 High Volume Markets -->
-      <div class="mb-16">
+      <div class="mb-24">
          <h2 class="text-2xl font-bold text-white mb-8 border-b border-white/10 pb-4">High-Velocity Regional Data</h2>
          <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
             {top10States.map(state => {
               const count = stateGroupedContent[state]?.length || 0;
+              const fullName = STATE_NAME_MAP[state] || state;
               return (
-                <a href={`/local-intel/${state.toLowerCase()}`} class="group relative bg-white/5 border border-white/10 rounded-xl p-6 text-center hover:bg-white/10 hover:border-[#E8C677]/50 transition-all duration-300">
+                <a href={`/local-intel/${state.toLowerCase()}`} class="group relative bg-white/5 border border-white/10 rounded-xl p-8 text-center hover:bg-white/10 hover:border-[#E8C677]/50 transition-all duration-300">
                    <div class="absolute inset-0 bg-gradient-to-b from-[#E8C677]/10 to-transparent opacity-0 group-hover:opacity-100 rounded-xl transition-all" />
-                   <h3 class="text-4xl font-extrabold text-white group-hover:text-[#E8C677] transition-colors mb-2">{state.toUpperCase()}</h3>
-                   <p class="text-sm font-medium text-white/50">{count} Frameworks</p>
+                   <h3 class="text-xl font-bold text-white group-hover:text-[#E8C677] transition-colors mb-2 uppercase tracking-widest">{fullName}</h3>
+                   <p class="text-xs font-medium text-white/50">{count} Frameworks</p>
                 </a>
               );
             })}
          </div>
       </div>
 
-      <!-- All Assessed Markets -->
-      <div>
+      <div class="mb-24">
          <h2 class="text-2xl font-bold text-white mb-8 border-b border-white/10 pb-4">All Evaluated Markets</h2>
-         <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3">
-             {allStates.map(state => (
-                <a href={`/local-intel/${state.toLowerCase()}`} class="px-4 py-3 bg-white/5 rounded-lg border border-white/5 hover:border-[#E8C677]/30 hover:bg-[#E8C677]/5 text-white/80 hover:text-white transition-all text-sm font-medium flex justify-between items-center group">
-                   <span>{state.toUpperCase()}</span>
-                   <svg class="w-4 h-4 text-white/20 group-hover:text-[#E8C677] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+         <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-3">
+             {allActiveStates.map(state => (
+                <a href={`/local-intel/${state.toLowerCase()}`} class="px-5 py-4 bg-white/5 rounded-xl border border-white/10 hover:border-[#E8C677]/50 hover:bg-[#E8C677]/10 text-white/80 hover:text-white transition-all text-sm font-semibold flex justify-between items-center group">
+                   <span>{STATE_NAME_MAP[state] || state}</span>
+                   <svg class="w-4 h-4 text-white/20 group-hover:text-[#E8C677] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" /></svg>
                 </a>
+             ))}
+         </div>
+      </div>
+
+      <!-- Coming Soon / Non-Indexed Markets -->
+      <div>
+         <h2 class="text-2xl font-bold text-white/30 mb-8 border-b border-white/5 pb-4">Expanding Coverage Map</h2>
+         <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-2">
+             {inactiveStates.map(state => (
+                <div class="px-4 py-2 bg-white/[0.02] rounded-lg border border-white/[0.05] text-white/20 text-xs font-medium cursor-not-allowed">
+                   {STATE_NAME_MAP[state]} <span class="text-[8px] opacity-50 block uppercase">Indexing...</span>
+                </div>
              ))}
          </div>
       </div>
