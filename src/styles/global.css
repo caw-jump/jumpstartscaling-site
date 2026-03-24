@@ -210,6 +210,13 @@ p {
     max-width: var(--container-max)
 }
 
+@media(max-width:750px) {
+    .container {
+        padding-left: 1.5rem !important;
+        padding-right: 1.5rem !important;
+    }
+}
+
 .section {
     padding: 4rem 0;
     position: relative;
