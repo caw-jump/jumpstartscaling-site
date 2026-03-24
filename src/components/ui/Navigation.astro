@@ -24,8 +24,14 @@ const services = [
 const resources = [
   { name: "Tools", href: "/tools", desc: "News-inspired calculators" },
   { name: "Calculators", href: "/resources/calculators", desc: "8+ Growth Tools" },
-  { name: "Market Intel", href: "/intel", desc: "Deep dive strategy" },
   { name: "Full Audit", href: "/audit", desc: "Free comprehensive analysis" },
+];
+
+const intel = [
+  { name: "AI Operator Framework", href: "/intel/ai-operator-framework", desc: "Deploy AI Agents properly" },
+  { name: "Advanced Orchestration", href: "/intel/advanced-orchestration", desc: "Bypass the GHL natively" },
+  { name: "2026 Lead Machine", href: "/intel/lead-machine", desc: "Clay + n8n + Instantly" },
+  { name: "Automation ROI", href: "/intel/automation-roi", desc: "True Cost of Manual Data" }
 ];
 ---
 
@@ -91,9 +97,30 @@ const resources = [
         </div>
       </li>
 
-      <!-- Direct Link -->
-      <li>
-        <a href="/intel" class="hover:text-[#E8C677] transition block py-4">Intel</a>
+      <!-- Intel Dropdown -->
+      <li class="relative group">
+        <button class="hover:text-[#E8C677] transition flex items-center gap-1 py-4 cursor-pointer">
+          Intel <span class="text-[10px] opacity-70 group-hover:rotate-180 transition-transform">▼</span>
+        </button>
+        <!-- Hover Bridge -->
+        <div class="absolute top-full left-0 w-full h-4 bg-transparent"></div>
+
+        <div class="absolute top-[calc(100%+0.5rem)] left-0 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0 w-80 pointer-events-none group-hover:pointer-events-auto">
+          <ul class="bg-[#0A0A0A] border border-white/10 rounded-xl p-2 shadow-2xl overflow-hidden ring-1 ring-white/5">
+            <li class="px-4 py-2 text-[10px] uppercase tracking-widest text-[#E8C677]/70 font-mono flex items-center justify-between">
+              <span>Deep Dive Strategy</span>
+              <a href="/intel" class="hover:text-white transition underline lowercase">view all</a>
+            </li>
+            {intel.map(item => (
+              <li>
+                <a href={item.href} class="block py-3 px-4 rounded-lg hover:bg-[#E8C677]/10 transition group/item">
+                  <div class="text-white/90 font-bold group-hover/item:text-[#E8C677] transition-colors">{item.name}</div>
+                  <div class="text-xs text-white/50">{item.desc}</div>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
       </li>
 
       <!-- CTA -->
@@ -137,9 +164,22 @@ const resources = [
 
         <!-- Tools Section -->
         <li class="space-y-4">
-           <span class="text-[#E8C677] text-sm font-mono uppercase tracking-widest border-b border-[#E8C677]/30 pb-2 block">Tools & Intel</span>
+           <span class="text-[#E8C677] text-sm font-mono uppercase tracking-widest border-b border-[#E8C677]/30 pb-2 block">Tools & Resources</span>
            <ul class="space-y-2">
             {resources.map(item => (
+              <li><a href={item.href} class="block text-xl text-white/80 hover:text-[#E8C677] transition mobile-link py-1">{item.name}</a></li>
+            ))}
+           </ul>
+        </li>
+
+        <!-- Intel Section -->
+        <li class="space-y-4">
+           <span class="text-[#E8C677] text-sm font-mono uppercase tracking-widest border-b border-[#E8C677]/30 pb-2 flex justify-between items-center">
+             <span>Intel Vault</span>
+             <a href="/intel" class="text-xs lowercase text-white/50 hover:text-white transition">View All</a>
+           </span>
+           <ul class="space-y-2">
+            {intel.map(item => (
               <li><a href={item.href} class="block text-xl text-white/80 hover:text-[#E8C677] transition mobile-link py-1">{item.name}</a></li>
             ))}
            </ul>
