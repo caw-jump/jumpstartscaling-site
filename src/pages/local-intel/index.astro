@@ -1,0 +1,71 @@
+---
+import Layout from '../../layouts/BaseLayout.astro';
+import { stateGroupedContent, top10States } from '../../utils/pseo';
+
+const allStates = Object.keys(stateGroupedContent).sort();
+---
+
+<Layout title="Local Intel Registry - Jumpstart Scaling" description="Explore data-driven growth insights, predictive modeling architectures, and private AI engineered solutions localized for your market.">
+  <main class="pt-32 pb-24 bg-[#0B0B0F] min-h-screen">
+    <div class="w-full max-w-7xl mx-auto px-6">
+      
+      <!-- Page Header -->
+      <div class="mb-16 max-w-4xl text-center mx-auto">
+        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#E8C677]/10 border border-[#E8C677]/20 mb-6">
+          <span class="w-2 h-2 rounded-full bg-[#E8C677] animate-pulse"></span>
+          <span class="text-sm font-semibold text-[#E8C677] uppercase tracking-wider">Geographic Growth Targeting</span>
+        </div>
+        <h1 class="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
+          National <span class="bg-gradient-to-r from-[#E8C677] to-[#E8C677]/50 bg-clip-text text-transparent">Local Intel</span> Registry
+        </h1>
+        <p class="text-xl text-white/70">
+          Private AI automation architectures and intelligent revenue pipeline frameworks engineered for your specific local market constraints. Select your state below to access regional intelligence.
+        </p>
+      </div>
+
+      <!-- Top 10 High Volume Markets -->
+      <div class="mb-16">
+         <h2 class="text-2xl font-bold text-white mb-8 border-b border-white/10 pb-4">High-Velocity Regional Data</h2>
+         <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
+            {top10States.map(state => {
+              const count = stateGroupedContent[state]?.length || 0;
+              return (
+                <a href={`/local-intel/${state.toLowerCase()}`} class="group relative bg-white/5 border border-white/10 rounded-xl p-6 text-center hover:bg-white/10 hover:border-[#E8C677]/50 transition-all duration-300">
+                   <div class="absolute inset-0 bg-gradient-to-b from-[#E8C677]/10 to-transparent opacity-0 group-hover:opacity-100 rounded-xl transition-all" />
+                   <h3 class="text-4xl font-extrabold text-white group-hover:text-[#E8C677] transition-colors mb-2">{state.toUpperCase()}</h3>
+                   <p class="text-sm font-medium text-white/50">{count} Frameworks</p>
+                </a>
+              );
+            })}
+         </div>
+      </div>
+
+      <!-- All Assessed Markets -->
+      <div>
+         <h2 class="text-2xl font-bold text-white mb-8 border-b border-white/10 pb-4">All Evaluated Markets</h2>
+         <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3">
+             {allStates.map(state => (
+                <a href={`/local-intel/${state.toLowerCase()}`} class="px-4 py-3 bg-white/5 rounded-lg border border-white/5 hover:border-[#E8C677]/30 hover:bg-[#E8C677]/5 text-white/80 hover:text-white transition-all text-sm font-medium flex justify-between items-center group">
+                   <span>{state.toUpperCase()}</span>
+                   <svg class="w-4 h-4 text-white/20 group-hover:text-[#E8C677] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+                </a>
+             ))}
+         </div>
+      </div>
+
+    </div>
+  </main>
+<style is:global>
+  h1 { font-size: 1.5rem !important; }
+  h2 { font-size: 1.3rem !important; }
+  h3 { font-size: 1.2rem !important; }
+  p { font-size: 1em !important; }
+  .container {
+    width: 100% !important;
+    margin: 0 auto !important;
+    padding-left: 0rem !important;
+    padding-right: 0rem !important;
+    max-width: 100% !important;
+  }
+</style>
+</Layout>

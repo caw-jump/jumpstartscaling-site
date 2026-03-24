@@ -149,22 +149,6 @@ graph.push(mainEntity);
     <Navigation currentPath={Astro.url.pathname} />
 
     <main class="relative z-10 pt-20">
-        <!-- Breadcrumbs on subpages -->
-        {crumbs.length > 0 && (
-          <div class={fluid ? "w-full px-6" : "container mx-auto px-6"}>
-            <nav aria-label="breadcrumb" class="py-8">
-              <ol class="flex flex-wrap items-center gap-3 text-sm text-white/70">
-                {crumbs.map((crumb, i) => (
-                  <li class="flex items-center gap-3">
-                    <a href={crumb.url} class="hover:text-accent transition">{crumb.name}</a>
-                    {i < crumbs.length - 1 && <span class="text-white/30">/</span>}
-                  </li>
-                ))}
-                <li class="text-white font-medium">{title}</li>
-              </ol>
-            </nav>
-          </div>
-        )}
 
         {/* Support fluid layouts for services/landing pages */}
         {fluid ? (

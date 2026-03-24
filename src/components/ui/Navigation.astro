@@ -5,6 +5,8 @@
 // - Structure: Desktop Mega-Menu + Mobile Drawer
 // - Branding: Gold accents, Matte black bg (#0B0B0F)
 
+import { top10States } from '../../utils/pseo';
+
 const JUMPSTART_URL = "https://jumpstartscaling.com";
 
 const services = [
@@ -127,6 +129,31 @@ const intel = [
         </div>
       </li>
 
+      <!-- Local Intel Dropdown -->
+      <li class="relative group">
+        <button class="hover:text-[#E8C677] transition flex items-center gap-1 py-4 cursor-pointer">
+          Local Intel <span class="text-[10px] opacity-70 group-hover:rotate-180 transition-transform">▼</span>
+        </button>
+        <!-- Hover Bridge -->
+        <div class="absolute top-full left-0 w-full h-4 bg-transparent"></div>
+
+        <div class="absolute top-[calc(100%+0.5rem)] left-0 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0 w-64 pointer-events-none group-hover:pointer-events-auto">
+          <ul class="bg-[#0A0A0A] border border-white/10 rounded-xl p-2 shadow-2xl overflow-hidden ring-1 ring-white/5">
+            <li class="px-4 py-2 text-[10px] uppercase tracking-widest text-[#E8C677]/70 font-mono flex items-center justify-between">
+              <span>Top Markets</span>
+              <a href="/local-intel" class="hover:text-white transition underline lowercase">view all</a>
+            </li>
+            {top10States.map(state => (
+              <li>
+                <a href={`/local-intel/${state.toLowerCase()}`} class="block py-2 px-4 rounded-lg hover:bg-[#E8C677]/10 hover:text-[#E8C677] transition text-white/80 font-medium">
+                   {state.toUpperCase()} Regional Intel
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </li>
+
       <!-- CTA -->
       <li>
         <a href="/audit" class="px-6 py-2.5 bg-[#E8C677] text-black font-bold text-sm uppercase tracking-wider rounded-lg hover:bg-white transition shadow-[0_0_20px_rgba(232,198,119,0.4)] hover:shadow-white/50">
@@ -185,6 +212,19 @@ const intel = [
            <ul class="space-y-2">
             {intel.map(item => (
               <li><a href={item.href} class="block text-xl text-white/80 hover:text-[#E8C677] transition mobile-link py-1">{item.name}</a></li>
+            ))}
+           </ul>
+        </li>
+
+        <!-- Local Intel Section -->
+        <li class="space-y-4">
+           <span class="text-[#E8C677] text-sm font-mono uppercase tracking-widest border-b border-[#E8C677]/30 pb-2 flex justify-between items-center">
+             <span>Local Intel</span>
+             <a href="/local-intel" class="text-xs lowercase text-white/50 hover:text-white transition">View All</a>
+           </span>
+           <ul class="space-y-2">
+            {top10States.map(state => (
+              <li><a href={`/local-intel/${state.toLowerCase()}`} class="block text-xl text-white/80 hover:text-[#E8C677] transition mobile-link py-1">{state.toUpperCase()} Regional Intel</a></li>
             ))}
            </ul>
         </li>

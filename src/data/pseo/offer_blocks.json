@@ -1,0 +1,20 @@
+[
+{"block_type":"unicorn_readiness_survey","avatar_key":null,"data":"{\"headline\":\"Free 90-Second Unicorn Readiness Survey\",\"button_text\":\"Start Survey Now\",\"form_fields\":[\"Name\",\"Email\",\"Company\",\"Biggest Bottleneck\"]}","created_at":"2026-02-22 05:04:49+00:00"},
+{"block_type":"ai_architecture_audit","avatar_key":null,"data":"{\"headline\":\"Claim Your Private AI Architecture Audit\",\"button_text\":\"Get Audit\",\"form_fields\":[\"URL\",\"Email\"]}","created_at":"2026-02-22 05:04:49+00:00"},
+{"block_type":"zapier_replacement_scorecard","avatar_key":null,"data":"{\"headline\":\"Zapier Replacement Scorecard (Instant)\",\"button_text\":\"Score My Workflows\",\"form_fields\":[\"Email\"]}","created_at":"2026-02-22 05:04:49+00:00"},
+{"block_type":"unicorn_day","avatar_key":null,"data":"{\"headline\":\"Book Your Private Unicorn Developer Day\",\"button_text\":\"Reserve My Day\",\"form_fields\":[\"Name\",\"Email\",\"Business Goal\"]}","created_at":"2026-02-22 05:04:49+00:00"},
+{"block_type":"technical_strategy_session","avatar_key":null,"data":"{\"headline\":\"Technical Strategy Session — No Pitch\",\"button_text\":\"Book Session\",\"form_fields\":[\"Name\",\"Email\"]}","created_at":"2026-02-22 05:04:49+00:00"},
+{"block_type":"headless_readiness_check","avatar_key":null,"data":"{\"headline\":\"Headless Readiness Check\",\"button_text\":\"Get Check\",\"form_fields\":[\"Email\",\"Current Stack\"]}","created_at":"2026-02-22 05:04:49+00:00"},
+{"block_type":"ai_blueprint","avatar_key":null,"data":"{\"headline\":\"Free AI Blueprint\",\"button_text\":\"Claim Blueprint\",\"form_fields\":[\"Email\"]}","created_at":"2026-02-22 05:04:49+00:00"},
+{"block_type":"cta","avatar_key":null,"data":"{\"headline\":\"Get a Free Quote Today\",\"button_text\":\"Get Free Quote\",\"form_action\":\"/api/submit-lead\"}","created_at":"2026-02-22 05:04:49+00:00"},
+{"block_type":"cta","avatar_key":null,"data":"{\"headline\":\"Need Help? Contact Us Now\",\"button_text\":\"Contact Us\",\"form_action\":\"/api/submit-lead\"}","created_at":"2026-02-22 05:04:49+00:00"},
+{"block_type":"strategy_call","avatar_key":null,"data":"{\"headline\":\"15-Min Strategy Call\",\"button_text\":\"Book Call\",\"form_fields\":[\"Name\",\"Email\",\"Phone\"]}","created_at":"2026-02-22 05:04:49+00:00"},
+{"block_type":"audit","avatar_key":null,"data":"{\"headline\":\"2-Hour Technical Audit\",\"button_text\":\"Request Audit\",\"form_fields\":[\"Email\",\"Website\"]}","created_at":"2026-02-22 05:04:49+00:00"},
+{"block_type":"demo","avatar_key":null,"data":"{\"headline\":\"Zapier Replacement Demo\",\"button_text\":\"See Demo\",\"form_fields\":[\"Email\"]}","created_at":"2026-02-22 05:04:49+00:00"},
+{"block_type":"roadmap","avatar_key":null,"data":"{\"headline\":\"Custom AI Roadmap\",\"button_text\":\"Get Roadmap\",\"form_fields\":[\"Email\"]}","created_at":"2026-02-22 05:04:49+00:00"},
+{"block_type":"survey_cta","avatar_key":null,"data":"{\"headline\":\"90-Second Unicorn Survey\",\"button_text\":\"Start Survey\",\"form_fields\":[\"Email\"]}","created_at":"2026-02-22 05:04:49+00:00"},
+{"block_type":"unicorn_day_teaser","avatar_key":null,"data":"{\"headline\":\"Unicorn Day — $4,997\",\"button_text\":\"Reserve\",\"form_fields\":[\"Name\",\"Email\"]}","created_at":"2026-02-22 05:04:49+00:00"},
+{"block_type":"free_audit","avatar_key":null,"data":"{\"headline\":\"Free Architecture Audit\",\"button_text\":\"Claim Audit\",\"form_fields\":[\"Email\"]}","created_at":"2026-02-22 05:04:49+00:00"},
+{"block_type":"ai_assessment","avatar_key":null,"data":"{\"headline\":\"AI Readiness Assessment\",\"button_text\":\"Get Assessment\",\"form_fields\":[\"Email\",\"Company\"]}","created_at":"2026-02-22 05:04:49+00:00"},
+{"block_type":"pipeline_build","avatar_key":null,"data":"{\"headline\":\"Revenue Pipeline Build\",\"button_text\":\"Learn More\",\"form_fields\":[\"Name\",\"Email\"]}","created_at":"2026-02-22 05:04:49+00:00"}
+]
