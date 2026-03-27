@@ -240,7 +240,7 @@ p {
 
  .pill-nowrap {
      display: inline-flex;
-     max-inline-size: 100%;
+     max-width: 100%;
      white-space: nowrap;
      overflow: hidden;
      text-overflow: ellipsis;
@@ -623,6 +623,7 @@ button.primary:hover {
 .text-gradient-gold {
     background: linear-gradient(135deg, #C9A961, #FFD700);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
     color: #C9A961;
 }

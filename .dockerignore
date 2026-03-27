@@ -9,7 +9,6 @@ dist
 .gitignore
 README.md
 COOLIFY_*.md
-scripts/
 data/
 audit-*.html
 base.html
