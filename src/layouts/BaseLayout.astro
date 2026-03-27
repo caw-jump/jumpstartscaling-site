@@ -2,7 +2,6 @@
 // src/layouts/BaseLayout.astro - Updated master layout (single source of truth for ALL pages)
 import Navigation from '../components/ui/Navigation.astro';
 import Footer from '../components/ui/Footer.astro';
-import StickySearchBar from '../components/StickySearchBar.astro';
 import '../styles/global.css';
 
 interface Props {
@@ -296,8 +295,6 @@ const META_PIXEL_ID = import.meta.env.PUBLIC_META_PIXEL_ID || '';
     </main>
 
     <Footer />
-
-    <StickySearchBar />
 
     <div id="a11y-widget" style="position:fixed;bottom:1.25rem;right:1.25rem;z-index:9999;font-family:inherit">
       <button 
