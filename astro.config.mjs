@@ -12,6 +12,6 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
     server: { allowedHosts: ['jumpstartscaling.com', 'www.jumpstartscaling.com', 'localhost', '127.0.0.1'] },
-    build: { cssCodeSplit: true, rollupOptions: { output: { manualChunks: { 'react-vendor': ['react', 'react-dom'] } } } }
+    build: { cssCodeSplit: true }
   }
 });

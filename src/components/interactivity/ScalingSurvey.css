@@ -13,6 +13,9 @@
     --error-red: #ff4444;
     --font-ui: 'Inter', sans-serif;
     --font-mono: 'JetBrains Mono', monospace;
+    --text-primary: #FFFFFF;
+    --text-secondary: #FFFFFF;
+    --text-muted: #FFFFFF;
 }
 
 /* --- MAIN CONTAINER --- */

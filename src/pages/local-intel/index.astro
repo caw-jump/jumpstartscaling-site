@@ -1,6 +1,7 @@
 ---
 import Layout from '../../layouts/BaseLayout.astro';
 import { stateGroupedContent, top10States, STATE_NAME_MAP } from '../../utils/pseo';
+import BubbleBadge from '../../components/ui/BubbleBadge.astro';
 
 const allActiveStates = Object.keys(stateGroupedContent).sort();
 
@@ -15,30 +16,43 @@ const inactiveStates = ALL_50_STATES.filter(s => !allActiveStates.includes(s));
       
       <!-- Page Header -->
       <div class="mb-16 max-w-4xl text-center mx-auto">
-        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#E8C677]/10 border border-[#E8C677]/20 mb-6">
-          <span class="w-2 h-2 rounded-full bg-[#E8C677] animate-pulse"></span>
-          <span class="text-sm font-semibold text-[#E8C677] uppercase tracking-wider">Geographic Growth Targeting</span>
+        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#C9A961]/10 border border-[#C9A961]/20 mb-6">
+          <span class="w-2 h-2 rounded-full bg-[#C9A961] animate-pulse"></span>
+          <BubbleBadge
+            text="Geographic Growth Targeting"
+            class="text-sm font-semibold text-[#C9A961] uppercase tracking-wider"
+          />
         </div>
         <h1 class="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
-          National <span class="bg-gradient-to-r from-[#E8C677] to-[#E8C677]/50 bg-clip-text text-transparent">Local Intel</span> Registry
+          National <span class="bg-gradient-to-r from-[#C9A961] to-[#C9A961]/50 bg-clip-text text-transparent">Local Intel</span> Registry
         </h1>
         <p class="text-xl text-white/70">
           Private AI automation architectures and intelligent revenue pipeline frameworks engineered for your specific local market constraints. Select your state below to access regional intelligence.
         </p>
       </div>
 
+      <div class="mb-12 max-w-2xl mx-auto">
+        <input
+          id="state-search"
+          type="text"
+          placeholder="Search states..."
+          class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-lg text-white focus:outline-none focus:border-[#C9A961]/60 transition-all placeholder:text-white/20"
+        />
+        <div id="state-search-meta" class="mt-3 text-xs font-mono text-white/40 uppercase tracking-widest text-center"></div>
+      </div>
+
       <!-- Top 10 High Volume Markets -->
       <div class="mb-24">
          <h2 class="text-2xl font-bold text-white mb-8 border-b border-white/10 pb-4">High-Velocity Regional Data</h2>
-         <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
+         <div class="grid grid-cols-2 md:grid-cols-5 gap-4" id="top-states-grid">
             {top10States.map(state => {
               const count = stateGroupedContent[state]?.length || 0;
               const fullName = STATE_NAME_MAP[state] || state;
               return (
-                <a href={`/local-intel/${state.toLowerCase()}`} class="group relative bg-white/5 border border-white/10 rounded-xl p-8 text-center hover:bg-white/10 hover:border-[#E8C677]/50 transition-all duration-300">
-                   <div class="absolute inset-0 bg-gradient-to-b from-[#E8C677]/10 to-transparent opacity-0 group-hover:opacity-100 rounded-xl transition-all" />
-                   <h3 class="text-xl font-bold text-white group-hover:text-[#E8C677] transition-colors mb-2 uppercase tracking-widest">{fullName}</h3>
-                   <p class="text-xs font-medium text-white/50">{count} Frameworks</p>
+                <a href={`/local-intel/${state.toLowerCase()}`} data-state={fullName} class="state-link group relative bg-white/5 border border-white/10 rounded-xl p-8 text-center hover:bg-white/10 hover:border-[#C9A961]/50 transition-all duration-300">
+                   <div class="absolute inset-0 bg-gradient-to-b from-[#C9A961]/10 to-transparent opacity-0 group-hover:opacity-100 rounded-xl transition-all" />
+                   <h3 class="text-xl font-bold text-white group-hover:text-[#C9A961] transition-colors mb-2 uppercase tracking-widest relative z-10">{fullName}</h3>
+                   <p class="text-xs font-medium text-white/50 relative z-10">{count} Frameworks</p>
                 </a>
               );
             })}
@@ -47,11 +61,11 @@ const inactiveStates = ALL_50_STATES.filter(s => !allActiveStates.includes(s));
 
       <div class="mb-24">
          <h2 class="text-2xl font-bold text-white mb-8 border-b border-white/10 pb-4">All Evaluated Markets</h2>
-         <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-3">
+         <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-3" id="all-states-grid">
              {allActiveStates.map(state => (
-                <a href={`/local-intel/${state.toLowerCase()}`} class="px-5 py-4 bg-white/5 rounded-xl border border-white/10 hover:border-[#E8C677]/50 hover:bg-[#E8C677]/10 text-white/80 hover:text-white transition-all text-sm font-semibold flex justify-between items-center group">
+                <a href={`/local-intel/${state.toLowerCase()}`} data-state={STATE_NAME_MAP[state] || state} class="state-link px-5 py-4 bg-white/5 rounded-xl border border-white/10 hover:border-[#C9A961]/50 hover:bg-[#C9A961]/10 text-white/80 hover:text-white transition-all text-sm font-semibold flex justify-between items-center group">
                    <span>{STATE_NAME_MAP[state] || state}</span>
-                   <svg class="w-4 h-4 text-white/20 group-hover:text-[#E8C677] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" /></svg>
+                   <svg class="w-4 h-4 text-white/20 group-hover:text-[#C9A961] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" /></svg>
                 </a>
              ))}
          </div>
@@ -71,23 +85,25 @@ const inactiveStates = ALL_50_STATES.filter(s => !allActiveStates.includes(s));
 
     </div>
   </main>
-<style is:global>
-  h1 { font-size: 1.5rem !important; }
-  h2 { font-size: 1.3rem !important; }
-  h3 { font-size: 1.2rem !important; }
-  p { font-size: 1em !important; }
-  .container {
-    width: 100% !important;
-    margin: 0 auto !important;
-    padding-left: 0rem !important;
-    padding-right: 0rem !important;
-    max-width: 100% !important;
-  }
-  @media (max-width: 750px) {
-    .container {
-      padding-left: 1.5rem !important;
-      padding-right: 1.5rem !important;
+
+<script is:inline>
+  const input = document.getElementById('state-search');
+  const meta = document.getElementById('state-search-meta');
+  const links = Array.from(document.querySelectorAll('a.state-link'));
+
+  function apply() {
+    const q = (input?.value || '').trim().toLowerCase();
+    let shown = 0;
+    for (const el of links) {
+      const name = (el.getAttribute('data-state') || '').toLowerCase();
+      const visible = q.length === 0 || name.includes(q);
+      el.style.display = visible ? '' : 'none';
+      if (visible) shown++;
     }
+    if (meta) meta.textContent = q.length === 0 ? `${shown} states` : `${shown} matches`;
   }
-</style>
+
+  input?.addEventListener('input', apply);
+  apply();
+</script>
 </Layout>

@@ -1,0 +1,117 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  href: string;
+  category: string;
+  city: string;
+  state: string;
+  index: number;
+}
+
+const { title, description, href, category, city, state, index } = Astro.props;
+
+const lightGradients = [
+  'linear-gradient(135deg, #FFF9E6 0%, #FFFBF0 100%)',
+  'linear-gradient(135deg, #F0F9FF 0%, #F8FBFF 100%)',
+  'linear-gradient(135deg, #FFF0F5 0%, #FFF8FA 100%)',
+  'linear-gradient(135deg, #F0FFF4 0%, #F8FFF9 100%)',
+  'linear-gradient(135deg, #FFF5E6 0%, #FFFAF0 100%)',
+  'linear-gradient(135deg, #F5F0FF 0%, #FAF8FF 100%)',
+  'linear-gradient(135deg, #E6F9FF 0%, #F0FCFF 100%)',
+  'linear-gradient(135deg, #FFE6F0 0%, #FFF0F5 100%)',
+  'linear-gradient(135deg, #FFF3E0 0%, #FFF8F0 100%)',
+  'linear-gradient(135deg, #E8F5E9 0%, #F1F8F4 100%)',
+];
+
+const gradient = lightGradients[index % lightGradients.length];
+
+const categoryLabels: Record<string, string> = {
+  'paid-acquisition': 'Paid Acquisition',
+  'funnel-optimization': 'Funnel Optimization',
+  'crm-automation': 'CRM Automation',
+  'data-attribution': 'Data Attribution',
+  'authority-content': 'Authority Content',
+  'growth-retainer': 'Growth Retainer',
+};
+
+const displayCategory = categoryLabels[category] || category.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+
+const cleanedTitle = title
+  .replace(/\s*\|\s*The Ultimate Guide to Scaling Your Startup$/i, '')
+  .replace(/\s*\|\s*Your Market Domination Strategy Playbook$/i, '')
+  .replace(/\s*\|\s*The Market Domination Strategy Playbook$/i, '')
+  .replace(/\s*\|\s*CRM Automation and Revenue Growth$/i, '')
+  .replace(/\s*\|\s*Paid Acquisition and Revenue Growth$/i, '')
+  .replace(/\s*\|\s*Funnel Optimization and Revenue Growth$/i, '')
+  .replace(/\s*\|\s*Data Attribution and Revenue Growth$/i, '')
+  .replace(/\s*\|\s*Authority Content and Revenue Growth$/i, '')
+  .replace(/\s*\|\s*Growth Retainer and Revenue Growth$/i, '')
+  .trim();
+
+const derivedTopicLabel = cleanedTitle
+  .replace(new RegExp(`\\s+in\\s+${city},\\s*${state}$`, 'i'), '')
+  .replace(new RegExp(`\\s+for\\s+${city}$`, 'i'), '')
+  .replace(new RegExp(`\\s+for\\s+${city},\\s*${state}$`, 'i'), '')
+  .trim();
+
+const topicLabel = derivedTopicLabel && derivedTopicLabel.toLowerCase() !== cleanedTitle.toLowerCase()
+  ? derivedTopicLabel
+  : displayCategory;
+
+---
+
+<article class="local-intel-tile group" style={`background: ${gradient};`}>
+  <a href={href} class="block h-full p-8 relative">
+    <div class="absolute inset-0 bg-gradient-to-br from-black/0 via-black/0 to-black/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl" />
+    
+    <div class="relative z-10">
+      <div class="flex items-center gap-2 mb-4">
+        <span class="inline-block px-3 py-1 bg-gray-900/15 text-gray-800 rounded-full text-xs font-semibold uppercase tracking-wider">
+          {city}, {state}
+        </span>
+        <span class="text-xs text-gray-600 font-medium">
+          {topicLabel}
+        </span>
+      </div>
+      
+      <h2 class="text-xl font-bold text-black mb-3 group-hover:text-[#8B7355] transition-colors leading-tight" style="text-shadow: none; color: #000 !important;">
+        {cleanedTitle}
+      </h2>
+
+      <p class="text-sm text-gray-800 leading-relaxed mb-6 line-clamp-3" style="text-shadow: 0 1px 1px rgba(255,255,255,0.5);">
+        {description}
+      </p>
+      
+      <div class="inline-flex items-center text-sm font-bold uppercase tracking-wider text-[#8B7355] group-hover:text-gray-900 transition-colors">
+        View Framework
+        <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+        </svg>
+      </div>
+    </div>
+  </a>
+</article>
+
+<style>
+  .local-intel-tile {
+    border-radius: 1.5rem;
+    border: 2px solid rgba(0, 0, 0, 0.08);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    height: 100%;
+  }
+  
+  .local-intel-tile:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+    border-color: rgba(201, 169, 97, 0.3);
+  }
+  
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+</style>

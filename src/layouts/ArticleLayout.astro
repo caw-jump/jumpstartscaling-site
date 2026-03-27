@@ -41,27 +41,27 @@ const { title, description, city = "Global Hubs", serviceTier } = content;
       <StickyTOC />
     </aside>
 
-    <main class="lg:col-span-9 prose prose-invert prose-gold max-w-none">
+    <div class="article-prose lg:col-span-9 prose prose-invert prose-gold max-w-none">
       <slot /> 
       
       <div class="mt-20 pt-20 border-t border-white/10">
         <h2 class="text-3xl font-bold mb-8">Maximize Your <span class="gold italic">ROI</span></h2>
         <ServiceSynergy currentService={serviceTier} />
       </div>
-    </main>
+    </div>
   </div>
 </ServiceLayout>
 
 <style is:global>
   /* Enforcing the 3-sentence rule and bolding via CSS for the AI-generated text */
-  main p {
+  .article-prose p {
     margin-bottom: 2rem;
     font-size: 1.125rem;
     line-height: 1.8;
     color: #cbd5e1; /* slate-300 */
   }
   
-  main h2 {
+  .article-prose h2 {
     font-size: 2.5rem;
     font-weight: 800;
     margin-top: 4rem;
@@ -69,7 +69,7 @@ const { title, description, city = "Global Hubs", serviceTier } = content;
     color: #fff;
   }
 
-  main h3 {
+  .article-prose h3 {
     font-size: 1.75rem;
     font-weight: 700;
     margin-top: 3rem;
@@ -77,7 +77,7 @@ const { title, description, city = "Global Hubs", serviceTier } = content;
     color: #f8fafc; /* slate-50 */
   }
   
-  main strong {
+  .article-prose strong {
     color: #fff;
     font-weight: 700;
   }

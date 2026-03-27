@@ -11,8 +11,197 @@ const __dirname = dirname(__filename);
 const PORT = process.env.PORT || 8100;
 const DIST_DIR = join(__dirname, 'dist');
 
+function normalizePathname(p) {
+    let path = (p || '/').split('?')[0];
+    if (!path.startsWith('/')) path = `/${path}`;
+    // Normalize trailing slash (keep root as '/')
+    path = path.replace(/\/+$/, '') || '/';
+    return path;
+}
+
+function safeReadJson(filePath) {
+    try {
+        return JSON.parse(readFileSync(filePath, 'utf-8'));
+    } catch {
+        return null;
+    }
+}
+
+// Optional redirect map: { "/old": "/new" }
+const redirectMap = safeReadJson(join(DIST_DIR, 'redirects.json')) || {};
+
+// Canonical slugs exported from sitemap at build time
+const validSlugs = safeReadJson(join(DIST_DIR, 'slugs.json')) || [];
+const validSlugSet = new Set(validSlugs);
+
+function trigrams(s) {
+    const t = `  ${s}  `;
+    const out = new Set();
+    for (let i = 0; i < t.length - 2; i++) out.add(t.slice(i, i + 3));
+    return out;
+}
+
+const slugTrigrams = validSlugs.map((p) => ({ p, grams: trigrams(p) }));
+
+function trigramSimilarity(a, b) {
+    const A = trigrams(a);
+    const B = trigrams(b);
+    let inter = 0;
+    for (const g of A) if (B.has(g)) inter++;
+    const denom = A.size + B.size - inter;
+    return denom === 0 ? 0 : inter / denom;
+}
+
+function bestMatch(pathname) {
+    // Fast exits
+    if (validSlugSet.has(pathname)) return { path: pathname, score: 1 };
+
+    let best = null;
+    let bestScore = 0;
+    // Limit comparisons for speed by focusing on same prefix bucket when possible
+    const prefix = pathname.split('/').slice(0, 2).join('/');
+
+    for (const item of slugTrigrams) {
+        if (prefix !== '/' && item.p.startsWith(prefix) === false) {
+            // Still allow some cross-prefix matches, but de-prioritize by skipping most
+            // (keeps perf sane on large slug lists)
+            continue;
+        }
+
+        const score = trigramSimilarity(pathname, item.p);
+        if (score > bestScore) {
+            bestScore = score;
+            best = item.p;
+        }
+    }
+
+    // If prefix-bucket search failed, do a broader sweep on a small sample of top candidates
+    if (!best) {
+        for (let i = 0; i < slugTrigrams.length; i += 25) {
+            const p = slugTrigrams[i].p;
+            const score = trigramSimilarity(pathname, p);
+            if (score > bestScore) {
+                bestScore = score;
+                best = p;
+            }
+        }
+    }
+
+    return { path: best, score: bestScore };
+}
+
 // n8n webhook - MUST be set in Coolify env (never commit)
 const N8N_WEBHOOK = process.env.N8N_WEBHOOK;
+const GA4_MEASUREMENT_ID = process.env.GA4_MEASUREMENT_ID || process.env.PUBLIC_GA4_MEASUREMENT_ID || '';
+const GA4_API_SECRET = process.env.GA4_API_SECRET || '';
+const GA4_DEBUG = String(process.env.GA4_DEBUG || process.env.PUBLIC_GA4_DEBUG || '').toLowerCase() === '1' || String(process.env.GA4_DEBUG || process.env.PUBLIC_GA4_DEBUG || '').toLowerCase() === 'true';
+const META_PIXEL_ID = process.env.META_PIXEL_ID || process.env.PUBLIC_META_PIXEL_ID || '';
+const META_CAPI_ACCESS_TOKEN = process.env.META_CAPI_ACCESS_TOKEN || '';
+const META_TEST_EVENT_CODE = process.env.META_TEST_EVENT_CODE || '';
+
+function safeString(v, fallback = '') {
+    if (v === null || v === undefined) return fallback;
+    return String(v);
+}
+
+function getClientIp(req) {
+    const fwd = req.headers['x-forwarded-for'];
+    if (Array.isArray(fwd) && fwd.length > 0) return safeString(fwd[0]).split(',')[0].trim();
+    if (typeof fwd === 'string' && fwd.length > 0) return fwd.split(',')[0].trim();
+    const realIp = req.headers['x-real-ip'];
+    if (typeof realIp === 'string' && realIp.length > 0) return realIp.trim();
+    return req.socket?.remoteAddress || '';
+}
+
+async function forwardToGa4TrackEvent(trackPayload) {
+    if (!GA4_MEASUREMENT_ID || !GA4_API_SECRET) {
+        return { enabled: false, delivered: false, reason: 'ga4_not_configured' };
+    }
+
+    const endpoint = GA4_DEBUG
+        ? 'https://www.google-analytics.com/debug/mp/collect'
+        : 'https://www.google-analytics.com/mp/collect';
+    const eventName = safeString(trackPayload.name || 'custom_event').trim() || 'custom_event';
+    const params = trackPayload.params && typeof trackPayload.params === 'object' ? trackPayload.params : {};
+    const clientId = safeString(trackPayload.client_id || trackPayload.clientId || `jss.${Date.now()}.${Math.floor(Math.random() * 1e9)}`);
+
+    const body = {
+        client_id: clientId,
+        events: [{
+            name: eventName,
+            params: {
+                ...params,
+                event_id: safeString(trackPayload.event_id || trackPayload.eventId || ''),
+                page_location: safeString(trackPayload.url || params.page_location || ''),
+            }
+        }]
+    };
+
+    const response = await fetch(`${endpoint}?measurement_id=${encodeURIComponent(GA4_MEASUREMENT_ID)}&api_secret=${encodeURIComponent(GA4_API_SECRET)}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body)
+    });
+
+    if (!response.ok) {
+        const text = await response.text();
+        return { enabled: true, delivered: false, status: response.status, body: text.slice(0, 300) };
+    }
+
+    if (GA4_DEBUG) {
+        const debugBody = await response.text();
+        return { enabled: true, delivered: true, status: response.status, body: debugBody.slice(0, 300) };
+    }
+
+    return { enabled: true, delivered: true, status: response.status };
+}
+
+async function forwardToMetaCapiTrackEvent(trackPayload, req) {
+    if (!META_PIXEL_ID || !META_CAPI_ACCESS_TOKEN) {
+        return { enabled: false, delivered: false, reason: 'meta_capi_not_configured' };
+    }
+
+    const eventNameMap = {
+        page_view: 'PageView',
+        view_content: 'ViewContent',
+        search: 'Search',
+        lead: 'Lead',
+        form_submit: 'CompleteRegistration'
+    };
+    const mappedEventName = eventNameMap[safeString(trackPayload.name)] || safeString(trackPayload.name || 'CustomEvent');
+    const params = trackPayload.params && typeof trackPayload.params === 'object' ? trackPayload.params : {};
+
+    const payload = {
+        data: [{
+            event_name: mappedEventName,
+            event_time: Math.floor(Date.now() / 1000),
+            event_id: safeString(trackPayload.event_id || trackPayload.eventId || ''),
+            action_source: 'website',
+            event_source_url: safeString(trackPayload.url || params.page_location || ''),
+            user_data: {
+                client_ip_address: getClientIp(req),
+                client_user_agent: safeString(req.headers['user-agent'] || '')
+            },
+            custom_data: params
+        }]
+    };
+
+    if (META_TEST_EVENT_CODE) payload.test_event_code = META_TEST_EVENT_CODE;
+
+    const endpoint = `https://graph.facebook.com/v20.0/${encodeURIComponent(META_PIXEL_ID)}/events?access_token=${encodeURIComponent(META_CAPI_ACCESS_TOKEN)}`;
+    const response = await fetch(endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+    });
+
+    if (!response.ok) {
+        const text = await response.text();
+        return { enabled: true, delivered: false, status: response.status, body: text.slice(0, 300) };
+    }
+
+    return { enabled: true, delivered: true, status: response.status };
+}
 
 function proxyToWebhook(body, res) {
     const data = JSON.stringify(body);
@@ -37,6 +226,24 @@ function handleApiPost(urlPath, req, res) {
     req.on('end', () => {
         try {
             const data = body ? JSON.parse(body) : {};
+            // Server-side analytics forwarding scaffold
+            if (urlPath === '/api/track') {
+                (async () => {
+                    try {
+                        const [ga4, meta] = await Promise.all([
+                            forwardToGa4TrackEvent(data),
+                            forwardToMetaCapiTrackEvent(data, req)
+                        ]);
+                        res.writeHead(200, { 'Content-Type': 'application/json' });
+                        return res.end(JSON.stringify({ success: true, ga4, meta }));
+                    } catch (forwardErr) {
+                        res.writeHead(200, { 'Content-Type': 'application/json' });
+                        return res.end(JSON.stringify({ success: true, warning: 'tracking_forward_failed' }));
+                    }
+                })();
+                return;
+            }
+
             proxyToWebhook(data, res);
         } catch (e) {
             res.writeHead(400, { 'Content-Type': 'application/json' });
@@ -67,10 +274,13 @@ const MIME_TYPES = {
 };
 
 const server = createServer((req, res) => {
-    const urlPath = (req.url || '/').split('?')[0];
+    const urlPath = normalizePathname(req.url || '/');
 
     // API routes - proxy to n8n (Coolify deployment)
     if (req.method === 'POST') {
+        if (urlPath === '/api/track') {
+            return handleApiPost(urlPath, req, res);
+        }
         if (urlPath === '/api/submit-lead' || urlPath === '/api/submit-scaling-survey') {
             if (!N8N_WEBHOOK) {
                 console.warn('N8N_WEBHOOK not set - form submissions will be accepted but not forwarded');
@@ -104,14 +314,23 @@ const server = createServer((req, res) => {
         });
         res.end(content);
     } catch (error) {
-        try {
-            const content = readFileSync(join(DIST_DIR, 'index.html'));
-            res.writeHead(200, { 'Content-Type': 'text/html' });
-            res.end(content);
-        } catch {
-            res.writeHead(404, { 'Content-Type': 'text/plain' });
-            res.end('404 Not Found');
+        // Redirect safety net (Option 2)
+        const mapped = redirectMap[urlPath];
+        if (mapped) {
+            res.writeHead(301, { Location: mapped });
+            return res.end();
         }
+
+        const { path: matched, score } = bestMatch(urlPath);
+        const THRESHOLD = Number(process.env.REDIRECT_MATCH_THRESHOLD || '0.35');
+        if (matched && score >= THRESHOLD) {
+            res.writeHead(301, { Location: matched });
+            return res.end();
+        }
+
+        const q = encodeURIComponent(urlPath.replace(/^\//, ''));
+        res.writeHead(301, { Location: `/search?q=${q}` });
+        return res.end();
     }
 });
 

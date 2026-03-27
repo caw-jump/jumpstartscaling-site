@@ -66,7 +66,7 @@ export default function ManualVsAutomationCostCalculator() {
 
       {results && (
         <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="space-y-6">
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 gap-6">
             <div className="glass-card p-6 text-center border-t-4 border-t-red-500">
                <div className="text-sm text-white/60 mb-2 uppercase tracking-wide">Monthly Pen & Paper Cost</div>
                <div className="text-3xl font-black text-red-400">{formatCurrency(results.manualCostPerMonth)}</div>
@@ -75,7 +75,7 @@ export default function ManualVsAutomationCostCalculator() {
             
             <div className="glass-card p-6 text-center border-t-4 border-t-yellow-500">
                <div className="text-sm text-white/60 mb-2 uppercase tracking-wide">Developer ROI Break-Even</div>
-               <div className="text-5xl font-black text-yellow-400 my-2">{results.breakevenMonths > 0 ? results.breakevenMonths.toFixed(1) : '0'}</div>
+               <div className="text-4xl font-black text-yellow-400 my-2">{results.breakevenMonths > 0 ? results.breakevenMonths.toFixed(1) : '0'}</div>
                <div className="text-xs text-white/50">Months</div>
             </div>
 

@@ -3,7 +3,6 @@
 import Navigation from '../components/ui/Navigation.astro';
 import Footer from '../components/ui/Footer.astro';
 import StickySearchBar from '../components/StickySearchBar.astro';
-import AtmosphereParticles from '../components/visuals/AtmosphereParticles.tsx';
 import '../styles/global.css';
 
 interface Props {
@@ -41,10 +40,14 @@ const breadcrumb = crumbs.length > 0 ? {"@type":"BreadcrumbList","itemListElemen
 const faqSchema = faqs.length > 0 ? {"@type":"FAQPage","mainEntity":faqs.map(f=>({"@type":"Question","name":f.q,"acceptedAnswer":{"@type":"Answer","text":f.a}}))} : null;
 const mainEntity = {"@type":"WebPage","name":title,"description":description,"url":canonicalUrl};
 
-const graph = [org, webSite];
+const graph: any[] = [org, webSite];
 if (breadcrumb) graph.push(breadcrumb);
 if (faqSchema) graph.push(faqSchema);
 graph.push(mainEntity);
+
+const GA4_MEASUREMENT_ID = import.meta.env.PUBLIC_GA4_MEASUREMENT_ID || '';
+const CLARITY_PROJECT_ID = import.meta.env.PUBLIC_CLARITY_PROJECT_ID || '';
+const META_PIXEL_ID = import.meta.env.PUBLIC_META_PIXEL_ID || '';
 
 ---
 
@@ -80,26 +83,157 @@ graph.push(mainEntity);
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=JetBrains+Mono:wght@100..800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=JetBrains+Mono:wght@100..800&display=swap"></noscript>
 
+    {GA4_MEASUREMENT_ID && (
+      <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA4_MEASUREMENT_ID}`}></script>
+    )}
 
-    <!-- Microsoft Clarity -->
-    <script type="text/javascript">
-        (function(c,l,a,r,i,t,y){
-            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-        })(window, document, "clarity", "script", "u2is508icv");
-    </script>
+    <script type="module" define:vars={{ GA4_MEASUREMENT_ID, CLARITY_PROJECT_ID, META_PIXEL_ID }}>
+      const GA_ID = GA4_MEASUREMENT_ID ? String(GA4_MEASUREMENT_ID) : '';
+      const CLARITY_ID = CLARITY_PROJECT_ID ? String(CLARITY_PROJECT_ID) : '';
+      const META_ID = META_PIXEL_ID ? String(META_PIXEL_ID) : '';
 
-    <!-- Google Analytics 4 (GA4) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VKT7QBTYNX"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-VKT7QBTYNX', {
-        send_page_view: true,
-        transport_type: 'beacon'
+      // GA4 (gtag)
+      const w = window;
+      w.dataLayer = w.dataLayer || [];
+      function gtag(){ w.dataLayer.push(arguments); }
+      w.gtag = w.gtag || gtag;
+      if (GA_ID) {
+        gtag('js', new Date());
+        gtag('config', GA_ID, { send_page_view: false, transport_type: 'beacon' });
+      }
+
+      // Microsoft Clarity (via npm package)
+      if (CLARITY_ID) {
+        import('@microsoft/clarity').then((mod) => {
+          const clarity = mod?.default || mod;
+          if (clarity?.init) clarity.init(CLARITY_ID);
+        }).catch(() => {});
+      }
+
+      // Meta Pixel (client)
+      if (META_ID) {
+        !(function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)})(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', META_ID);
+      }
+
+      const track = (name, params = {}, opts = {}) => {
+        const eventId = opts.event_id || `${name}_${Date.now()}_${Math.random().toString(16).slice(2)}`;
+
+        if (GA_ID) {
+          try { gtag('event', name, { ...params, event_id: eventId }); } catch {}
+        }
+
+        if (META_ID) {
+          try {
+            if (name === 'page_view') fbq('track', 'PageView', {}, { eventID: eventId });
+            else if (name === 'view_content') fbq('track', 'ViewContent', params, { eventID: eventId });
+            else if (name === 'search') fbq('track', 'Search', params, { eventID: eventId });
+            else if (name === 'lead') fbq('track', 'Lead', params, { eventID: eventId });
+            else fbq('trackCustom', name, params, { eventID: eventId });
+          } catch {}
+        }
+
+        // Optional server-side forwarding (disabled unless configured)
+        if (opts.server) {
+          try {
+            fetch('/api/track', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ name, params, event_id: eventId, url: location.href })
+            }).catch(() => {});
+          } catch {}
+        }
+      };
+
+      // Expose a tiny API for other scripts/components
+      w.jssTrack = w.jssTrack || track;
+
+      // 1) Page view on Astro navigations
+      const pageView = () => {
+        const pagePath = location.pathname;
+        track('page_view', { page_location: location.href, page_path: pagePath, page_title: document.title });
+
+        if (pagePath.startsWith('/tools/') || pagePath.startsWith('/insights/')) {
+          track('view_content', {
+            content_name: document.title,
+            content_category: pagePath.startsWith('/tools/') ? 'tool' : 'insight',
+            content_path: pagePath
+          });
+        }
+      };
+      document.addEventListener('astro:page-load', pageView);
+      pageView();
+
+      // 2) Scroll depth (25/50/75/90)
+      const fired = new Set();
+      const onScroll = () => {
+        const h = document.documentElement;
+        const doc = h.scrollHeight - h.clientHeight;
+        if (doc <= 0) return;
+        const pct = Math.round((h.scrollTop / doc) * 100);
+        const marks = [25, 50, 75, 90];
+        for (const m of marks) {
+          if (pct >= m && !fired.has(m)) {
+            fired.add(m);
+            track('scroll', { percent_scrolled: m });
+          }
+        }
+      };
+      window.addEventListener('scroll', onScroll, { passive: true });
+
+      // 3) Outbound clicks
+      document.addEventListener('click', (e) => {
+        const a = e.target?.closest?.('a[href]');
+        if (!a) return;
+        const href = a.getAttribute('href') || '';
+        if (href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('tel:')) return;
+        const isExternal = href.startsWith('http') && !href.includes(location.host);
+        if (isExternal) track('outbound_click', { link_url: href, link_text: (a.textContent || '').trim().slice(0, 100) });
       });
+
+      // 4) Search events (site search + index filters)
+      document.addEventListener('input', (e) => {
+        const el = e.target;
+        if (!el || el.tagName !== 'INPUT') return;
+        const id = el.id || '';
+        const q = (el.value || '').trim();
+        if (!q) return;
+        if (id === 'advanced-search-input') track('search', { search_term: q, source: 'site_search' });
+        if (id === 'state-search') track('search', { search_term: q, source: 'local_intel_states' });
+        if (id === 'intel-search') track('search', { search_term: q, source: 'intel_index' });
+        if (id === 'tools-search') track('search', { search_term: q, source: 'tools_index' });
+      });
+
+      // 5) CTA clicks + form submits
+      document.addEventListener('submit', (e) => {
+        const form = e.target;
+        const action = form?.getAttribute?.('action') || '';
+        track('form_submit', { form_action: action, form_id: form?.id || '' }, { server: true });
+        if (action.includes('submit-lead') || action.includes('submit-scaling-survey')) {
+          track('lead', { form_action: action }, { server: true });
+        }
+      });
+
+      document.addEventListener('click', (e) => {
+        const a = e.target?.closest?.('a,button');
+        if (!a) return;
+        const text = (a.textContent || '').trim().slice(0, 120);
+        if (!text) return;
+        if (/free growth audit/i.test(text) || /get your free growth audit/i.test(text)) track('cta_click', { cta: 'free_growth_audit', text });
+        if (/view blueprint/i.test(text)) track('cta_click', { cta: 'view_blueprint', text });
+      });
+
+      // Meta standard PageView
+      if (META_ID) {
+        try { fbq('track', 'PageView'); } catch {}
+      }
     </script>
 
     <!-- Schema (Global Organization + WebSite + Breadcrumb) -->
@@ -165,6 +299,161 @@ graph.push(mainEntity);
 
     <StickySearchBar />
 
+    <div id="a11y-widget" style="position:fixed;bottom:1.25rem;right:1.25rem;z-index:9999;font-family:inherit">
+      <button 
+        id="a11y-toggle"
+        aria-label="Accessibility options"
+        aria-expanded="false"
+        aria-controls="a11y-panel"
+        style="width:3rem;height:3rem;border-radius:50%;background:#C9A135;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(201,161,53,0.4);transition:transform 0.2s,box-shadow 0.2s;"
+        onmouseover="this.style.transform='scale(1.1)';this.style.boxShadow='0 6px 24px rgba(201,161,53,0.5)'"
+        onmouseout="this.style.transform='scale(1)';this.style.boxShadow='0 4px 16px rgba(201,161,53,0.4)'"
+      >
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="4" r="2"/>
+          <path d="M12 6v5M9 9h6M9 22l3-6 3 6M6 12l3 1M18 12l-3 1"/>
+        </svg>
+      </button>
+
+      <div 
+        id="a11y-panel"
+        role="dialog"
+        aria-label="Accessibility settings"
+        aria-hidden="true"
+        style="display:none;position:absolute;bottom:3.75rem;right:0;width:240px;background:#141419;border:1px solid rgba(255,255,255,0.05);border-radius:1rem;padding:1.25rem;box-shadow:0 8px 32px rgba(0,0,0,0.4);backdrop-filter:blur(10px);"
+      >
+        <p style="font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin:0 0 0.75rem 0;">Accessibility</p>
+        
+        <div style="margin-bottom:1rem;">
+          <p style="font-size:0.8rem;font-weight:600;color:#fff;margin:0 0 0.5rem 0;">Text Size</p>
+          <div style="display:flex;gap:0.5rem;align-items:center;">
+            <button id="a11y-decrease" aria-label="Decrease text size" style="flex:1;padding:0.4rem;border:1px solid rgba(255,255,255,0.1);border-radius:0.5rem;background:rgba(255,255,255,0.05);cursor:pointer;font-size:1.1rem;font-weight:700;color:#fff;transition:background 0.15s;" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'">A−</button>
+            <button id="a11y-reset-size" aria-label="Reset text size" style="flex:1;padding:0.4rem;border:1px solid rgba(255,255,255,0.1);border-radius:0.5rem;background:rgba(255,255,255,0.05);cursor:pointer;font-size:0.75rem;font-weight:600;color:#fff;transition:background 0.15s;" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'">Reset</button>
+            <button id="a11y-increase" aria-label="Increase text size" style="flex:1;padding:0.4rem;border:1px solid rgba(255,255,255,0.1);border-radius:0.5rem;background:rgba(255,255,255,0.05);cursor:pointer;font-size:1.1rem;font-weight:700;color:#fff;transition:background 0.15s;" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'">A+</button>
+          </div>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:0.5rem;">
+          <label style="display:flex;align-items:center;justify-content:space-between;cursor:pointer;font-size:0.8rem;font-weight:600;color:#fff;">
+            <span>Dyslexia Font</span>
+            <input id="a11y-dyslexia" type="checkbox" style="width:1rem;height:1rem;accent-color:#E8C677;cursor:pointer;" />
+          </label>
+          <label style="display:flex;align-items:center;justify-content:space-between;cursor:pointer;font-size:0.8rem;font-weight:600;color:#fff;">
+            <span>High Contrast</span>
+            <input id="a11y-contrast" type="checkbox" style="width:1rem;height:1rem;accent-color:#E8C677;cursor:pointer;" />
+          </label>
+          <label style="display:flex;align-items:center;justify-content:space-between;cursor:pointer;font-size:0.8rem;font-weight:600;color:#fff;">
+            <span>Reduce Motion</span>
+            <input id="a11y-motion" type="checkbox" style="width:1rem;height:1rem;accent-color:#E8C677;cursor:pointer;" />
+          </label>
+        </div>
+
+        <p style="font-size:0.65rem;color:rgba(255,255,255,0.3);margin:1rem 0 0 0;text-align:center;">Settings saved automatically</p>
+      </div>
+    </div>
+
+    <style is:global>
+      body.a11y-dyslexia { letter-spacing: 0.05em; word-spacing: 0.15em; line-height: 1.9 !important; }
+      body.a11y-dyslexia *, body.a11y-dyslexia *:not(#a11y-widget):not(#a11y-widget *) { 
+        font-family: 'Verdana', 'Arial', sans-serif !important; 
+      }
+      body.a11y-contrast main, 
+      body.a11y-contrast nav, 
+      body.a11y-contrast footer { 
+        filter: contrast(1.5) saturate(1.1) !important; 
+      }
+      body.a11y-contrast .glass-card { background: #fff !important; }
+      #a11y-widget {
+        isolation: isolate;
+        z-index: 999999 !important;
+      }
+    </style>
+
+    <script is:inline>
+      (function() {
+        const STORAGE_KEY = 'jss_a11y';
+        const html = document.documentElement;
+        const body = document.body;
+
+        let prefs = {};
+        try { prefs = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); } catch(e) {}
+
+        let scale = prefs.scale || 1;
+        html.style.fontSize = (16 * scale) + 'px';
+
+        if (prefs.dyslexia) body.classList.add('a11y-dyslexia');
+        if (prefs.contrast) body.classList.add('a11y-contrast');
+        if (prefs.motion) body.classList.add('a11y-no-motion');
+
+        function savePrefs() {
+          try { localStorage.setItem(STORAGE_KEY, JSON.stringify(prefs)); } catch(e) {}
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+          const toggle = document.getElementById('a11y-toggle');
+          const panel = document.getElementById('a11y-panel');
+          const increase = document.getElementById('a11y-increase');
+          const decrease = document.getElementById('a11y-decrease');
+          const resetSize = document.getElementById('a11y-reset-size');
+          const dyslexia = document.getElementById('a11y-dyslexia');
+          const contrast = document.getElementById('a11y-contrast');
+          const motion = document.getElementById('a11y-motion');
+
+          if (dyslexia) dyslexia.checked = !!prefs.dyslexia;
+          if (contrast) contrast.checked = !!prefs.contrast;
+          if (motion)   motion.checked = !!prefs.motion;
+
+          toggle?.addEventListener('click', function() {
+            const isOpen = panel.style.display === 'block';
+            panel.style.display = isOpen ? 'none' : 'block';
+            toggle.setAttribute('aria-expanded', String(!isOpen));
+            panel.setAttribute('aria-hidden', String(isOpen));
+          });
+
+          document.addEventListener('click', function(e) {
+            if (!document.getElementById('a11y-widget')?.contains(e.target)) {
+              if (panel) { panel.style.display = 'none'; toggle?.setAttribute('aria-expanded', 'false'); }
+            }
+          });
+
+          increase?.addEventListener('click', function() {
+            scale = Math.min(scale + 0.1, 1.5);
+            html.style.fontSize = (16 * scale) + 'px';
+            prefs.scale = scale;
+            savePrefs();
+          });
+          decrease?.addEventListener('click', function() {
+            scale = Math.max(scale - 0.1, 0.7);
+            html.style.fontSize = (16 * scale) + 'px';
+            prefs.scale = scale;
+            savePrefs();
+          });
+          resetSize?.addEventListener('click', function() {
+            scale = 1;
+            html.style.fontSize = '16px';
+            prefs.scale = 1;
+            savePrefs();
+          });
+
+          dyslexia?.addEventListener('change', function() {
+            body.classList.toggle('a11y-dyslexia', this.checked);
+            prefs.dyslexia = this.checked;
+            savePrefs();
+          });
+          contrast?.addEventListener('change', function() {
+            body.classList.toggle('a11y-contrast', this.checked);
+            prefs.contrast = this.checked;
+            savePrefs();
+          });
+          motion?.addEventListener('change', function() {
+            body.classList.toggle('a11y-no-motion', this.checked);
+            prefs.motion = this.checked;
+            savePrefs();
+          });
+        });
+      })();
+    </script>
+
     <!-- Particles Container -->
     <div class="particles fixed inset-0 pointer-events-none z-0 overflow-hidden"></div>
 
@@ -218,7 +507,58 @@ graph.push(mainEntity);
             document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
         }
         observeAnimateElements();
-        document.addEventListener('astro:page-load', () => { updateScroll(); observeAnimateElements(); });
+
+        function hashString(str) {
+            let h = 2166136261;
+            for (let i = 0; i < str.length; i++) {
+                h ^= str.charCodeAt(i);
+                h = Math.imul(h, 16777619);
+            }
+            return h >>> 0;
+        }
+
+         function applySectionTheme() {
+            const path = window.location.pathname || '/';
+            const candidates = Array.from(document.querySelectorAll('main > section, main > div > section'));
+            candidates.forEach((el) => {
+                if (!el.classList.contains('section')) el.classList.add('section');
+            });
+
+            const sections = Array.from(document.querySelectorAll('main .section'));
+            const gradientsLight = [
+                'radial-gradient(circle at 20% 20%, rgba(232, 198, 119, 0.40), transparent 55%), radial-gradient(circle at 80% 0%, rgba(125, 211, 252, 0.28), transparent 60%)',
+                'radial-gradient(circle at 10% 90%, rgba(232, 198, 119, 0.38), transparent 60%), radial-gradient(circle at 90% 10%, rgba(232, 121, 249, 0.22), transparent 58%)',
+                'radial-gradient(circle at 30% 10%, rgba(52, 211, 153, 0.18), transparent 60%), radial-gradient(circle at 80% 80%, rgba(232, 198, 119, 0.32), transparent 55%)',
+                'linear-gradient(135deg, rgba(232, 198, 119, 0.22) 0%, rgba(125, 211, 252, 0.16) 45%, rgba(232, 121, 249, 0.12) 100%)',
+                'radial-gradient(circle at 50% 0%, rgba(250, 204, 21, 0.22), transparent 55%), radial-gradient(circle at 0% 70%, rgba(59, 130, 246, 0.14), transparent 60%)'
+            ];
+            const gradientsDark = [
+                'radial-gradient(circle at 20% 20%, rgba(232, 198, 119, 0.16), transparent 55%), radial-gradient(circle at 80% 0%, rgba(125, 211, 252, 0.12), transparent 60%)',
+                'radial-gradient(circle at 10% 90%, rgba(232, 198, 119, 0.14), transparent 60%), radial-gradient(circle at 90% 10%, rgba(232, 121, 249, 0.10), transparent 58%)',
+                'radial-gradient(circle at 30% 10%, rgba(52, 211, 153, 0.10), transparent 60%), radial-gradient(circle at 80% 80%, rgba(232, 198, 119, 0.14), transparent 55%)',
+                'linear-gradient(135deg, rgba(232, 198, 119, 0.10) 0%, rgba(125, 211, 252, 0.07) 45%, rgba(232, 121, 249, 0.06) 100%)',
+                'radial-gradient(circle at 50% 0%, rgba(250, 204, 21, 0.12), transparent 55%), radial-gradient(circle at 0% 70%, rgba(59, 130, 246, 0.08), transparent 60%)'
+            ];
+
+            sections.forEach((section, idx) => {
+                const hasLight = section.classList.contains('light');
+                const hasDark = section.classList.contains('dark');
+                if (!hasLight && !hasDark) {
+                    section.classList.add(idx % 2 === 0 ? 'dark' : 'light');
+                }
+
+                section.classList.add('has-gradient');
+
+                const seed = hashString(`${path}#${idx}`);
+                const isLight = section.classList.contains('light');
+                const arr = isLight ? gradientsLight : gradientsDark;
+                const gradient = arr[seed % arr.length];
+                section.style.setProperty('--section-gradient', gradient);
+            });
+        }
+
+        document.addEventListener('astro:page-load', () => { updateScroll(); observeAnimateElements(); applySectionTheme(); });
+        applySectionTheme();
     </script>
   </body>
 </html>

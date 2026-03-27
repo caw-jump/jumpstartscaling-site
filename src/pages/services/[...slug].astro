@@ -1,6 +1,6 @@
 ---
 // src/pages/services/[...slug].astro - Updated to use BaseLayout (consistent particles, nav, spacing, SEO)
-import { getCollection } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 export async function getStaticPaths() {
@@ -12,7 +12,7 @@ export async function getStaticPaths() {
 }
 
 const { entry } = Astro.props;
-const { Content } = await entry.render();
+const { Content } = await render(entry);
 
 const faqs = entry.data.faqs || []; // If you add FAQ frontmatter later
 ---

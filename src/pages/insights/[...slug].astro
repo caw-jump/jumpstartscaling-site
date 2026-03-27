@@ -1,6 +1,7 @@
 ---
 import Layout from '../../layouts/BaseLayout.astro';
 import { pseoContent } from '../../utils/pseo';
+import BubbleBadge from '../../components/ui/BubbleBadge.astro';
 
 export async function getStaticPaths() {
   return pseoContent.map(entry => {
@@ -149,7 +150,12 @@ function smartHeading(text: string, tag: string, classes: string, pClasses: stri
           <section class="pt-32 pb-20 px-6 border-b border-white/5 relative overflow-hidden bg-[#0B0B0F]">
              <div class="absolute inset-0 bg-gradient-to-br from-[#E8C677]/10 via-transparent to-transparent opacity-50" />
              <div class="max-w-4xl mx-auto text-center relative z-10">
-                {data.badge && <span class="inline-block px-4 py-1.5 rounded-full bg-[#E8C677]/10 text-[#E8C677] text-xs font-bold tracking-widest uppercase mb-6 border border-[#E8C677]/20" set:html={renderMarkdown(data.badge)} />}
+                {data.badge && (
+                  <BubbleBadge
+                    text={renderMarkdown(data.badge)}
+                    class="px-4 py-1.5 rounded-full bg-[#E8C677]/10 text-[#E8C677] text-xs font-bold tracking-widest uppercase mb-6 border border-[#E8C677]/20"
+                  />
+                )}
                 <Fragment set:html={smartHeading(data.headline, 'h1', 'text-4xl md:text-6xl font-extrabold text-white mb-6 leading-tight')} />
                 <p class="text-xl text-white/70 mb-10" set:html={renderMarkdown(data.subhead)} />
                 {data.cta_label && <a href={data.cta_href || "#audit"} class="inline-flex items-center justify-center px-8 py-4 bg-[#E8C677] text-black font-bold text-sm uppercase tracking-wider rounded-xl shadow-[0_0_30px_rgba(232,198,119,0.3)] hover:scale-105 transition-all" set:html={renderMarkdown(data.cta_label.replace('< ', '').replace(' />', ''))} />}
@@ -225,10 +231,10 @@ function smartHeading(text: string, tag: string, classes: string, pClasses: stri
                    <div set:html={smartBlockFormat(data.body, true)} />
                  </div>
                  {data.stats && (
-                   <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 bg-black/5 p-8 rounded-3xl backdrop-blur-sm border border-black/10">
+                   <div class="grid grid-cols-1 gap-6 bg-black/5 p-8 rounded-3xl backdrop-blur-sm border border-black/10">
                      {deduplicateItems(data.stats).map((stat: any) => (
                        <div class="bg-white/90 rounded-2xl p-6 text-center shadow-xl">
-                         <div class="text-3xl md:text-4xl font-black mb-2 text-black" set:html={renderMarkdown(stat.value, true)} />
+                         <div class="font-black mb-2 text-black" style="font-size: 1.3rem;" set:html={renderMarkdown(stat.value, true)} />
                          <div class="text-[10px] md:text-xs font-bold uppercase tracking-widest text-black/60" set:html={renderMarkdown(stat.label, true)} />
                        </div>
                      ))}

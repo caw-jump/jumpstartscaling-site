@@ -1,5 +1,5 @@
 ---
-import { type CollectionEntry, getCollection } from 'astro:content';
+import { type CollectionEntry, getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import FormattedDate from '../../components/ui/FormattedDate.astro';
 import Breadcrumbs from '../../components/ui/Breadcrumbs.astro';
@@ -14,7 +14,7 @@ export async function getStaticPaths() {
 type Props = CollectionEntry<'intel'>;
 
 const post = Astro.props;
-const { Content } = await post.render();
+const { Content } = await render(post);
 
 const crumbs = [
   { name: 'Home', url: '/' },

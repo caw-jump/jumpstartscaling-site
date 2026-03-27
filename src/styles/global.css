@@ -3,7 +3,7 @@
 :root {
     --bg-deep: #0B0B0F;
     --bg-panel: #141419;
-    --bg-light: #D4B062;
+    --bg-light: #FFFFFF;
     --text-primary-dark: #FFFFFF;
     --text-primary-light: #050505;
     --text-secondary-dark: rgba(255, 255, 255, 0.94);
@@ -96,7 +96,7 @@ h3,
 h4,
 h5,
 h6 {
-    font-weight: 900;
+    font-weight: 500;
     line-height: 1.1;
     margin: 0 0 1rem 0;
     color: inherit;
@@ -104,15 +104,15 @@ h6 {
 }
 
 h1 {
-    font-size: 2.5rem
+    font-size: 1.5rem
 }
 
 h2 {
-    font-size: 2rem
+    font-size: 1.3rem
 }
 
 h3 {
-    font-size: 1.75rem
+    font-size: 1.1rem
 }
 
 p {
@@ -223,6 +223,29 @@ p {
     transition: background var(--transition-smooth), color var(--transition-smooth)
 }
 
+.section.has-gradient::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: var(--section-gradient, none);
+    opacity: var(--section-gradient-opacity, 0);
+    z-index: 0;
+}
+
+.section.has-gradient > * {
+    position: relative;
+    z-index: 1;
+}
+
+ .pill-nowrap {
+     display: inline-flex;
+     max-inline-size: 100%;
+     white-space: nowrap;
+     overflow: hidden;
+     text-overflow: ellipsis;
+ }
+
 @media(min-width:480px) {
     .section {
         padding: 5rem 0
@@ -267,6 +290,14 @@ p {
 .section.light {
     background: var(--bg-light);
     color: #000000
+}
+
+.section.light.has-gradient {
+    --section-gradient-opacity: 0.18;
+}
+
+.section.dark.has-gradient {
+    --section-gradient-opacity: 0.12;
 }
 
 .section.light h1,
@@ -455,6 +486,213 @@ button.primary:hover {
     display: grid;
     gap: 2rem;
     grid-template-columns: 1fr
+}
+
+.hero {
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 4rem 0;
+    text-align: center;
+    background: radial-gradient(circle at center, rgba(201, 169, 97, 0.05) 0%, transparent 70%);
+}
+
+.subhead {
+    font-size: clamp(1rem, 2.5vw, 1.35rem);
+    color: rgba(255, 255, 255, 0.65);
+    max-width: 800px;
+    margin: 0 auto 2rem;
+    line-height: 1.7;
+}
+
+.grid-2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3rem;
+    align-items: start;
+}
+
+.grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+}
+
+.grid-4 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+}
+
+@media (max-width: 1024px) {
+    .grid-4 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .hero {
+        min-height: auto;
+        padding: 3rem 0;
+    }
+
+    .grid-2,
+    .grid-3,
+    .grid-4 {
+        grid-template-columns: 1fr;
+    }
+}
+
+.process-flow {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+.process-step {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(201, 169, 97, 0.2);
+    border-radius: 12px;
+    padding: 2rem;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.step-number {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, #C9A961, #FFD700);
+    color: #000;
+    font-weight: 900;
+    font-size: 1.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+.step-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 0.75rem;
+}
+
+.step-desc {
+    color: #aaa;
+    font-size: 1rem;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.holographic-card {
+    background: rgba(15, 15, 15, 0.7);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(201, 169, 97, 0.2);
+    border-radius: 16px;
+    padding: 2rem;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+.holographic-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(201, 169, 97, 0.5), transparent);
+    opacity: 0.5;
+}
+
+.text-huge {
+    font-size: clamp(3rem, 10vw, 5rem);
+    font-weight: 900;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+}
+
+.text-gradient-gold {
+    background: linear-gradient(135deg, #C9A961, #FFD700);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: #C9A961;
+}
+
+.btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 3rem;
+    background: linear-gradient(135deg, #C9A961, #FFD700);
+    color: #000;
+    font-weight: 800;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 8px;
+    letter-spacing: 0.05em;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px -5px rgba(201, 169, 97, 0.4);
+}
+
+.section-black {
+    background-color: #000;
+}
+
+.section-gradient-dark {
+    background: linear-gradient(180deg, #000 0%, #0a0a0a 100%);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.link-gold {
+    color: #C9A961;
+    text-decoration: none;
+    font-weight: 700;
+    transition: color 0.2s;
+}
+
+.link-gold:hover {
+    color: #FFD700;
+    text-decoration: underline;
+}
+
+.grid-services {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+}
+
+section {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+}
+
+@media (min-width: 768px) {
+    section {
+        padding-left: 3rem;
+        padding-right: 3rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    section {
+        padding-left: 4rem;
+        padding-right: 4rem;
+    }
 }
 
 @media(min-width:640px) {

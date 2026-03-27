@@ -60,6 +60,12 @@ import { STATE_NAME_MAP } from '../utils/pseo';
     const countContainer = document.getElementById('results-count');
     const countNum = document.getElementById('count-num');
 
+    function toMobileBadge(text, maxChars = 20) {
+        const t = (text || '').toString().trim();
+        if (t.length <= maxChars) return t;
+        return t.slice(0, Math.max(0, maxChars - 1)).trimEnd() + '…';
+    }
+
     async function initSearch() {
         try {
             const res = await fetch('/api/search.json');
@@ -124,7 +130,7 @@ import { STATE_NAME_MAP } from '../utils/pseo';
             <a href="/${item.slug}" class="group block p-8 bg-white/5 border border-white/10 rounded-2xl hover:bg-[#E8C677]/5 hover:border-[#E8C677]/30 transition-all">
                 <div class="flex items-center gap-3 mb-4">
                     <span class="px-2 py-0.5 rounded bg-[#E8C677]/10 text-[#E8C677] text-[10px] font-bold uppercase tracking-widest border border-[#E8C677]/20">
-                        ${item.category}
+                        <span class="hidden sm:inline">${item.category}</span><span class="inline sm:hidden">${toMobileBadge(item.category)}</span>
                     </span>
                     <span class="text-white/30 text-[10px] uppercase font-mono tracking-tighter">
                         ${item.city}, ${fullName}

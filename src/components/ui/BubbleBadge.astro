@@ -1,0 +1,24 @@
+---
+import { toMobileBadgeText } from '../../utils/badgeText';
+
+interface Props {
+  text: string;
+  mobileText?: string;
+  maxMobileChars?: number;
+  class?: string;
+}
+
+const {
+  text,
+  mobileText,
+  maxMobileChars = 20,
+  class: className = '',
+} = Astro.props;
+
+const mobile = mobileText ?? toMobileBadgeText(text, maxMobileChars);
+---
+
+<span class={`inline-block ${className}`}>
+  <span class="hidden sm:inline" set:html={text} />
+  <span class="inline sm:hidden" set:html={mobile} />
+</span>

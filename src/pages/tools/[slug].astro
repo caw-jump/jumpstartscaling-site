@@ -1,5 +1,5 @@
 ---
-import { getCollection } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 import CalculatorToolLayout from '../../layouts/CalculatorToolLayout.astro';
 import CalculatorLoader from '../../components/tools/CalculatorLoader';
 import KeyFactsGrid from '../../components/content/KeyFactsGrid.astro';
@@ -16,7 +16,7 @@ export async function getStaticPaths() {
 }
 
 const { tool } = Astro.props;
-const { Content } = await tool.render();
+const { Content } = await render(tool);
 const slug = tool.id.replace(/\.mdx$/, '');
 const data = tool.data;
 const siteUrl = 'https://jumpstartscaling.com';

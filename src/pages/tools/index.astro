@@ -41,6 +41,17 @@ const toolsByCategory = categories.reduce((acc, cat) => {
       <p class="text-xl text-white/70 mb-12">
         No signup • No data saved • Real-time calculations in your browser
       </p>
+
+      <div class="max-w-2xl mx-auto mb-10">
+        <input
+          id="tools-search"
+          type="text"
+          placeholder="Search calculators..."
+          class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-lg text-white focus:outline-none focus:border-white/40 transition-all placeholder:text-white/20"
+        />
+        <div id="tools-search-meta" class="mt-3 text-xs font-mono text-white/40 uppercase tracking-widest"></div>
+      </div>
+
       <div class="flex flex-wrap justify-center gap-4" id="category-filter">
         {categories.map((cat) => (
           <a
@@ -68,7 +79,10 @@ const toolsByCategory = categories.reduce((acc, cat) => {
             {tools.map((tool) => (
               <a
                 href={`/tools/${toSlug(tool.id)}`}
-                class="glass-card p-10 group hover:border-accent hover:-translate-y-3 transition-all duration-400 block"
+                data-title={tool.data.title}
+                data-desc={tool.data.description}
+                data-category={cat.label}
+                class="tool-card glass-card p-10 group hover:border-accent hover:-translate-y-3 transition-all duration-400 block"
               >
                 <div class="text-6xl mb-6">{tool.data.emoji || '📊'}</div>
                 <h3 class="text-2xl font-bold mb-4 group-hover:text-accent transition">{tool.data.title}</h3>
@@ -113,3 +127,26 @@ const toolsByCategory = categories.reduce((acc, cat) => {
     </div>
   </section>
 </BaseLayout>
+
+<script is:inline>
+  const input = document.getElementById('tools-search');
+  const meta = document.getElementById('tools-search-meta');
+  const cards = Array.from(document.querySelectorAll('a.tool-card'));
+
+  function apply() {
+    const q = (input?.value || '').trim().toLowerCase();
+    let shown = 0;
+    for (const el of cards) {
+      const title = (el.getAttribute('data-title') || '').toLowerCase();
+      const desc = (el.getAttribute('data-desc') || '').toLowerCase();
+      const cat = (el.getAttribute('data-category') || '').toLowerCase();
+      const visible = q.length === 0 || title.includes(q) || desc.includes(q) || cat.includes(q);
+      el.style.display = visible ? '' : 'none';
+      if (visible) shown++;
+    }
+    if (meta) meta.textContent = q.length === 0 ? `${shown} calculators` : `${shown} matches`;
+  }
+
+  input?.addEventListener('input', apply);
+  apply();
+</script>
