@@ -726,7 +726,7 @@ section {
     max-width: none;
 }
 
-.prose-tools :global(h2) {
+.prose-tools h2 {
     scroll-margin-top: 6rem;
     font-size: 2.5rem;
     font-weight: 900;
@@ -735,7 +735,7 @@ section {
     color: #fff;
 }
 
-.prose-tools :global(h3) {
+.prose-tools h3 {
     font-size: 1.875rem;
     font-weight: 700;
     margin-top: 2rem;
@@ -743,34 +743,34 @@ section {
     color: #fff;
 }
 
-.prose-tools :global(p) {
+.prose-tools p {
     font-size: 1.125rem;
     line-height: 1.75;
     margin-bottom: 1.5rem;
     color: rgba(255, 255, 255, 0.9);
 }
 
-.prose-tools :global(ul) {
+.prose-tools ul {
     list-style-type: disc;
     margin-left: 2rem;
     margin-bottom: 1.5rem;
 }
 
-.prose-tools :global(li) {
+.prose-tools li {
     margin-bottom: 0.5rem;
     color: rgba(255, 255, 255, 0.9);
 }
 
-.prose-tools :global(a) {
+.prose-tools a {
     color: #E8C677;
     text-decoration: underline;
 }
 
-.prose-tools :global(a:hover) {
+.prose-tools a:hover {
     color: #FFE5A0;
 }
 
-.prose-tools :global(code) {
+.prose-tools code {
     background: rgba(255, 255, 255, 0.1);
     padding: 0.25rem 0.5rem;
     border-radius: 0.25rem;
@@ -778,7 +778,7 @@ section {
     font-size: 0.875rem;
 }
 
-.prose-tools :global(blockquote) {
+.prose-tools blockquote {
     border-left: 4px solid #E8C677;
     padding-left: 1.5rem;
     margin: 2rem 0;
@@ -1016,7 +1016,7 @@ section {
 
 .survey-container .submit-btn:hover:not(:disabled) {
     background: var(--accent-hover);
-    transform: translateY -2px;
+    transform: translateY(-2px);
     box-shadow: 0 8px 25px rgba(232, 198, 119, 0.4);
 }
 
