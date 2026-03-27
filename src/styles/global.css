@@ -740,7 +740,8 @@ section {
     background: var(--gradient-accent);
     -webkit-background-clip: text;
     background-clip: text;
-    color: transparent;
+    -webkit-text-fill-color: transparent;
+    color: #C9A961;
     display: inline-block
 }
 
