@@ -2,15 +2,14 @@
 // SearchIcon.astro - Floating search icon with tooltip
 ---
 
-<div class="fixed bottom-6 right-6 z-[100] group">
+<div class="fixed bottom-6 left-1/2 transform -translate-x-1/2 z-[100] group sm:bottom-10 sm:left-auto sm:right-6 sm:transform-none">
   <!-- Tooltip -->
-  <div class="absolute bottom-full right-0 mb-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-    <div class="bg-gray-900 text-white px-4 py-2 rounded-lg shadow-lg whitespace-nowrap text-sm font-medium">
-      Click here to search for your issue
-      <br />
-      <span class="text-xs text-gray-400">Might be localized to your county</span>
+  <div class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 sm:left-auto sm:right-0 sm:transform-none opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+    <div class="bg-gray-900 text-white px-3 py-2 rounded-lg shadow-lg max-w-xs text-center sm:text-left sm:max-w-none sm:whitespace-nowrap text-sm font-medium">
+      <span class="block">Click here to search for your issue</span>
+      <span class="text-xs text-gray-400 block">Might be localized to your county</span>
       <!-- Tooltip arrow -->
-      <div class="absolute top-full right-4 w-0 h-0 border-l-8 border-r-8 border-t-8 border-transparent border-t-gray-900"></div>
+      <div class="absolute top-full left-1/2 transform -translate-x-1/2 sm:left-auto sm:right-4 sm:transform-none w-0 h-0 border-l-8 border-r-8 border-t-8 border-transparent border-t-gray-900"></div>
     </div>
   </div>
   
