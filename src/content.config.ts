@@ -60,6 +60,7 @@ const services = defineCollection({
     author: z.string().default('Jumpstart Scaling'),
     keyMetrics: z.array(z.object({ label: z.string(), value: z.string() })).optional(),
     order: z.number().optional(),
+    faqs: z.array(faqSchema).optional(),
   }),
 });
 
