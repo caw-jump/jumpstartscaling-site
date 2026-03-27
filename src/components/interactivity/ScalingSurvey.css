@@ -14,8 +14,8 @@
     --font-ui: 'Inter', sans-serif;
     --font-mono: 'JetBrains Mono', monospace;
     --text-primary: #FFFFFF;
-    --text-secondary: #FFFFFF;
-    --text-muted: #FFFFFF;
+    --text-secondary: rgba(255, 255, 255, 0.9);
+    --text-muted: rgba(255, 255, 255, 0.7);
 }
 
 /* --- MAIN CONTAINER --- */
