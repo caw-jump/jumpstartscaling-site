@@ -1,0 +1,10 @@
+[phases.build]
+cmds = ["npm run build"]
+
+[phases.install]
+cmds = ["npm ci"]
+
+[variables]
+NIXPACKS_NODE_VERSION = "23"
+NODE_ENV = "production"
+NPM_CONFIG_PRODUCTION = "false"
