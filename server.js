@@ -1,15 +1,17 @@
 import { createServer } from 'http';
-import { readFileSync, statSync } from 'fs';
+import { readFileSync, statSync, writeFile, mkdirSync } from 'fs';
 import { join, extname } from 'path';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import https from 'https';
+import { spawn } from 'child_process';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const PORT = process.env.PORT || 8100;
 const DIST_DIR = join(__dirname, 'dist');
+const ADMIN_TOKEN = process.env.ADMIN_TOKEN;
 
 function normalizePathname(p) {
     let path = (p || '/').split('?')[0];
@@ -252,6 +254,89 @@ function handleApiPost(urlPath, req, res) {
     });
 }
 
+/**
+ * ADMIN API - Support for hot-updates and background builds
+ */
+let currentBuildProcess = null;
+
+function handleAdminApi(urlPath, req, res) {
+    if (!ADMIN_TOKEN) {
+        res.writeHead(500, { 'Content-Type': 'application/json' });
+        return res.end(JSON.stringify({ error: 'ADMIN_TOKEN not configured on server' }));
+    }
+
+    const token = req.headers['x-admin-token'];
+    if (token !== ADMIN_TOKEN) {
+        res.writeHead(403, { 'Content-Type': 'application/json' });
+        return res.end(JSON.stringify({ error: 'Forbidden' }));
+    }
+
+    let body = '';
+    req.on('data', (chunk) => { body += chunk; });
+    req.on('end', () => {
+        try {
+            const data = body ? JSON.parse(body) : {};
+
+            // TRIGGER BACKGROUND BUILD
+            if (urlPath === '/api/admin/rebuild') {
+                if (currentBuildProcess) {
+                    res.writeHead(409, { 'Content-Type': 'application/json' });
+                    return res.end(JSON.stringify({ error: 'Build already in progress', pid: currentBuildProcess.pid }));
+                }
+
+                // Start build in separate process
+                // Use a temporary dist folder and rsync/mv to avoid downtime
+                const env = { ...process.env, RENDER_PSEO: data.renderPseo === false ? 'false' : 'true' };
+                if (data.pseoLimit) env.PSEO_LIMIT = String(data.pseoLimit);
+
+                console.log(`[Admin] Starting background build. RENDER_PSEO=${env.RENDER_PSEO}`);
+
+                currentBuildProcess = spawn('npm', ['run', 'build'], { env, shell: true });
+                
+                currentBuildProcess.stdout.on('data', (d) => console.log(`[Build] ${d}`));
+                currentBuildProcess.stderr.on('data', (d) => console.error(`[Build Error] ${d}`));
+
+                currentBuildProcess.on('close', (code) => {
+                    console.log(`[Admin] Build finished with code ${code}`);
+                    currentBuildProcess = null;
+                });
+
+                res.writeHead(202, { 'Content-Type': 'application/json' });
+                return res.end(JSON.stringify({ success: true, message: 'Build started in background' }));
+            }
+
+            // UPDATE JSON DATA
+            if (urlPath === '/api/admin/update-json') {
+                const { filename, content } = data;
+                if (!filename || !content) {
+                    res.writeHead(400, { 'Content-Type': 'application/json' });
+                    return res.end(JSON.stringify({ error: 'Missing filename or content' }));
+                }
+
+                // Restrict to data/pseo directory for safety
+                const safeFilename = filename.replace(/^.*[\\\/]/, '');
+                const targetPath = join(__dirname, 'src/data/pseo', safeFilename);
+
+                writeFile(targetPath, JSON.stringify(content, null, 2), (err) => {
+                    if (err) {
+                        res.writeHead(500, { 'Content-Type': 'application/json' });
+                        return res.end(JSON.stringify({ error: 'Failed to write file', details: err.message }));
+                    }
+                    res.writeHead(200, { 'Content-Type': 'application/json' });
+                    res.end(JSON.stringify({ success: true, message: `Updated ${safeFilename}` }));
+                });
+                return;
+            }
+
+            res.writeHead(404, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ error: 'Admin route not found' }));
+        } catch (e) {
+            res.writeHead(400, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ error: 'Invalid JSON' }));
+        }
+    });
+}
+
 const MIME_TYPES = {
     '.html': 'text/html',
     '.txt': 'text/plain; charset=utf-8',
@@ -278,6 +363,9 @@ const server = createServer((req, res) => {
 
     // API routes - proxy to n8n (Coolify deployment)
     if (req.method === 'POST') {
+        if (urlPath.startsWith('/api/admin/')) {
+            return handleAdminApi(urlPath, req, res);
+        }
         if (urlPath === '/api/track') {
             return handleApiPost(urlPath, req, res);
         }

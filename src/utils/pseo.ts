@@ -33,6 +33,7 @@ export const STATE_NAME_MAP: Record<string, string> = {
 };
 
 const locations: LocationRecord[] = locationsDataRaw as any;
+const locationMap = new Map<string, LocationRecord>(locations.map(loc => [loc.slug, loc]));
 
 // Helper to extract a headline from blocks string
 function extractHeadline(blocksStr: string): string {
@@ -46,59 +47,55 @@ function extractHeadline(blocksStr: string): string {
   return "Discover Actionable Insights for Revenue Growth";
 }
 
-// Generate the fully massive dataset dynamically on demand
-const rawContentFromEngine = generatePseoPages();
+// Pre-sort locations for legacy matching once
+const sortedLocationsForLegacy = [...locations].sort((a, b) => b.slug.length - a.slug.length);
 
-export const pseoContent: PseoEntry[] = rawContentFromEngine
-  .filter((item: any) => item.slug && item.slug.startsWith('insights/'))
+// Generate the fully massive dataset dynamically on demand
+const rawContentFromEngine = (import.meta.env?.RENDER_PSEO !== 'false') 
+  ? generatePseoPages() 
+  : [];
+
+let filteredContent = rawContentFromEngine
+  .filter((item: any) => item.slug && item.slug.startsWith('insights/'));
+
+// Apply limit if specified (useful for dev or testing)
+const pseoLimit = parseInt(import.meta.env?.PSEO_LIMIT || '0', 10);
+if (pseoLimit > 0) {
+  filteredContent = filteredContent.slice(0, pseoLimit);
+}
+
+export const pseoContent: PseoEntry[] = filteredContent
   .map((item: any) => {
     const parts = item.slug.split('/');
     
-    // We have two slug structures in the dataset:
-    // 1. LEGACY: insights/category-name/some-page-name-columbus-oh
-    // 2. MATRIX: insights/columbus-oh/roofing-sales-director
-    
     let state = 'Unknown';
     let city = 'Unknown';
-    let category = '';
+    let category = 'Uncategorized';
 
-    // Sort locations to match largest slugs first ensuring we don't accidentally match substrings loosely
-    const sortedLocations = [...locations].sort((a,b) => b.slug.length - a.slug.length);
-    
-    // Helper to safely strip suffix
-    const extractLocationFromLegacySlug = (filename: string) => {
-        for (const loc of sortedLocations) {
-            if (filename.endsWith(`-${loc.slug}`)) {
-                return loc;
-            }
-        }
-        return null;
-    };
-
+    // MATRIX: insights/columbus-oh/roofing-sales-director
     if (parts.length === 3) {
-      // MATRIX: parts = ['insights', 'columbus-oh', 'roofing-sales-director']
       const possibleLocSlug = parts[1];
-      const matchedLoc = sortedLocations.find(loc => loc.slug === possibleLocSlug);
+      const matchedLoc = locationMap.get(possibleLocSlug);
+      
       if (matchedLoc) {
          state = matchedLoc.state;
          city = matchedLoc.city;
-         category = parts[2].replace(/-/g, ' '); // Category is the niche name
-      } else {
-         // Fallback legacy behavior just in case
-         const locMatch = extractLocationFromLegacySlug(parts[parts.length - 1] || '');
-         if (locMatch) { state = locMatch.state; city = locMatch.city; }
-         category = (parts[1] || '').replace(/-/g, ' '); 
+         category = parts[2].replace(/-/g, ' ');
       }
-    } else {
-      // LEGACY: parts > 3 (e.g. ['insights', 'category', 'specific-slug-city'])
-      // or standard
+    } 
+    // LEGACY: insights/category/specific-slug-city-st
+    else if (parts.length > 2) {
       const filename = parts[parts.length - 1] || '';
-      const locMatch = extractLocationFromLegacySlug(filename);
-      if (locMatch) {
-         state = locMatch.state;
-         city = locMatch.city;
+      category = parts[1].replace(/-/g, ' ');
+      
+      // Legacy matching: check if filename ends with any known location slug
+      for (const loc of sortedLocationsForLegacy) {
+        if (filename.endsWith(`-${loc.slug}`)) {
+          state = loc.state;
+          city = loc.city;
+          break;
+        }
       }
-      category = parts.length > 2 ? parts[1].replace(/-/g, ' ') : '';
     }
 
     return {

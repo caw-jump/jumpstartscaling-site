@@ -4,7 +4,7 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev --port 8100 --host",
-    "build": "astro build",
+    "build": "NODE_OPTIONS=--max-old-space-size=16384 astro build",
     "postbuild": "node scripts/export-slugs.mjs && node scripts/submit-indexnow.mjs",
     "preview": "node server.js",
     "slugs:export": "node scripts/export-slugs.mjs",
