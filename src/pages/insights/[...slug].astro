@@ -216,6 +216,7 @@ function smartHeading(text: string, tag: string, classes: string, pClasses: stri
               <div class="max-w-4xl mx-auto prose prose-invert prose-lg prose-p:text-white/75 prose-p:leading-relaxed prose-headings:text-white prose-a:text-[#E8C677] prose-headings:font-bold prose-h2:mt-12 prose-h3:mt-8">
               {data.title && <Fragment set:html={smartHeading(data.title, 'h2', 'text-3xl md:text-5xl font-bold text-white mb-10 text-center leading-tight')} />}
               <div set:html={smartBlockFormat(data.body)} />
+              </div>
             </div>
           </section>
         )
