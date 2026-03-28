@@ -23,20 +23,21 @@ const { src, poster = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
 </div>
 
 <script>
-  document.querySelectorAll('[data-video-wrapper] video[data-src]').forEach((v) => {
+  document.querySelectorAll<HTMLVideoElement>('[data-video-wrapper] video[data-src]').forEach((v) => {
     if (v.dataset.loaded) return;
     const io = new IntersectionObserver(
       (entries) => {
         entries.forEach((e) => {
           if (e.isIntersecting) {
-            const src = e.target.dataset.src;
+            const target = e.target as HTMLVideoElement;
+            const src = target.dataset.src;
             if (src) {
-              e.target.src = src;
-              e.target.load();
-              e.target.removeAttribute('data-src');
-              e.target.dataset.loaded = '1';
-              e.target.play?.();
-              io.unobserve(e.target);
+              target.src = src;
+              target.load();
+              target.removeAttribute('data-src');
+              target.dataset.loaded = '1';
+              target.play?.();
+              io.unobserve(target);
             }
           }
         });

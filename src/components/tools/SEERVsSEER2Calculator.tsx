@@ -6,7 +6,7 @@ export default function SEERVsSEER2Calculator() {
   const [newSeer, setNewSeer] = useState<string>('16');
   const [tonnage, setTonnage] = useState<string>('3.0');
   const [coolingHours, setCoolingHours] = useState<string>('2000'); // FL roughly 2800, NY roughly 1000
-  const [electricityRate, setElectricityRate] = useState<string>('0.15');
+  const [electricityRate] = useState<string>('0.15');
 
   const [results, setResults] = useState<{
     oldAnnualCost: number;

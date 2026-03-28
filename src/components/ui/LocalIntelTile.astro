@@ -49,10 +49,15 @@ const cleanedTitle = title
   .replace(/\s*\|\s*Growth Retainer and Revenue Growth$/i, '')
   .trim();
 
+// Helper to escape regex special characters
+function escapeRegExp(str) {
+  return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
 const derivedTopicLabel = cleanedTitle
-  .replace(new RegExp(`\\s+in\\s+${city},\\s*${state}$`, 'i'), '')
-  .replace(new RegExp(`\\s+for\\s+${city}$`, 'i'), '')
-  .replace(new RegExp(`\\s+for\\s+${city},\\s*${state}$`, 'i'), '')
+  .replace(new RegExp(`\\s+in\\s+${escapeRegExp(city)},\\s*${escapeRegExp(state)}$`, 'i'), '')
+  .replace(new RegExp(`\\s+for\\s+${escapeRegExp(city)}$`, 'i'), '')
+  .replace(new RegExp(`\\s+for\\s+${escapeRegExp(city)},\\s*${escapeRegExp(state)}$`, 'i'), '')
   .trim();
 
 const topicLabel = derivedTopicLabel && derivedTopicLabel.toLowerCase() !== cleanedTitle.toLowerCase()

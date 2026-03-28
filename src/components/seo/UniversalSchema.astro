@@ -49,7 +49,7 @@ const organizationSchema = {
 };
 
 // Type-specific schemas
-let typeSchema = {};
+let typeSchema: Record<string, unknown> = {};
 
 if (type === 'service') {
   typeSchema = {
@@ -106,12 +106,12 @@ if (type === 'service') {
   };
 }
 
-const schemas = [organizationSchema];
+const schemas: Record<string, unknown>[] = [organizationSchema];
 if (Object.keys(typeSchema).length > 0) {
   schemas.push(typeSchema);
 }
 ---
 
 {schemas.map(schema => (
-  <script type="application/ld+json" set:html={JSON.stringify(schema, null, 2)} />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(schema, null, 2)} />
 ))}

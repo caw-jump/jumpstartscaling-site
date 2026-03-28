@@ -23,9 +23,6 @@ export default function SaaSNetRevenueRetentionCalculator() {
     }
   }, [startingMRR, expansionMRR, downgradeMRR, churnMRR]);
 
-  const formatCurrency = (n: number) =>
-    new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(n);
-
   return (
     <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="w-full text-white">
       <div className="grid md:grid-cols-2 gap-6 mb-8">

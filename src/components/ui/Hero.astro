@@ -6,7 +6,7 @@ interface Props {
   variant?: 'full' | 'compact';
 }
 
-const { title, subtitle, variant = 'full' } = Astro.props;
+const { title, subtitle } = Astro.props as Props;
 ---
 
 <section class="relative min-h-[65vh] flex items-center justify-center overflow-hidden py-20">

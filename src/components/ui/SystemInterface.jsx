@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
     Terminal,
@@ -18,7 +18,6 @@ import {
     ChevronRight,
     Wifi,
     Shield,
-    Activity,
     Target
 } from 'lucide-react';
 import './CyberConsole.css';

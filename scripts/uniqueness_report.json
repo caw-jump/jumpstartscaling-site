@@ -5295,7 +5295,7 @@
   "config": {
     "distance_threshold": 3,
     "min_length": 12,
-    "input": "/Users/christopheramaya/Documents/factory/jumpstartscaling-site/src/data/pseo/jss_content.json",
-    "locations": "/Users/christopheramaya/Documents/factory/jumpstartscaling-site/src/data/pseo/locations.json"
+    "input": "./src/data/pseo/jss_content.json",
+    "locations": "./src/data/pseo/locations.json"
   }
 }

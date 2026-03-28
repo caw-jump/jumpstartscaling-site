@@ -2,15 +2,12 @@
 // src/pages/index.astro - Updated homepage using BaseLayout (consistent particles, nav, spacing)
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import AnimatedSection from '../components/ui/AnimatedSection.astro';
 import Hero from '../components/ui/Hero.astro';
+import LazyVideo from '../components/ui/LazyVideo.astro';
 import ServiceTeaser from '../components/ui/ServiceTeaser.astro';
 import ScalingSurvey from '../components/interactivity/ScalingSurvey.tsx';
 import CTA from '../components/ui/CTA.astro';
-import GlassCard from '../components/ui/GlassCard.astro';
-import AnimatedSection from '../components/ui/AnimatedSection.astro';
-import ScrollRevealGrid from '../components/ui/ScrollRevealGrid.tsx';
-import ImagePlaceholder from '../components/ui/ImagePlaceholder.tsx';
-import LazyVideo from '../components/ui/LazyVideo.astro';
 
 const services = (await getCollection('services')).sort((a, b) => (a.data.order || 99) - (b.data.order || 99));
 ---

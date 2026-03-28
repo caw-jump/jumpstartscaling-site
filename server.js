@@ -313,8 +313,17 @@ function handleAdminApi(urlPath, req, res) {
                     return res.end(JSON.stringify({ error: 'Missing filename or content' }));
                 }
 
-                // Restrict to data/pseo directory for safety
-                const safeFilename = filename.replace(/^.*[\\\/]/, '');
+                // Strict filename validation to prevent path traversal
+                if (filename.includes('..') || filename.includes('/') || filename.includes('\\') || filename.includes('\0')) {
+                    res.writeHead(400, { 'Content-Type': 'application/json' });
+                    return res.end(JSON.stringify({ error: 'Invalid filename' }));
+                }
+                if (!/^[A-Za-z0-9._-]+$/.test(filename)) {
+                    res.writeHead(400, { 'Content-Type': 'application/json' });
+                    return res.end(JSON.stringify({ error: 'Filename contains invalid characters' }));
+                }
+
+                const safeFilename = filename;
                 const targetPath = join(__dirname, 'src/data/pseo', safeFilename);
 
                 writeFile(targetPath, JSON.stringify(content, null, 2), (err) => {

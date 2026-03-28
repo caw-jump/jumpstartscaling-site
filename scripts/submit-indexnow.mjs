@@ -9,8 +9,17 @@ import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const SITE = process.env.SITE_URL || 'https://jumpstartscaling.com';
-const HOST = process.env.SITE_HOST || new URL(SITE).host;
+const rawSite = process.env.SITE_URL || 'https://jumpstartscaling.com';
+let SITE, HOST;
+try {
+  SITE = new URL(rawSite).href;
+  HOST = new URL(SITE).host;
+} catch (err) {
+  console.error(`Invalid SITE_URL "${rawSite}": ${err.message}`);
+  console.error('Falling back to default host: jumpstartscaling.com');
+  SITE = 'https://jumpstartscaling.com';
+  HOST = 'jumpstartscaling.com';
+}
 const INDEXNOW_ENABLED = String(process.env.INDEXNOW_ENABLED || '').toLowerCase() === '1' || String(process.env.INDEXNOW_ENABLED || '').toLowerCase() === 'true';
 const KEY = process.env.INDEXNOW_KEY || 'jumpstart-indexnow-key-2026';
 const KEY_LOCATION = process.env.INDEXNOW_KEY_LOCATION || `${SITE}/jumpstart-indexnow-key-2026.txt`;

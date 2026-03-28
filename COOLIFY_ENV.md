@@ -6,11 +6,10 @@ Set these in **Coolify → Application → Environment Variables**.
 
 | Variable      | Description                              | Example Value |
 |---------------|------------------------------------------|---------------|
-| `N8N_WEBHOOK` | Full n8n webhook URL for form submissions | `https://n8n.jumpstartscaling.com/webhook/d282e622-9c83-4936-9d93-05c37eaa7b68` |
-| `SITE_URL` | Site URL for sitemap/indexing | `https://jumpstartscaling.com` |
+| `N8N_WEBHOOK` | Full n8n webhook URL for form submissions | `https://n8n.example.com/webhook/<your-token>` |
+| `SITE_URL` | Site URL for sitemap/indexing | `https://your-site.com` |
 
-**Production (Coolify):** `https://n8n.jumpstartscaling.com/webhook/d282e622-9c83-4936-9d93-05c37eaa7b68`  
-**Test (local/staging):** `https://n8n.jumpstartscaling.com/webhook-test/d282e622-9c83-4936-9d93-05c37eaa7b68`
+**Do not commit real webhook URLs. Store them in environment variables.**
 
 Forms POST to `/api/submit-lead` and `/api/submit-scaling-survey`; the server proxies to this webhook.
 

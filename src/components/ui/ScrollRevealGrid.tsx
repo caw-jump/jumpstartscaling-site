@@ -17,7 +17,6 @@ function CountUpMetric({ label, value, delay }: { label: string, value: string, 
 
             const numValue = parseFloat(match[0]);
             const suffix = value.replace(match[0], '');
-            const prefix = ""; // Assuming suffix only for simplicity based on typical inputs like "+185%", "2.7x"
 
             let start = 0;
             const duration = 2000;

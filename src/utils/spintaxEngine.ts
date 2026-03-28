@@ -5,7 +5,7 @@ import intentMatrixRaw from '../data/pseo/search_intent_matrix.json';
 import jssContentRaw from '../data/pseo/jss_content.json';
 import offerBlocksRaw from '../data/pseo/offer_blocks.json';
 import synonymGroupsRaw from '../data/pseo/synonym_groups.json';
-import dictionariesRaw from '../data/pseo/spintax_dictionaries.json';
+import sharedSpintaxRaw from '../data/pseo/globals/shared_spintax.json';
 
 // Type definitions
 const locations = locationsRaw as any[];
@@ -14,8 +14,10 @@ const avatarDefs = (avatarDefsRaw as any).avatars;
 const intentMatrix = (intentMatrixRaw as any).intent_data;
 const existingPages = jssContentRaw as any[];
 const offerBlocks = offerBlocksRaw as any[];
-const synonymGroups = synonymGroupsRaw as any[];
-const dictionaries = dictionariesRaw as any[];
+
+// Merge local and shared spintax
+const sharedSynonyms = (sharedSpintaxRaw as any).synonyms || [];
+const synonymGroups = [...(synonymGroupsRaw as any[]), ...sharedSynonyms];
 
 /**
  * Deterministic Seeded Random
@@ -137,10 +139,6 @@ export function generatePseoPages() {
             });
         };
 
-        // Pick 3 random pain points and 3 random value props for uniqueness
-        const painDict = JSON.parse(dictionaries.find(d => d.category === 'b2b_pain_points')?.data || '[]');
-        const valDict = JSON.parse(dictionaries.find(d => d.category === 'tech_value_props')?.data || '[]');
-        
         const randomOffer = offerBlocks[Math.floor(seededRandom(urlSlug) * offerBlocks.length)];
         let offerData: any = typeof randomOffer.data === 'string' ? JSON.parse(randomOffer.data) : randomOffer.data;
 

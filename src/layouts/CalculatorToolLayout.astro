@@ -43,7 +43,6 @@ const pageUrl = `${siteUrl}/tools/${slug}`;
 const fullTitle = meta.title || `${title} | Jumpstart Scaling`;
 const fullDescription = meta.description || description;
 const canonicalUrl = meta.canonical || pageUrl;
-const ogImage = meta.ogImage ? (meta.ogImage.startsWith('http') ? meta.ogImage : new URL(meta.ogImage, siteUrl).href) : `${siteUrl}/og-default.png`;
 
 const crumbs = [
   { name: 'Home', url: '/' },

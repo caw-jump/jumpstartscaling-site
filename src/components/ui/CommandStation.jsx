@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import {
     Terminal, Zap, Database, Award, Briefcase, Cpu, X,
     BarChart3, Rocket, BarChart2, Menu, Shield, Settings,

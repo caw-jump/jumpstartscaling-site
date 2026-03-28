@@ -64,7 +64,7 @@ html {
   font-family: 'Inter', sans-serif;
   font-size: 16px;
   background: #000000;
-  color: var(--text-primary-dark);
+  color: var(--color-text-primary-dark);
   scroll-behavior: smooth;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
@@ -213,7 +213,25 @@ h6 { font-size: clamp(1rem, 1.5vw, 1.25rem); line-height: 1.6; }
 
 /* Calculator Card */
 .calculator-card {
-  @extend .glass-card;
+  background: var(--glass-bg-dark);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border-dark);
+  border-radius: var(--radius-lg);
+  transition: all var(--transition-normal);
+}
+
+.calculator-card:hover {
+  transform: translateY(-0.5rem);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+
+.section.light .calculator-card {
+  background: var(--glass-bg-light);
+  backdrop-filter: none;
+  border: 1px solid var(--glass-border-light);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  color: var(--color-text-primary-light);
 }
 
 /* Buttons */

@@ -6,7 +6,7 @@ export default function CompanySalesComparison() {
   const [companyB, setCompanyB] = useState<string>('713');
   const [growthA, setGrowthA] = useState<string>('12');
   const [growthB, setGrowthB] = useState<string>('5');
-  const [years, setYears] = useState(5);
+  const [years] = useState(5);
   const [projections, setProjections] = useState<Array<{ year: number; a: number; b: number }>>([]);
 
   useEffect(() => {

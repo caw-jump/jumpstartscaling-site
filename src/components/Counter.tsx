@@ -1,11 +1,11 @@
-import { useState } from 'react';
+import { type ReactNode, useState } from 'react';
 import './Counter.css';
 
 export default function Counter({
 	children,
 	count: initialCount,
 }: {
-	children: JSX.Element;
+	children: ReactNode;
 	count: number;
 }) {
 	const [count, setCount] = useState(initialCount);

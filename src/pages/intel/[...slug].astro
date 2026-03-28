@@ -1,8 +1,6 @@
 ---
 import { type CollectionEntry, getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import FormattedDate from '../../components/ui/FormattedDate.astro';
-import Breadcrumbs from '../../components/ui/Breadcrumbs.astro';
 
 export async function getStaticPaths() {
 	const posts = await getCollection('intel');
@@ -13,7 +11,7 @@ export async function getStaticPaths() {
 }
 type Props = CollectionEntry<'intel'>;
 
-const post = Astro.props;
+const post = Astro.props as Props;
 const { Content } = await render(post);
 
 const crumbs = [
@@ -25,7 +23,7 @@ const crumbs = [
 
 <BaseLayout title={post.data.title} description={post.data.description} palette="emerald" crumbs={crumbs}>
   <Fragment slot="head">
-    <script type="application/ld+json" set:html={JSON.stringify({
+    <script is:inline type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
       "@type": "Article",
       "headline": post.data.title,

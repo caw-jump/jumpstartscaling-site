@@ -1,10 +1,8 @@
 ---
 import { getCollection, render } from 'astro:content';
 import CalculatorToolLayout from '../../layouts/CalculatorToolLayout.astro';
-import CalculatorLoader from '../../components/tools/CalculatorLoader';
-import KeyFactsGrid from '../../components/content/KeyFactsGrid.astro';
-import BenchmarkTable from '../../components/content/BenchmarkTable.astro';
 import FAQAccordion from '../../components/content/FAQAccordion';
+import CalculatorLoader from '../../components/tools/CalculatorLoader.tsx';
 import RelatedTools from '../../components/tools/RelatedTools.astro';
 
 export async function getStaticPaths() {

@@ -1,4 +1,3 @@
-import React, { useEffect } from 'react';
 import { Rocket, BarChart2, Calculator, Menu } from 'lucide-react';
 import './NavigationModal.css'; // Reuse CSS or define new
 

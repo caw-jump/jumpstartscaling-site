@@ -12,14 +12,6 @@ const allTools = await getCollection('tools');
 const tools = allTools
   .filter((t) => toSlug(t.id) !== currentSlug)
   .slice(0, 4);
-
-const categoryLabels: Record<string, string> = {
-  finance: 'Finance',
-  ecommerce: 'E-Commerce',
-  loyalty: 'Loyalty',
-  labor: 'Labor',
-  ai: 'AI & Tech',
-};
 ---
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
   {tools.map((tool) => (

@@ -80,8 +80,7 @@ const META_PIXEL_ID = import.meta.env.PUBLIC_META_PIXEL_ID || '';
     <!-- Fonts - async load to avoid render blocking -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=JetBrains+Mono:wght@100..800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=JetBrains+Mono:wght@100..800&display=swap"></noscript>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=JetBrains+Mono:wght@100..800&display=swap">
 
     <!-- Theme Script - Prevent FOUC -->
     <script is:inline>
@@ -105,10 +104,10 @@ const META_PIXEL_ID = import.meta.env.PUBLIC_META_PIXEL_ID || '';
     </script>
 
     {GA4_MEASUREMENT_ID && (
-      <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA4_MEASUREMENT_ID}`}></script>
+      <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${GA4_MEASUREMENT_ID}`}></script>
     )}
 
-    <script type="module" define:vars={{ GA4_MEASUREMENT_ID, CLARITY_PROJECT_ID, META_PIXEL_ID }}>
+    <script is:inline type="module" define:vars={{ GA4_MEASUREMENT_ID, CLARITY_PROJECT_ID, META_PIXEL_ID }}>
       const GA_ID = GA4_MEASUREMENT_ID ? String(GA4_MEASUREMENT_ID) : '';
       const CLARITY_ID = CLARITY_PROJECT_ID ? String(CLARITY_PROJECT_ID) : '';
       const META_ID = META_PIXEL_ID ? String(META_PIXEL_ID) : '';
@@ -258,7 +257,7 @@ const META_PIXEL_ID = import.meta.env.PUBLIC_META_PIXEL_ID || '';
     </script>
 
     <!-- Schema (Global Organization + WebSite + Breadcrumb) -->
-    <script type="application/ld+json" set:html={JSON.stringify({
+    <script is:inline type="application/ld+json" set:html={JSON.stringify({
         "@context": "https://schema.org",
         "@graph": [
             {
@@ -382,6 +381,13 @@ const META_PIXEL_ID = import.meta.env.PUBLIC_META_PIXEL_ID || '';
         filter: contrast(1.5) saturate(1.1) !important; 
       }
       body.a11y-contrast .glass-card { background: #fff !important; }
+      body.a11y-no-motion,
+      body.a11y-no-motion * {
+        animation-duration: 0s !important;
+        animation-delay: 0s !important;
+        transition-duration: 0s !important;
+        scroll-behavior: auto !important;
+      }
       #a11y-widget {
         isolation: isolate;
         z-index: 999999 !important;

@@ -1,5 +1,5 @@
 
-import React, { useRef } from "react";
+import { useRef } from "react";
 import {
     motion,
     useMotionValue,
@@ -20,13 +20,14 @@ import {
     Activity,
     Layers,
     Database,
+    type LucideIcon,
 } from "lucide-react";
 
 // Types for our navigation items
 type NavItem = {
     title: string;
     href: string;
-    icon: React.ElementType;
+    icon: LucideIcon;
     description?: string; // For tooltip
 };
 

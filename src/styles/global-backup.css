@@ -68,6 +68,16 @@
   --glass-bg-light: rgba(255, 255, 255, 0.8);
   --glass-border-dark: rgba(255, 255, 255, 0.1);
   --glass-border-light: rgba(0, 0, 0, 0.1);
+  
+  /* Compatibility aliases for legacy variable names */
+  --accent: var(--color-accent);
+  --border-dark: var(--color-border-dark);
+  --text-primary-dark: var(--color-text-primary-dark);
+  --bg-panel: var(--color-bg-panel);
+  --border: var(--color-border-dark);
+  --text-primary-light: var(--color-text-primary-light);
+  --bg-light: var(--color-bg-light);
+  --accent-hover: var(--color-accent-hover);
 }
 
 /* ========================================
@@ -416,7 +426,6 @@ input:focus, select:focus, textarea:focus {
     border-color: var(--border-focus);
     box-shadow: 0 0 0 3px var(--accent-dim);
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
-    margin-bottom: 1.5rem;
 }
 
 .section.dark input,
@@ -1204,16 +1213,6 @@ section {
 .is-visible {
     opacity: 1;
     transform: translateY(0)
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0
-    }
-
-    to {
-        opacity: 1
-    }
 }
 
 @keyframes float {
