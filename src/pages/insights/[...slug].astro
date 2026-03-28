@@ -147,9 +147,8 @@ function smartHeading(text: string, tag: string, classes: string, pClasses: stri
 
       if (block_type === 'hero') {
         return (
-          <section class="pt-32 pb-20 px-6 border-b border-white/5 relative overflow-hidden bg-[#0B0B0F]">
-             <div class="absolute inset-0 bg-gradient-to-br from-[#E8C677]/10 via-transparent to-transparent opacity-50" />
-             <div class="max-w-4xl mx-auto text-center relative z-10">
+          <section class="section dark relative overflow-hidden">
+             <div class="container mx-auto px-6 pt-32 pb-20">
                 {data.badge && (
                   <BubbleBadge
                     text={renderMarkdown(data.badge)}
@@ -167,8 +166,8 @@ function smartHeading(text: string, tag: string, classes: string, pClasses: stri
 
       if (block_type === 'solution_cards') {
         return (
-          <section class="py-24 px-6 bg-[#0B0B0F]">
-            <div class="max-w-7xl mx-auto">
+          <section class="section dark">
+            <div class="container mx-auto px-6 py-24">
               <div class="text-center mb-16 max-w-3xl mx-auto">
                 {data.eyebrow && <h4 class="text-sm font-bold text-[#E8C677] uppercase tracking-widest mb-4 flex items-center justify-center gap-2"><span class="w-8 h-px bg-[#E8C677]"></span> <span set:html={renderMarkdown(data.eyebrow.replace('// ', ''))} /> <span class="w-8 h-px bg-[#E8C677]"></span></h4>}
                 <Fragment set:html={smartHeading(data.title, 'h2', 'text-3xl md:text-5xl font-bold text-white')} />
@@ -191,8 +190,8 @@ function smartHeading(text: string, tag: string, classes: string, pClasses: stri
 
       if (block_type === 'icon_bullets') {
         return (
-          <section class="py-24 px-6 border-y border-white/5 bg-black/40">
-             <div class="max-w-7xl mx-auto">
+          <section class="section dark">
+             <div class="container mx-auto px-6 py-24">
                 <Fragment set:html={smartHeading(data.title, 'h2', 'text-3xl md:text-4xl font-bold text-white mb-16 text-center max-w-4xl mx-auto')} />
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
                    {deduplicateItems(data.bullets).map((bullet: any) => (
@@ -212,8 +211,9 @@ function smartHeading(text: string, tag: string, classes: string, pClasses: stri
 
       if (block_type === 'value_prop') {
         return (
-          <section class="py-24 px-6 bg-[#0B0B0F]">
-            <div class="max-w-4xl mx-auto prose prose-invert prose-lg prose-p:text-white/75 prose-p:leading-relaxed prose-headings:text-white prose-a:text-[#E8C677] prose-headings:font-bold prose-h2:mt-12 prose-h3:mt-8">
+          <section class="section dark">
+            <div class="container mx-auto px-6 py-24">
+              <div class="max-w-4xl mx-auto prose prose-invert prose-lg prose-p:text-white/75 prose-p:leading-relaxed prose-headings:text-white prose-a:text-[#E8C677] prose-headings:font-bold prose-h2:mt-12 prose-h3:mt-8">
               {data.title && <Fragment set:html={smartHeading(data.title, 'h2', 'text-3xl md:text-5xl font-bold text-white mb-10 text-center leading-tight')} />}
               <div set:html={smartBlockFormat(data.body)} />
             </div>
@@ -223,8 +223,8 @@ function smartHeading(text: string, tag: string, classes: string, pClasses: stri
 
       if (block_type === 'authority') {
         return (
-          <section class="py-24 px-6 bg-gradient-to-br from-[#E8C677] to-[#B38D35] text-black">
-            <div class="max-w-7xl mx-auto">
+          <section class="section light">
+            <div class="container mx-auto px-6 py-24">
               <div class="grid grid-cols-1 gap-12 items-center">
                  <div class="prose prose-lg prose-p:text-black/80 prose-headings:text-black max-w-4xl mx-auto text-center">
                    <Fragment set:html={smartHeading(data.title, 'h2', 'text-3xl md:text-4xl font-extrabold mb-6 leading-tight text-black', 'mt-4 mb-6 text-black/80 leading-relaxed text-lg', true)} />
@@ -248,8 +248,8 @@ function smartHeading(text: string, tag: string, classes: string, pClasses: stri
 
       if (block_type === 'calculator') {
         return (
-          <section class="py-24 px-6 bg-[#0B0B0F] border-y border-white/5">
-            <div class="max-w-6xl mx-auto">
+          <section class="section dark">
+            <div class="container mx-auto px-6 py-24">
                <div class="text-center mb-16">
                  <Fragment set:html={smartHeading(data.section_title, 'h2', 'text-3xl md:text-4xl font-bold text-white mb-6')} />
                  <p class="text-lg text-white/70 max-w-3xl mx-auto" set:html={renderMarkdown(data.text)} />
@@ -276,13 +276,13 @@ function smartHeading(text: string, tag: string, classes: string, pClasses: stri
       
       if (block_type === 'audit_form') {
         return (
-          <section id="audit" class="py-24 px-6 border-t border-white/5 bg-[#0B0B0F]">
-            <div class="max-w-4xl mx-auto bg-white/5 border border-[#E8C677]/30 p-8 md:p-16 rounded-3xl text-center relative overflow-hidden">
-               <div class="absolute inset-0 bg-gradient-to-br from-[#E8C677]/10 via-transparent to-transparent pointer-events-none" />
-               <Fragment set:html={smartHeading(data.title, 'h2', 'text-3xl md:text-4xl font-bold text-white mb-6 relative z-10')} />
-               <p class="text-white/70 mb-12 relative z-10 text-lg leading-relaxed" set:html={renderMarkdown(data.subhead)} />
-               
-               <div class="relative z-10 max-w-md mx-auto">
+          <section id="audit" class="section dark">
+            <div class="container mx-auto px-6 py-24">
+               <div class="max-w-4xl mx-auto bg-white/5 border border-[#E8C677]/30 p-8 md:p-16 rounded-3xl text-center relative overflow-hidden">
+                  <div class="absolute inset-0 bg-gradient-to-br from-[#E8C677]/10 via-transparent to-transparent pointer-events-none" />
+                  <Fragment set:html={smartHeading(data.title, 'h2', 'text-3xl md:text-4xl font-bold text-white mb-6 relative z-10')} />
+                  <p class="text-white/70 mb-12 relative z-10 text-lg leading-relaxed" set:html={renderMarkdown(data.subhead)} />
+                 <div class="relative z-10 max-w-md mx-auto">
                  <div class="p-8 bg-[#050505] rounded-xl border border-white/10 text-left shadow-2xl">
                    <p class="text-xs text-white/50 mb-6 uppercase tracking-widest flex items-center gap-3">
                      <span class="w-2 h-2 rounded-full bg-[#E8C677] animate-pulse"></span> <span set:html={renderMarkdown(data.form_title.replace('_', ' '))} />
@@ -298,12 +298,11 @@ function smartHeading(text: string, tag: string, classes: string, pClasses: stri
           </section>
         )
       }
-
+      
       if (block_type === 'cta') {
         return (
-          <section class="py-24 px-6 bg-gradient-to-br from-[#E8C677] to-[#C9A961] text-black text-center relative overflow-hidden">
-            <div class="absolute inset-0 opacity-10 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-white to-transparent" />
-            <div class="max-w-4xl mx-auto relative z-10">
+          <section class="section light">
+            <div class="container mx-auto px-6 py-24 text-center relative overflow-hidden">
               <Fragment set:html={smartHeading(data.heading, 'h2', 'text-4xl md:text-5xl font-black mb-8 leading-tight text-black', 'mt-4 mb-6 text-black/80 leading-relaxed text-lg', true)} />
               <p class="text-xl md:text-2xl font-medium text-black/80 mb-12 leading-relaxed" set:html={renderMarkdown(data.text, true)} />
               <a href={data.href} class="inline-flex items-center justify-center px-12 py-5 bg-black text-white font-bold text-lg uppercase tracking-widest rounded-xl shadow-2xl hover:scale-105 hover:bg-black/80 transition-all">

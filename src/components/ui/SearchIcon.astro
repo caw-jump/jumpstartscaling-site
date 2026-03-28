@@ -2,28 +2,31 @@
 // SearchIcon.astro - Floating search icon with tooltip
 ---
 
-<div class="fixed bottom-6 left-1/2 transform -translate-x-1/2 z-[100] group sm:bottom-10 sm:left-auto sm:right-6 sm:transform-none">
+<div class="fixed bottom-6 left-1/2 transform -translate-x-1/2 z-[100] group sm:bottom-10 sm:left-6 sm:transform-none">
   <!-- Tooltip -->
-  <div class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 sm:left-auto sm:right-0 sm:transform-none opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+  <div class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 sm:left-0 sm:transform-none opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
     <div class="bg-gray-900 text-white px-3 py-2 rounded-lg shadow-lg max-w-xs text-center sm:text-left sm:max-w-none sm:whitespace-nowrap text-sm font-medium">
       <span class="block">Click here to search for your issue</span>
       <span class="text-xs text-gray-400 block">Might be localized to your county</span>
       <!-- Tooltip arrow -->
-      <div class="absolute top-full left-1/2 transform -translate-x-1/2 sm:left-auto sm:right-4 sm:transform-none w-0 h-0 border-l-8 border-r-8 border-t-8 border-transparent border-t-gray-900"></div>
+      <div class="absolute top-full left-1/2 transform -translate-x-1/2 sm:left-4 sm:transform-none w-0 h-0 border-l-8 border-r-8 border-t-8 border-transparent border-t-gray-900"></div>
     </div>
   </div>
   
   <!-- Search Icon Button -->
   <a 
     href="/search" 
-    class="flex items-center justify-center w-14 h-14 bg-gradient-to-r from-[#E8C677] to-[#C9A961] rounded-full shadow-lg hover:shadow-xl transform transition-all duration-300 hover:scale-110 active:scale-95 group"
-    aria-label="Search"
+    class="flex items-center justify-center w-14 h-14 bg-gradient-to-r from-[#E8C677] to-[#C9A961] rounded-full shadow-lg hover:shadow-xl transform transition-all duration-300 hover:scale-110 active:scale-95 group focus:outline-none focus:ring-4 focus:ring-[#E8C677]/50"
+    aria-label="Search for issues"
+    role="button"
+    tabindex="0"
   >
     <svg 
       class="w-6 h-6 text-black" 
       fill="none" 
       stroke="currentColor" 
       viewBox="0 0 24 24"
+      aria-hidden="true"
     >
       <path 
         stroke-linecap="round" 

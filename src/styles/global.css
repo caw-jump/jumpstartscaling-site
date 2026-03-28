@@ -107,7 +107,7 @@
 html {
     font-family: 'Inter', sans-serif;
     font-size: 16px;
-    background: var(--bg-deep);
+    background: #000000;
     color: var(--text-primary-dark);
     scroll-behavior: smooth;
     overflow-x: hidden;
@@ -121,7 +121,7 @@ body {
     margin: 0;
     line-height: 1.75;
     min-height: 100vh;
-    background: var(--bg-deep);
+    background: #000000;
     background-image: radial-gradient(circle at 15% 85%, rgba(232, 198, 119, 0.03), transparent 50%), radial-gradient(circle at 85% 15%, rgba(232, 198, 119, 0.03), transparent 50%);
     background-attachment: fixed;
     width: 100%
@@ -132,7 +132,7 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-    background: var(--bg-deep)
+    background: #000000
 }
 
 ::-webkit-scrollbar-thumb {
@@ -278,7 +278,7 @@ h6 {
 }
 
 .section.dark {
-    background: var(--bg-deep);
+    background: #000000;
     color: var(--text-primary-dark)
 }
 
